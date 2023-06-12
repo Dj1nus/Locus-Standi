@@ -4,19 +4,42 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+    [SerializeField] private float _damage;
+    [SerializeField] private float _hp;
+    [SerializeField] private float _distanceToDamage;
+    [SerializeField] private float _attackCooldown;
 
-    public float _damage;
-    public float _hp;
+    private bool _isCanAttack = true;
 
     public float GetHp()
     {
         return _hp;
     }
+
+    public float GetDamageValue()
+    {
+        return _damage;
+    }
+
     public void GetDamage(float value)
     {
         _hp -= value;
-        //print(hp);
-        //print(value);
+    }
+
+    public void Attack(Entity target)
+    {
+        if (_isCanAttack)
+        {
+            StartCoroutine(AttackCooldown());
+            target.GetDamage(_damage);
+        }
+    }
+
+    IEnumerator AttackCooldown()
+    {
+        _isCanAttack = false;
+        yield return new WaitForSeconds(_attackCooldown);
+        _isCanAttack = true;
     }
 
     public void Die()
@@ -24,25 +47,13 @@ public class Entity : MonoBehaviour
         Destroy(gameObject);
     }
 
-    protected void CheckHp()
+    public void CheckHp()
     {
         if (_hp <= 0)
         {
-            print(gameObject.name);
-            print("is dying");
+            //print(gameObject.name);
+            //print("is dying");
             Die();
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        print(_hp);
     }
 }

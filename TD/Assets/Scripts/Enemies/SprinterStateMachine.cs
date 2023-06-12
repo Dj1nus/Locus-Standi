@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyRam : BaseEnemyClass
+public class SprinterStateMachine : BaseEnemyStateMachine
 {
+    // Start is called before the first frame update
     IEnumerator LifeTimer()
     {
         yield return new WaitForSeconds(20);
@@ -13,9 +14,10 @@ public class EnemyRam : BaseEnemyClass
     void Start()
     {
         StartCoroutine(LifeTimer());
+        Init();
     }
 
-    void Update()
+    private void Update()
     {
         StateMachine();
     }

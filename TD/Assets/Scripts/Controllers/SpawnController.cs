@@ -16,7 +16,7 @@ public class SpawnController : MonoBehaviour
     [SerializeField] private int[] _numberOfEnemies;
     [SerializeField] private float _delayBetweenWaves;
     [SerializeField] private float _startDelay;
-    [SerializeField] private BaseEnemyClass _ram;
+    [SerializeField] private BaseEnemyLogic _ram;
 
     private _states _state = _states.Start;
     private int _wave = 0;

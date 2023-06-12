@@ -111,4 +111,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 0
-  _hp: 100
+  _hp: 1000
+  _distanceToDamage: 4

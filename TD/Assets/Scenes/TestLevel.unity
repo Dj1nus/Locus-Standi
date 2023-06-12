@@ -130,9 +130,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1279797125281622297, guid: a9b725e63f43a8c45800a9e0e855162c, type: 3}
+      propertyPath: _hp
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 4309123793603384752, guid: a9b725e63f43a8c45800a9e0e855162c, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309123793603384752, guid: a9b725e63f43a8c45800a9e0e855162c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309123793603384752, guid: a9b725e63f43a8c45800a9e0e855162c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4309123793603384752, guid: a9b725e63f43a8c45800a9e0e855162c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4309123793603384752, guid: a9b725e63f43a8c45800a9e0e855162c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -152,15 +168,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4309123793603384752, guid: a9b725e63f43a8c45800a9e0e855162c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4309123793603384752, guid: a9b725e63f43a8c45800a9e0e855162c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4309123793603384752, guid: a9b725e63f43a8c45800a9e0e855162c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4309123793603384752, guid: a9b725e63f43a8c45800a9e0e855162c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -967,7 +983,7 @@ MonoBehaviour:
   _numberOfEnemies: 140000001e000000280000003c0000005a000000
   _delayBetweenWaves: 20
   _startDelay: 0
-  _ram: {fileID: 16438576049382850, guid: d1893681e02fc3040abafc36b499577d, type: 3}
+  _ram: {fileID: 8047860782902673565, guid: d1893681e02fc3040abafc36b499577d, type: 3}
 --- !u!1 &1857840888
 GameObject:
   m_ObjectHideFlags: 0
