@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7345118073097338264}
   - component: {fileID: 143239254968496831}
   - component: {fileID: 16438576049382850}
+  - component: {fileID: -2801255377637938530}
   m_Layer: 7
   m_Name: Ram
   m_TagString: Untagged
@@ -133,4 +134,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59f6809fbf8144c4fa7f4897aee45a5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainTarget: {fileID: 4309123793603384780, guid: a9b725e63f43a8c45800a9e0e855162c, type: 3}
+  _damage: 5
+  _hp: 20
+  _mainBase: {fileID: 1279797125281622297, guid: a9b725e63f43a8c45800a9e0e855162c, type: 3}
+--- !u!135 &-2801255377637938530
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7345118073097338267}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5
+  m_Center: {x: 0, y: 1.5, z: 0}

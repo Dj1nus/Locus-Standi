@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class EnemyRam : BaseEnemyClass
 {
-
-
-    
-
-    // Start is called before the first frame update
-    void Start()
+    IEnumerator LifeTimer()
     {
-        //Init();
-        Move();
+        yield return new WaitForSeconds(20);
+        Destroy(gameObject);
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+        StartCoroutine(LifeTimer());
+    }
+
     void Update()
     {
-        
+        StateMachine();
     }
 }
