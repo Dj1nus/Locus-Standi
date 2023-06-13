@@ -6,7 +6,7 @@ public class Entity : MonoBehaviour
 {
     public static Action OnBaseDestroyed;
 
-    [NonSerialized] private float _distanceToBuild;
+    //[NonSerialized] private float _distanceToBuild;
     [SerializeField] private float _damage;
     [SerializeField] private float _hp;
     [SerializeField] private float _distanceToDamage;
@@ -15,10 +15,10 @@ public class Entity : MonoBehaviour
 
     private bool _isCanAttack = true;
 
-    public float GetDistanceToBuild()
-    {
-        return _distanceToBuild;
-    }
+    //public float GetDistanceToBuild()
+    //{
+    //    return _distanceToBuild;
+    //}
 
     public float GetHp()
     {
