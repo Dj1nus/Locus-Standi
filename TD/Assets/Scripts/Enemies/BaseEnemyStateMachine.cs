@@ -25,7 +25,7 @@ public class BaseEnemyStateMachine : MonoBehaviour
 
     private void CheckState()
     {
-        if (Vector3.Distance(transform.position, _logic.GetTarget().transform.position) <= 5f)
+        if (_logic.GetTarget() != null && Vector3.Distance(transform.position, _logic.GetTarget().transform.position) <= 5f)
         {
             _state = _states.Attack;
             return;
@@ -35,11 +35,7 @@ public class BaseEnemyStateMachine : MonoBehaviour
 
     public void StateMachine()
     {
-        print(_state);
-        _entity.CheckHp();
-
         CheckState();
-
         switch (_state)
         {
             case _states.Move:
@@ -51,14 +47,4 @@ public class BaseEnemyStateMachine : MonoBehaviour
                 break;
         }
     }
-
-    //private void Start()
-    //{
-    //    Init();
-    //}
-
-    //private void Update()
-    //{
-    //    StateMachine();
-    //}
 }

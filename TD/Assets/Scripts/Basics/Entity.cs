@@ -1,28 +1,38 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+    public static Action OnBaseDestroyed;
+
+    [NonSerialized] private float _distanceToBuild;
     [SerializeField] private float _damage;
     [SerializeField] private float _hp;
     [SerializeField] private float _distanceToDamage;
     [SerializeField] private float _attackCooldown;
+    [SerializeField] private bool _isMainBase;
 
     private bool _isCanAttack = true;
+
+    public float GetDistanceToBuild()
+    {
+        return _distanceToBuild;
+    }
 
     public float GetHp()
     {
         return _hp;
     }
 
-    public float GetDamageValue()
+    public float GetDamage ()
     {
         return _damage;
     }
 
-    public void GetDamage(float value)
+    public void TakeDamage(float value)
     {
+        CheckHp();
         _hp -= value;
     }
 
@@ -31,7 +41,7 @@ public class Entity : MonoBehaviour
         if (_isCanAttack)
         {
             StartCoroutine(AttackCooldown());
-            target.GetDamage(_damage);
+            target.TakeDamage(_damage);
         }
     }
 
@@ -44,6 +54,11 @@ public class Entity : MonoBehaviour
 
     public void Die()
     {
+        if (_isMainBase)
+        {
+            OnBaseDestroyed?.Invoke();
+        }
+        
         Destroy(gameObject);
     }
 

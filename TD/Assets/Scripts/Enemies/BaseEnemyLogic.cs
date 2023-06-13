@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -58,13 +56,6 @@ public class BaseEnemyLogic : MonoBehaviour
                     minDistance = distancetotarget;
                 }
             }
-
-            //float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
-            //if (distanceToTarget < distanceToBase & distanceToTarget <= minDistance)
-            //{
-            //    possibleTarget = target;
-            //    minDistance = distanceToTarget;
-            //}
         }
         
         if (possibleTarget != null)

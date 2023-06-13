@@ -12,6 +12,5 @@ public class GunTurret : BaseTurretClass
     // Update is called once per frame
     void Update()
     {
-        CheckHp();
     }
 }
