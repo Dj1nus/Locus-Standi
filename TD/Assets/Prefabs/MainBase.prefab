@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4309123793603384755}
   - component: {fileID: 1279797125281622297}
   - component: {fileID: 8090810695063958232}
+  - component: {fileID: -4122195564363674139}
   m_Layer: 0
   m_Name: MainBase
   m_TagString: Untagged
@@ -129,6 +130,23 @@ MonoBehaviour:
   _distanceToDamage: 4
   _attackCooldown: 0
   _isMainBase: 0
+--- !u!114 &-4122195564363674139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4309123793603384780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2920109135a9e1a4f94867e60e4da913, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _size: {x: 4, y: 4}
+  _gridPosiotion: {x: 0, y: 0}
+  _costOrganic: 0
+  _costMetal: 0
+  _yOffset: 0
 --- !u!1 &6749493207141290012
 GameObject:
   m_ObjectHideFlags: 0

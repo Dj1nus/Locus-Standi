@@ -28,7 +28,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            _buildingManager.CreateGhostBuilding(_currentTurret);
+            _buildingManager.SetGhostBuilding(_currentTurret);
         }
 
         else if (Input.GetMouseButtonUp(0))
