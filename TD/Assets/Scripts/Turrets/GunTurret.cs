@@ -7,7 +7,7 @@ public class GunTurret : Entity
 
     public override void Die()
     {
-        
+        Destroy(gameObject);
     }
 
     void Start()
