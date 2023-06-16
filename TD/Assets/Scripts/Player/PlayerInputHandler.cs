@@ -17,6 +17,13 @@ public class PlayerInputHandler : MonoBehaviour
         return ray;
     }
 
+    public RaycastHit GetRaycastHit() 
+    { 
+        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+        Physics.Raycast(ray, out RaycastHit hit);
+
+        return hit;
+    }
 
     void Start()
     {
@@ -28,7 +35,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            _buildingManager.SetGhostBuilding(_currentTurret);
+            _buildingManager.CreateGhostBuilding(_currentTurret);
         }
 
         else if (Input.GetMouseButtonUp(0))

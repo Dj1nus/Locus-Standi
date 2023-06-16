@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class Building : MonoBehaviour
 {
-
     public enum _states
     {
         Ghost,
@@ -14,8 +13,8 @@ public class Building : MonoBehaviour
 
     private _states _state; 
     
-    [SerializeField] private Vector2Int _size;
-    [SerializeField] private Vector2Int _gridPosiotion;
+    [SerializeField] private Vector2[] _clamedPoints;
+    [SerializeField] private Vector2Int _gridPosition;
     [SerializeField] private int _costOrganic;
     [SerializeField] private int _costMetal;
     [SerializeField] private float _yOffset;
@@ -25,9 +24,9 @@ public class Building : MonoBehaviour
     private NavMeshObstacle _navMeshObstacle;
     private Color _color;
 
-    public Vector2Int GetSize()
+    public Vector2[] GetClamedPoints()
     {
-        return _size;
+        return _clamedPoints;
     }
 
     public float GetYOffset()
@@ -50,10 +49,10 @@ public class Building : MonoBehaviour
         {
             _state = _states.Ghost;
         }
-        SetVisualMode();
+        SetVisualMode(isPlaced);
     }
 
-    private void SetVisualMode()
+    public void SetVisualMode(bool isAvaible)
     {
         if (_state == _states.Placed)
         {
@@ -67,24 +66,16 @@ public class Building : MonoBehaviour
             _collider.enabled = false;
             _navMeshObstacle.enabled = false;
         }
-    }
 
-    public void SetTransparent(bool isAvaible)
-    {
-        if (_state == _states.Ghost)
+        if (isAvaible)
         {
-            if (isAvaible)
-            {
-                _renderer.material.color = _color;
-            }
-            else
-            {
-                _renderer.material.color = Color.red;
-            }
+            _renderer.material.color = _color;
         }
-
+        else
+        {
+            _renderer.material.color = Color.red;
+        }
     }
-
     private void Start()
     {
         _renderer = GetComponent<Renderer>();
@@ -92,7 +83,7 @@ public class Building : MonoBehaviour
         _navMeshObstacle = GetComponent<NavMeshObstacle>();
         _color = _renderer.material.color;
         _state = _states.Ghost;
-        _size = Vector2Int.one;
+        //_size = Vector2Int.one;
     }
 
 }

@@ -5,56 +5,27 @@ using UnityEngine;
 public class BuildingGrid : MonoBehaviour
 {
     [SerializeField] private Vector2Int _mapSize;
-    [SerializeField] private Building _mainBase;
+    [SerializeField] private List<Vector3> _busyPoints = new List<Vector3>();
 
-    private Building[,] _grid;
-
-    public bool IsPointAvaible(Vector3Int position, Building building)
+    public bool IsPointAvaible(Vector3Int position)
     {
         if ((position.x < -_mapSize.x || position.x > _mapSize.x) || (position.z < -_mapSize.y || position.z > _mapSize.y))
         {
             return false;
         }
-
-        //print(building);
-
-        Vector2Int size = building.GetSize();
-        Vector3 buildingPosition = building.transform.position;
-
-        for (int i = 0; i < size.x; i++)
+        else if (_busyPoints.Contains(position))
         {
-            for (int j = 0; j < size.y; j++)
-            {
-                //print(_grid[(int)buildingPosition.x + i, (int)buildingPosition.z + j]);
-                if (_grid[(int)buildingPosition.x + i, (int)buildingPosition.z + j] != null)
-                {
-                    return false;
-                }
-            }
+            return false;
         }
-
-        print(_grid);
 
         return true;
     }
 
-    public void UpdateGrid(Building building)
+    public void UpdateList(Building building)
     {
-        Vector2Int size = building.GetSize();
-        Vector3 position = building.transform.position;
-
-        for (int i = 0; i < size.x; i++)
+        foreach (Vector3 position in building.GetClamedPoints()) 
         {
-            for (int j = 0; j < size.y; j++)
-            {
-                _grid[(int)position.x + i, (int)position.z + j] = building;
-            }
+            _busyPoints.Add(new Vector3(building.transform.position.x + position.x, building.transform.position.y, building.transform.position.z + position.y));
         }
-    }
-
-    private void Awake()
-    {
-        _grid = new Building[_mapSize.x, _mapSize.y];
-
     }
 }
