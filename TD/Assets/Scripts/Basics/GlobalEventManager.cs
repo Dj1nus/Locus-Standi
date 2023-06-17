@@ -1,18 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GlobalEventManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static UnityEvent<Building> OnBuildingDestroy = new UnityEvent<Building>();
 
-    // Update is called once per frame
-    void Update()
+    public static void SendBuildingDestroy(Building building)
     {
-        
+        OnBuildingDestroy.Invoke(building);
     }
 }
