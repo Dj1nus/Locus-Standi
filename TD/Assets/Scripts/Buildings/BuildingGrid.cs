@@ -28,4 +28,19 @@ public class BuildingGrid : MonoBehaviour
             _busyPoints.Add(new Vector3(building.transform.position.x + position.x, building.transform.position.y, building.transform.position.z + position.y));
         }
     }
+
+    private void RemoveBuildingFromList(Building building)
+    {
+        print("Destroyed");
+
+        foreach (Vector3 position in building.GetClamedPoints())
+        {
+            _busyPoints.Remove(new Vector3(building.transform.position.x + position.x, building.transform.position.y, building.transform.position.z + position.y));
+        }
+    }
+
+    private void Awake()
+    {
+        GlobalEventManager.OnBuildingDestroy.AddListener(RemoveBuildingFromList);
+    }
 }
