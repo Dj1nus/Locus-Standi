@@ -6,7 +6,7 @@ public class PlayerInputHandler : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
     [SerializeField] private Building _gunTurret;
-    [SerializeField] private BuildingManager _buildingManager;
+    [SerializeField] private Builder _buildingManager;
 
     private Building _currentTurret;
 

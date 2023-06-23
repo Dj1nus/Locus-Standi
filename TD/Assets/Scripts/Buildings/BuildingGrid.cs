@@ -1,46 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BuildingGrid : MonoBehaviour
 {
     [SerializeField] private Vector2Int _mapSize;
-    [SerializeField] private List<Vector3> _busyPoints = new List<Vector3>();
+    private Building[,] _map;
 
-    public bool IsPointAvaible(Vector3Int position)
+    public Vector2Int GetMapSize()
     {
-        if ((position.x < -_mapSize.x || position.x > _mapSize.x) || (position.z < -_mapSize.y || position.z > _mapSize.y))
+        return _mapSize;
+    }
+
+    public bool IsPointAvaible(Vector2Int position, Building building)
+    {
+        foreach (Vector2Int point in building.GetClamedPoints())
         {
-            return false;
-        }
-        else if (_busyPoints.Contains(position))
-        {
-            return false;
+            if (_map[point.x, point.y] != null)
+            {
+                return false;
+            }
         }
 
         return true;
     }
 
-    public void UpdateList(Building building)
+    public void UpdateMap(Building building)
     {
-        foreach (Vector3 position in building.GetClamedPoints()) 
+        foreach (Vector2Int point in building.GetClamedPoints())
         {
-            _busyPoints.Add(new Vector3(building.transform.position.x + position.x, building.transform.position.y, building.transform.position.z + position.y));
+            _map[point.x, point.y] = building;
         }
     }
 
-    private void RemoveBuildingFromList(Building building)
+    public void DeleteBuildingFrommap(Building building)
     {
-        print("Destroyed");
-
-        foreach (Vector3 position in building.GetClamedPoints())
+        foreach (Vector2Int point in building.GetClamedPoints())
         {
-            _busyPoints.Remove(new Vector3(building.transform.position.x + position.x, building.transform.position.y, building.transform.position.z + position.y));
+            _map[point.x, point.y] = null;
         }
     }
 
     private void Awake()
     {
-        GlobalEventManager.OnBuildingDestroy.AddListener(RemoveBuildingFromList);
+        GlobalEventManager.OnBuildingDestroy.AddListener(DeleteBuildingFrommap);
+        _map = new Building[_mapSize.x, _mapSize.y];
     }
 }

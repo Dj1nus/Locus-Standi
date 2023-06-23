@@ -7,19 +7,15 @@ public class BaseEnemyStateMachine : MonoBehaviour
         Move,
         Attack
     }
-
     private _states _state;
 
-    private BaseEnemyLogic _logic;
+    private TargetSelector _logic;
     private Entity _entity;
-
 
     public void Init()
     {
-        //_logic.Init();
-
         _state = _states.Move;
-        _logic = gameObject.GetComponent<BaseEnemyLogic>();
+        _logic = gameObject.GetComponent<TargetSelector>();
         _entity = gameObject.GetComponent<Entity>();
     }
 

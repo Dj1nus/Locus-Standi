@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BuildingManager : MonoBehaviour
+public class Builder : MonoBehaviour
 {
     [SerializeField] private PlayerInputHandler _inputHandler;
     [SerializeField] private BuildingGrid _grid;
@@ -22,7 +22,7 @@ public class BuildingManager : MonoBehaviour
     {
         if (_ghostBuilding != null && _isCanPlace) 
         {
-            _grid.UpdateList(_ghostBuilding);
+            _grid.UpdateMap(_ghostBuilding);
             _ghostBuilding.SetState(true);
             _ghostBuilding = null;
         }
@@ -36,11 +36,11 @@ public class BuildingManager : MonoBehaviour
         if (groundPlane.Raycast(cameraToGroundRay, out float position))
         {
             Vector3 mousePositionInWorld = cameraToGroundRay.GetPoint(position);
-            Vector3Int _possiblePosition = new Vector3Int(Mathf.RoundToInt(mousePositionInWorld.x), (int)_ghostBuilding.GetYOffset(), Mathf.RoundToInt(mousePositionInWorld.z));
+            Vector3Int _possiblePosition = new Vector3Int(Mathf.RoundToInt(mousePositionInWorld.x), _ghostBuilding.GetYOffset(), Mathf.RoundToInt(mousePositionInWorld.z));
 
             _ghostBuilding.transform.position = _possiblePosition;
 
-            _isCanPlace = _grid.IsPointAvaible(_possiblePosition);
+            _isCanPlace = _grid.IsPointAvaible(new Vector2Int(_possiblePosition.x, _possiblePosition.z), _ghostBuilding);
 
             _ghostBuilding.SetVisualMode(_isCanPlace);
         }
