@@ -2,9 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BaseEnemyLogic : MonoBehaviour
+public class TargetSelector : MonoBehaviour
 {
-    //[SerializeField] private Entity _mainBase;
     private Entity _mainBase;
     private NavMeshAgent  _agent;
     private Entity _target;
