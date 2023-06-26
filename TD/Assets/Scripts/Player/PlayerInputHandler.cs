@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInputHandler : MonoBehaviour
@@ -7,6 +5,7 @@ public class PlayerInputHandler : MonoBehaviour
     [SerializeField] private Camera _camera;
     [SerializeField] private Building _gunTurret;
     [SerializeField] private Builder _buildingManager;
+    [SerializeField] private Level _level;
 
     private Building _currentTurret;
 
@@ -25,6 +24,11 @@ public class PlayerInputHandler : MonoBehaviour
         return hit;
     }
 
+    public void OpenBuildingMenu()
+    {
+        Debug.Log(1);
+    }
+
     void Start()
     {
         _currentTurret = _gunTurret;
@@ -38,9 +42,15 @@ public class PlayerInputHandler : MonoBehaviour
             _buildingManager.CreateGhostBuilding(_currentTurret);
         }
 
+        else if (Input.GetKeyDown (KeyCode.H))
+        {
+            
+        }
+
         else if (Input.GetMouseButtonUp(0))
         {
             _buildingManager.PlaceBuilding();
         }
+
     }
 }

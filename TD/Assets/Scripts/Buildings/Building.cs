@@ -27,7 +27,7 @@ public class Building : MonoBehaviour
     private Renderer _renderer;
     private Collider _collider;
     private NavMeshObstacle _navMeshObstacle;
-    private Color _color;
+    //private Color _color;
 
     public Vector2Int[] GetClamedPoints()
     {
@@ -87,7 +87,6 @@ public class Building : MonoBehaviour
             }
             else
             {
-
                 _renderer.material = _bad;
             }
         }
@@ -106,14 +105,9 @@ public class Building : MonoBehaviour
         _renderer = GetComponent<Renderer>();
         _collider = GetComponent<BoxCollider>();
         _navMeshObstacle = GetComponent<NavMeshObstacle>();
-        _color = _renderer.material.color;
         _state = _states.Ghost;
-        //_size = Vector2Int.one;
 
         _clamedPoints = new Vector2Int[_takenPoints.Length];
-        SetArrayToDefault();
-
-
     }
 
 }

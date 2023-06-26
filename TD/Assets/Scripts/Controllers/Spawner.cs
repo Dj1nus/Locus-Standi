@@ -22,10 +22,6 @@ public class Spawner : MonoBehaviour
     [SerializeField] private TargetSelector _tierTwoEnemy;
     [SerializeField] private TargetSelector _tierThreeEnemy;
 
-    
-
-    [SerializeField] private int[,] a;
-
     private int _wave = 0;
     private bool _isBetweenWavesDelayTimerStopped = true;
 

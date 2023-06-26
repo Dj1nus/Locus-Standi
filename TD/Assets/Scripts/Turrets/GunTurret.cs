@@ -18,7 +18,6 @@ public class GunTurret : Entity
 
     void Start()
     {
-        
     }
 
     // Update is called once per frame
