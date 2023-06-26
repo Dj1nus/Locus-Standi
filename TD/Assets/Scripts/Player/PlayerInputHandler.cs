@@ -1,20 +1,26 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class PlayerInputHandler : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
-    [SerializeField] private Building _gunTurret;
     [SerializeField] private Builder _buildingManager;
     [SerializeField] private Level _level;
 
-    private Building _currentBuilding;
 
+    //Они друзья,
     public void OnBuyBuildingButtonClick(Building building)
     {
-
+        StartCoroutine(KostylTimer(building));
+    }
+    IEnumerator KostylTimer(Building building)
+    {
+        yield return new WaitForSeconds(0.01f);
         _buildingManager.CreateGhostBuilding(building);
     }
+    //Их не разлучать!!!
+
 
     public Ray GetCursorRay()
     {
@@ -25,14 +31,12 @@ public class PlayerInputHandler : MonoBehaviour
 
     void Start()
     {
-        _currentBuilding = _gunTurret;
-
         GlobalEventManager.OnBuyButtonClick.AddListener(OnBuyBuildingButtonClick);
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonUp(0))
+        if (_level.GetState() == Level._states.building && Input.GetMouseButtonUp(0))
         {
             _buildingManager.PlaceBuilding();
         }

@@ -37,11 +37,8 @@ public class PlayersResources : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.B))
         {
-            print("Added resources");
             IncreaseMetalValue(100);
             IncreaseOrganicValue(100);
-
-            
         }
     }
 }
