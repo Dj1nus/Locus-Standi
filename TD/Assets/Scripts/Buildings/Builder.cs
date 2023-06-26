@@ -7,7 +7,8 @@ public class Builder : MonoBehaviour
 
     private Building _ghostBuilding;
     private bool _isCanPlace = false;
-    
+    private Vector3 _previousPosition = new Vector3();
+
     public void DestroyCurrentGhostBuilding()
     {
         if (_ghostBuilding != null )
@@ -42,13 +43,22 @@ public class Builder : MonoBehaviour
         if (groundPlane.Raycast(cameraToGroundRay, out float position))
         {
             Vector3 mousePositionInWorld = cameraToGroundRay.GetPoint(position);
-            Vector3Int _possiblePosition = new Vector3Int(Mathf.RoundToInt(mousePositionInWorld.x), _ghostBuilding.GetYOffset(), Mathf.RoundToInt(mousePositionInWorld.z));
+            
+            if (mousePositionInWorld != _previousPosition)
+            {
+                Vector3Int _possiblePosition = new Vector3Int(
+                    Mathf.RoundToInt(mousePositionInWorld.x), 
+                    _ghostBuilding.GetYOffset(), 
+                    Mathf.RoundToInt(mousePositionInWorld.z));
 
-            _ghostBuilding.transform.position = _possiblePosition;
+                _ghostBuilding.transform.position = _possiblePosition;
 
-            _isCanPlace = _grid.IsPointAvaible(_ghostBuilding);
+                _isCanPlace = _grid.IsPointAvaible(_ghostBuilding);
 
-            _ghostBuilding.SetVisualMode(_isCanPlace);
+                _ghostBuilding.SetVisualMode(_isCanPlace);
+
+                _previousPosition = mousePositionInWorld;
+            }
         }
     }
 

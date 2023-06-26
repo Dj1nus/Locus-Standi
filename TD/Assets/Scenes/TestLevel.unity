@@ -499,6 +499,7 @@ GameObject:
   - component: {fileID: 390745238}
   - component: {fileID: 390745237}
   - component: {fileID: 390745236}
+  - component: {fileID: 390745239}
   m_Layer: 5
   m_Name: TurrtetTierOneButton
   m_TagString: Untagged
@@ -570,9 +571,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1146375213}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnBuyBuildingButtonClick
+      - m_Target: {fileID: 390745239}
+        m_TargetAssemblyTypeName: BuyButton, Assembly-CSharp
+        m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -620,6 +621,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 390745234}
   m_CullTransparentMesh: 1
+--- !u!114 &390745239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390745234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b03dfdafbb7386f4d9a0cc232ef82cc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _building: {fileID: 5432958769582201883, guid: 81f512fa71072f6459cfb0259ebe74aa, type: 3}
+  _playerResources: {fileID: 607038234}
 --- !u!1 &445905596
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,6 +696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mapSize: {x: 100, y: 100}
+  _mapBorders: {x: 100, y: 100, z: 0, w: 0}
 --- !u!1 &574311863
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,8 +760,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 607038233}
+  - component: {fileID: 607038234}
   m_Layer: 0
-  m_Name: PlayersData
+  m_Name: PlayersResources
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -766,6 +783,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &607038234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607038232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 178c39ede3d51f04488dee51eef89a8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &668812298
 GameObject:
   m_ObjectHideFlags: 0

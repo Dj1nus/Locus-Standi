@@ -28,13 +28,11 @@ public class BuildingMenu : MonoBehaviour
     {
         _button.ChangeBuildingButtonPosition(_time);
         _panel.ChangeBuildingMenuPosition(_time);
-        //_button.enabled = false;
         _button.SetButtonClickable(false);
         _state = _states.moving;
         yield return new WaitForSeconds(_time);
         _state = nextState;
         _button.SetButtonClickable(true);
-        //_button.enabled = true;
     }
 
     public void ChangeMenuPosition()

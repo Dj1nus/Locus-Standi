@@ -14,10 +14,11 @@ public class Building : MonoBehaviour
 
     private _states _state;
 
+    [SerializeField] private Cost _cost;
     [SerializeField] private Vector2Int[] _takenPoints;
     [SerializeField] private Vector2Int _gridPosition;
-    [SerializeField] private int _costOrganic;
-    [SerializeField] private int _costMetal;
+    //[SerializeField] private int _costOrganic;
+    //[SerializeField] private int _costMetal;
     [SerializeField] private int _yOffset;
     [SerializeField] private Material _good;
     [SerializeField] private Material _bad;
@@ -27,7 +28,6 @@ public class Building : MonoBehaviour
     private Renderer _renderer;
     private Collider _collider;
     private NavMeshObstacle _navMeshObstacle;
-    //private Color _color;
 
     public Vector2Int[] GetClamedPoints()
     {
@@ -36,7 +36,6 @@ public class Building : MonoBehaviour
         for (int i = 0; i < _clamedPoints.Length; i++)
         {
             _clamedPoints[i] = new Vector2Int(_clamedPoints[i].x + (int)transform.position.x, _clamedPoints[i].y + (int)transform.position.z);
-            //print(_clamedPoints[i]);
         }
 
         return _clamedPoints;
@@ -50,6 +49,11 @@ public class Building : MonoBehaviour
     public _states GetState()
     {
         return _state;
+    }
+
+    public Cost GetCost()
+    {
+        return _cost;
     }
 
     public void SetState(bool isPlaced)
@@ -69,7 +73,6 @@ public class Building : MonoBehaviour
     {
         if (_state == _states.Placed)
         {
-            
             _renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
             _collider.enabled = true;
             _navMeshObstacle.enabled = true;
@@ -94,13 +97,15 @@ public class Building : MonoBehaviour
 
     private void SetArrayToDefault()
     {
-        for (int i = 0; i < _takenPoints.Length; i++)
-        {
-            _clamedPoints[i] = _takenPoints[i];
-        }
+        //for (int i = 0; i < _takenPoints.Length; i++)
+        //{
+        //    //_clamedPoints[i] = _takenPoints[i];
+
+        //}
+        _takenPoints.CopyTo(_clamedPoints, 0);
     }
 
-    private void Start()
+    private void Awake()
     {
         _renderer = GetComponent<Renderer>();
         _collider = GetComponent<BoxCollider>();
@@ -110,4 +115,13 @@ public class Building : MonoBehaviour
         _clamedPoints = new Vector2Int[_takenPoints.Length];
     }
 
+    
+}
+
+[System.Serializable]
+
+public class Cost
+{
+    [SerializeField] public int organic;
+    [SerializeField] public int metal;
 }

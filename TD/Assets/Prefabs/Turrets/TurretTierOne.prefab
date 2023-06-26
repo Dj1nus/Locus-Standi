@@ -131,6 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2920109135a9e1a4f94867e60e4da913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cost:
+    organic: 100
+    metal: 100
   _takenPoints:
   - {x: -1, y: 1}
   - {x: 0, y: 1}
@@ -142,8 +145,6 @@ MonoBehaviour:
   - {x: 0, y: -1}
   - {x: 1, y: -1}
   _gridPosition: {x: 0, y: 0}
-  _costOrganic: 0
-  _costMetal: 0
   _yOffset: 1
   _good: {fileID: 2100000, guid: e2c3147e5bd451344b12bc41b481bd87, type: 2}
   _bad: {fileID: 2100000, guid: 33036526e789a9d49b86331b46c2b7c7, type: 2}

@@ -10,9 +10,10 @@ public class PlayerInputHandler : MonoBehaviour
 
     private Building _currentBuilding;
 
-    public void OnBuyBuildingButtonClick()
+    public void OnBuyBuildingButtonClick(Building building)
     {
-        _buildingManager.CreateGhostBuilding(_currentBuilding);
+
+        _buildingManager.CreateGhostBuilding(building);
     }
 
     public Ray GetCursorRay()
@@ -25,6 +26,8 @@ public class PlayerInputHandler : MonoBehaviour
     void Start()
     {
         _currentBuilding = _gunTurret;
+
+        GlobalEventManager.OnBuyButtonClick.AddListener(OnBuyBuildingButtonClick);
     }
 
     void Update()

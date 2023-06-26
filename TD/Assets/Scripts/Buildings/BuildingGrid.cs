@@ -3,7 +3,10 @@ using UnityEngine;
 public class BuildingGrid : MonoBehaviour
 {
     [SerializeField] private Vector2Int _mapSize;
+    [SerializeField] private Vector4 _mapBorders;
     private Building[,] _map;
+
+
 
     public Vector2Int GetMapSize()
     {
@@ -11,10 +14,15 @@ public class BuildingGrid : MonoBehaviour
     }
 
     public bool IsPointAvaible(Building building)
-    {
+    { 
         foreach (Vector2Int point in building.GetClamedPoints())
         {
-            if (_map[point.x, point.y] != null)
+            if (point.x < _mapBorders.z || point.x > _mapBorders.x || point.y < _mapBorders.w || point.y > _mapBorders.y)
+            {
+                return false;
+            }
+
+            else if (_map[point.x, point.y] != null)
             {
                 return false;
             }
