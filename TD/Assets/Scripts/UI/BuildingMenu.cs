@@ -16,7 +16,7 @@ public class BuildingMenu : MonoBehaviour
     private _states _state;
 
     [SerializeField] private float _time;
-    [SerializeField] private Button _button;
+    [SerializeField] private BuildingMenuButton _button;
     [SerializeField] private BuildingMenuPanel _panel;
 
     public float GetTimeValue()
@@ -26,28 +26,24 @@ public class BuildingMenu : MonoBehaviour
 
     IEnumerator BuildingMenuTimer(_states nextState)
     {
-
-        _panel.ChangeBuildingMenuPosition();
-        _button.enabled = false;
+        _button.ChangeBuildingButtonPosition(_time);
+        _panel.ChangeBuildingMenuPosition(_time);
+        //_button.enabled = false;
+        _button.SetButtonClickable(false);
         _state = _states.moving;
         yield return new WaitForSeconds(_time);
         _state = nextState;
-        _button.enabled = true;
+        _button.SetButtonClickable(true);
+        //_button.enabled = true;
     }
 
     public void ChangeMenuPosition()
     {
         if (_state == _states.down) 
-        {
-            Debug.Log(2);
             StartCoroutine(BuildingMenuTimer(_states.up));
-        }
-
+        
         else
-        {
-            Debug.Log(3);
             StartCoroutine(BuildingMenuTimer(_states.down));
-        }
     }
 
     void Start()

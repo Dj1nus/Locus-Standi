@@ -8,6 +8,12 @@ public class Builder : MonoBehaviour
     private Building _ghostBuilding;
     private bool _isCanPlace = false;
     
+    public void DestroyCurrentGhostBuilding()
+    {
+        if (_ghostBuilding != null )
+            Destroy(_ghostBuilding.gameObject);
+    }
+
     public void CreateGhostBuilding(Building building) //Сделать кучу для "призрачных" зданий
     {
         if (_ghostBuilding != null)
@@ -40,7 +46,7 @@ public class Builder : MonoBehaviour
 
             _ghostBuilding.transform.position = _possiblePosition;
 
-            _isCanPlace = _grid.IsPointAvaible(new Vector2Int(_possiblePosition.x, _possiblePosition.z), _ghostBuilding);
+            _isCanPlace = _grid.IsPointAvaible(_ghostBuilding);
 
             _ghostBuilding.SetVisualMode(_isCanPlace);
         }

@@ -10,7 +10,7 @@ public class BuildingGrid : MonoBehaviour
         return _mapSize;
     }
 
-    public bool IsPointAvaible(Vector2Int position, Building building)
+    public bool IsPointAvaible(Building building)
     {
         foreach (Vector2Int point in building.GetClamedPoints())
         {

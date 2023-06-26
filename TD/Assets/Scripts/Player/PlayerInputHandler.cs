@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerInputHandler : MonoBehaviour
 {
@@ -7,7 +8,12 @@ public class PlayerInputHandler : MonoBehaviour
     [SerializeField] private Builder _buildingManager;
     [SerializeField] private Level _level;
 
-    private Building _currentTurret;
+    private Building _currentBuilding;
+
+    public void OnBuyBuildingButtonClick()
+    {
+        _buildingManager.CreateGhostBuilding(_currentBuilding);
+    }
 
     public Ray GetCursorRay()
     {
@@ -16,41 +22,21 @@ public class PlayerInputHandler : MonoBehaviour
         return ray;
     }
 
-    public RaycastHit GetRaycastHit() 
-    { 
-        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-        Physics.Raycast(ray, out RaycastHit hit);
-
-        return hit;
-    }
-
-    public void OpenBuildingMenu()
-    {
-        Debug.Log(1);
-    }
-
     void Start()
     {
-        _currentTurret = _gunTurret;
+        _currentBuilding = _gunTurret;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            _buildingManager.CreateGhostBuilding(_currentTurret);
-        }
-
-        else if (Input.GetKeyDown (KeyCode.H))
-        {
-            
-        }
-
-        else if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
             _buildingManager.PlaceBuilding();
         }
 
+        else if (_level.GetState() == Level._states.building && Input.GetMouseButtonDown(1))
+        {
+            _buildingManager.DestroyCurrentGhostBuilding();
+        }
     }
 }

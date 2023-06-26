@@ -12,25 +12,24 @@ public class BuildingMenuPanel : MonoBehaviour
         down
     }
 
-    private _states _state = _states.down;
+    private _states _state;
 
     [SerializeField] private int _upPositionY;
     [SerializeField] private int _downPositionY;
-    [SerializeField] private float _time;
-    [SerializeField] private GameObject _button;
     private RectTransform _transform;
 
-    public void ChangeBuildingMenuPosition()
+    public void ChangeBuildingMenuPosition(float time)
     {
         if (_state == _states.down)
         {
-            _transform.DOLocalMoveY(_upPositionY, _time);
+            
+            _transform.DOLocalMoveY(_upPositionY, time);
             _state = _states.up;
         }
 
         else
         {
-            _transform.DOLocalMoveY(_downPositionY, _time);
+            _transform.DOLocalMoveY(_downPositionY, time);
             _state = _states.down;
         }
     }
@@ -38,11 +37,6 @@ public class BuildingMenuPanel : MonoBehaviour
     void Start()
     {
         _transform = GetComponent<RectTransform>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _state = _states.down;
     }
 }
