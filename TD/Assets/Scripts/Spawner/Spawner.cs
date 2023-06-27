@@ -4,87 +4,98 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    private enum _states
-    {
-        Start,
-        Spawn,
-        Wait
-    }
-    private _states _state = _states.Start;
-
-    [SerializeField] private List<GameObject> _spawnPoints = new List<GameObject>();
-    [SerializeField] private int _numberOfWaves;
-    [SerializeField] private float _delayBetweenWaves;
+    [SerializeField] Transform[] _spawnPoints;
     [SerializeField] private float _startDelay;
+    [SerializeField] Waves[] _waves;
 
-    [SerializeField] private int[] _numberOfEnemies;
-    [SerializeField] private TargetSelector _tierOneEnemy;
-    [SerializeField] private TargetSelector _tierTwoEnemy;
-    [SerializeField] private TargetSelector _tierThreeEnemy;
+    private int _waveCount;
+    private int _currentWaveIndex;
 
-    private int _wave = 0;
-    private bool _isBetweenWavesDelayTimerStopped = true;
-
-    IEnumerator BetweenWavesDelayTimer(float time)
+    private IEnumerator StartSpawn()
     {
-        _isBetweenWavesDelayTimerStopped = false;
-        yield return new WaitForSeconds(time);
-        _state = _states.Spawn;
-        _isBetweenWavesDelayTimerStopped = true;
+        if (_startDelay != 0)
+        {
+            yield return new WaitForSeconds(_startDelay);
+        }
+
+        for (; _currentWaveIndex < _waveCount; _currentWaveIndex++) 
+        {
+            yield return StartCoroutine(SpawnWave());
+        }
     }
 
-    IEnumerator StartDelay(float time)
+    private IEnumerator SpawnWave()
     {
-        yield return new WaitForSeconds(time);
-        _state = _states.Spawn;
+        float delayBetweenSpawns = _waves[_currentWaveIndex].DelayBetweenSpawns;
+
+        Entity[] enemiesArray = _waves[_currentWaveIndex].Wave.GetEnemy();
+        int[] numbersOfEnemies = _waves[_currentWaveIndex].Wave.GetCount();
+
+        for (int i = 0; i < _waves[_currentWaveIndex].Wave.GetLenght(); i++)
+        {
+            for (int j = 0; j < numbersOfEnemies[i]; j++)
+            {
+                var newEnemy = Instantiate(enemiesArray[i], 
+                    _spawnPoints[Random.Range(0, _spawnPoints.Length)]);
+
+                newEnemy.gameObject.GetComponent<TargetSelector>().Init();
+                yield return new WaitForSeconds(delayBetweenSpawns);
+            }
+        }
+
+        yield return new WaitForSeconds(_waves[_currentWaveIndex].WaveDuration);
     }
 
     void Start()
     {
-        StartCoroutine(StartDelay(_startDelay));
-    }
+        _waveCount = _waves.Length;
+        _currentWaveIndex = 0;
 
-    void Update()
-    {
-        switch (_state)
-        {
-            case _states.Start: break;
-
-            case _states.Spawn:
-                foreach (GameObject point in _spawnPoints)
-                {
-                    for (int i = 0; i < _numberOfEnemies[_wave] / _spawnPoints.Count; i++) 
-                        Instantiate(_tierOneEnemy, point.transform.position, Quaternion.identity).Init();   
-                }
-                _state = _states.Wait;
-                _wave++;
-                break;
-
-            case _states.Wait:
-                if (_isBetweenWavesDelayTimerStopped)
-                {
-                    StartCoroutine(BetweenWavesDelayTimer(_delayBetweenWaves));
-                }
-                break;
-
-            default: _state = _states.Wait; break;
-        }
+        StartCoroutine(StartSpawn());
     }
 }
 
-//[System.Serializable]
+[System.Serializable]
 
-//public class Waves
-//{
-//    [SerializeField] private WaveSettings[] _waveSettings;
-//}
+public class Waves
+{
+    [SerializeField] private float _waveDuration;
+    [SerializeField] private float _delayBetweenSpawns;
+    [SerializeField] private bool _isTimeFixed;
+    [SerializeField] private EnemyDictionary _wavesDictionary;
 
-//[System.Serializable]
+    public EnemyDictionary Wave {get { return _wavesDictionary; } }
+    public float WaveDuration { get { return _waveDuration; } }
+    public float DelayBetweenSpawns { get { return _delayBetweenSpawns; } }
+}
 
-//public class WaveSettings
-//{
-//    //[SerializeField] private Dictionary<Building, int> _enemiesInWave;
+[System.Serializable]
 
+public class EnemyDictionary
+{
+    [SerializeField] private Entity[] _enemy;
+    [SerializeField] private int[] _count;
 
-//    //public Dictionary<Building, int> enemiesInWave { get { return _enemiesInWave; } }
-//}
+    public Entity[] GetEnemy()
+    {
+        return _enemy;
+    }
+
+    public int[] GetCount()
+    {
+        return _count;
+    }
+
+    public int GetLenght()
+    {
+        return _count.Length;
+    }
+
+    private void Init()
+    {
+        if(_enemy.Length != _count.Length)
+        {
+            Debug.LogError("Массивы имеют разное количество элементов!");
+        }
+    }
+}

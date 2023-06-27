@@ -6,6 +6,7 @@ public class ChangeTileCollor : MonoBehaviour
     [SerializeField] private Material _badMaterial;
 
     private MeshRenderer _meshRenderer;
+    private Collider _coll;
 
     private void Start()
     {
@@ -16,10 +17,18 @@ public class ChangeTileCollor : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         _meshRenderer.material = _badMaterial;
+        _coll = other;
     }
 
     private void OnTriggerExit(Collider other)
     {
         _meshRenderer.material = _goodMaterial;
+    }
+
+    private void Update()
+    {
+        if (_coll == null)
+            _meshRenderer.material = _goodMaterial;
+        
     }
 }
