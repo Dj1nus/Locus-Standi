@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,9 +26,6 @@ public class BuyButton : MonoBehaviour
 
     public void OnClick()
     {
-        _playerResources.DecreaseMetalValue(_buildingCost.metal);
-        _playerResources.DecreaseOrganicValue(_buildingCost.organic);
-
         GlobalEventManager.BuyButtonClicked(_building);
     }
 

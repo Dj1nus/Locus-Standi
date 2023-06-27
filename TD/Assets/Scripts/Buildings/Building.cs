@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,9 +13,6 @@ public class Building : MonoBehaviour
 
     [SerializeField] private Cost _cost;
     [SerializeField] private Vector2Int[] _takenPoints;
-    [SerializeField] private Vector2Int _gridPosition;
-    //[SerializeField] private int _costOrganic;
-    //[SerializeField] private int _costMetal;
     [SerializeField] private int _yOffset;
     [SerializeField] private Material _good;
     [SerializeField] private Material _bad;

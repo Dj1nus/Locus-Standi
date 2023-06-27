@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class RamStateMachine : BaseEnemyStateMachine
 {
-    //[SerializeField] private BaseEnemyStateMachine _stateMachine; 
-
     IEnumerator LifeTimer()
     {
         yield return new WaitForSeconds(20);

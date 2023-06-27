@@ -24,7 +24,6 @@ public class TargetSelector : MonoBehaviour
 
     private void SetTarget(Entity target)
     {
-        //print("Changing target");
         _target = target;
         _agent.destination = _target.transform.position;
     }

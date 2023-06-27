@@ -16,6 +16,7 @@ public class ResourcesTitels : MonoBehaviour
     void Start()
     {
         GlobalEventManager.OnResourceValueChanged.AddListener(ChangeResourcesValue);
+
         _metalText.text = _playersResources.metal.ToString();
         _organicText.text = _playersResources.organic.ToString();
     }

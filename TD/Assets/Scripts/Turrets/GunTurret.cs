@@ -15,13 +15,4 @@ public class GunTurret : Entity
         }
         Destroy(gameObject);
     }
-
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
 }

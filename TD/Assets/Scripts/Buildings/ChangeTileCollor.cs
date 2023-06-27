@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ChangeTileCollor : MonoBehaviour
@@ -17,13 +15,11 @@ public class ChangeTileCollor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //print(1);
         _meshRenderer.material = _badMaterial;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        //print(2);
         _meshRenderer.material = _goodMaterial;
     }
 }

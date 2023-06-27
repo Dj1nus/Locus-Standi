@@ -71,3 +71,20 @@ public class Spawner : MonoBehaviour
         }
     }
 }
+
+//[System.Serializable]
+
+//public class Waves
+//{
+//    [SerializeField] private WaveSettings[] _waveSettings;
+//}
+
+//[System.Serializable]
+
+//public class WaveSettings
+//{
+//    //[SerializeField] private Dictionary<Building, int> _enemiesInWave;
+
+
+//    //public Dictionary<Building, int> enemiesInWave { get { return _enemiesInWave; } }
+//}

@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 
 public class Builder : MonoBehaviour
 {
+    [SerializeField] private PlayersResources _playersResources;
     [SerializeField] private PlayerInputHandler _inputHandler;
     [SerializeField] private BuildingGrid _grid;
 
@@ -19,10 +20,8 @@ public class Builder : MonoBehaviour
     public void CreateGhostBuilding(Building building) //Сделать кучу для "призрачных" зданий
     {
         if (_ghostBuilding != null)
-        {
             Destroy(_ghostBuilding.gameObject);
-        }
-
+        
         _ghostBuilding = Instantiate(building);
     }
 
@@ -30,6 +29,11 @@ public class Builder : MonoBehaviour
     {
         if (_ghostBuilding != null && _isCanPlace) 
         {
+            Cost cost = _ghostBuilding.GetCost();
+
+            _playersResources.DecreaseMetalValue(cost.metal);
+            _playersResources.DecreaseOrganicValue(cost.organic);
+
             _grid.UpdateMap(_ghostBuilding);
             _ghostBuilding.SetState(true);
             _ghostBuilding = null;

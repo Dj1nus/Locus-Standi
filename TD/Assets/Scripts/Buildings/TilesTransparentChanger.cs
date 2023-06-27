@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TilesTransparentChanger : MonoBehaviour
 {
-
     private void ChangeTilesTransparent(Level._states state)
     {
         if (state == Level._states.building)

@@ -48,9 +48,4 @@ public class Level : MonoBehaviour
     {
         _state = _states.defending;
     }
-
-    void Update()
-    {
-        
-    }
 }

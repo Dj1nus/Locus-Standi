@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SprinterStateMachine : BaseEnemyStateMachine
 {
-    // Start is called before the first frame update
     IEnumerator LifeTimer()
     {
         yield return new WaitForSeconds(20);

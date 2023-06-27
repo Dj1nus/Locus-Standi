@@ -6,8 +6,6 @@ public class BuildingGrid : MonoBehaviour
     [SerializeField] private Vector4 _mapBorders;
     private Building[,] _map;
 
-
-
     public Vector2Int GetMapSize()
     {
         return _mapSize;
