@@ -37,7 +37,7 @@ public class BuildingGrid : MonoBehaviour
         }
     }
 
-    public void DeleteBuildingFrommap(Building building)
+    public void DeleteBuildingFromMap(Building building)
     {
         foreach (Vector2Int point in building.GetClamedPoints())
         {
@@ -47,7 +47,7 @@ public class BuildingGrid : MonoBehaviour
 
     private void Awake()
     {
-        GlobalEventManager.OnBuildingDestroy.AddListener(DeleteBuildingFrommap);
+        GlobalEventManager.OnBuildingDestroy.AddListener(DeleteBuildingFromMap);
         _map = new Building[_mapSize.x, _mapSize.y];
     }
 }

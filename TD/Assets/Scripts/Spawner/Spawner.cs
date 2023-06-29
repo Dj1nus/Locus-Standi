@@ -38,7 +38,7 @@ public class Spawner : MonoBehaviour
                 var newEnemy = Instantiate(enemiesArray[i], 
                     _spawnPoints[Random.Range(0, _spawnPoints.Length)]);
 
-                newEnemy.gameObject.GetComponent<TargetSelector>().Init();
+                newEnemy.gameObject.GetComponent<EnemyTargetSelector>().Init();
                 yield return new WaitForSeconds(delayBetweenSpawns);
             }
         }
@@ -64,7 +64,7 @@ public class Waves
     [SerializeField] private bool _isTimeFixed;
     [SerializeField] private EnemyDictionary _wavesDictionary;
 
-    public EnemyDictionary Wave {get { return _wavesDictionary; } }
+    public EnemyDictionary Wave { get { return _wavesDictionary; } }
     public float WaveDuration { get { return _waveDuration; } }
     public float DelayBetweenSpawns { get { return _delayBetweenSpawns; } }
 }

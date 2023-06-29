@@ -9,14 +9,14 @@ public class BaseEnemyStateMachine : MonoBehaviour
     }
     private _states _state;
 
-    private TargetSelector _logic;
+    private EnemyTargetSelector _logic;
     private Entity _entity;
 
     public void Init()
     {
         _state = _states.Move;
-        _logic = gameObject.GetComponent<TargetSelector>();
-        _entity = gameObject.GetComponent<Entity>();
+        _logic = GetComponent<EnemyTargetSelector>();
+        _entity = GetComponent<Entity>();
     }
 
     private void CheckState()

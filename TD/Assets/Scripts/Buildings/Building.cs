@@ -22,6 +22,7 @@ public class Building : MonoBehaviour
     private Renderer _renderer;
     private Collider _collider;
     private NavMeshObstacle _navMeshObstacle;
+    private BaseTurretStateMachine _baseTurretStateMachine;
 
     public Vector2Int[] GetClamedPoints()
     {
@@ -71,31 +72,25 @@ public class Building : MonoBehaviour
             _collider.enabled = true;
             _navMeshObstacle.enabled = true;
             _renderer.material = _standart;
+            _baseTurretStateMachine.enabled = true;
         }
         else
         {
             _renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             _collider.enabled = false;
             _navMeshObstacle.enabled = false;
+            _baseTurretStateMachine.enabled = false;
 
             if (isAvaible)
-            {
                 _renderer.material = _good;
-            }
+
             else
-            {
                 _renderer.material = _bad;
-            }
         }
     }
 
     private void SetArrayToDefault()
     {
-        //for (int i = 0; i < _takenPoints.Length; i++)
-        //{
-        //    //_clamedPoints[i] = _takenPoints[i];
-
-        //}
         _takenPoints.CopyTo(_clamedPoints, 0);
     }
 
@@ -104,12 +99,14 @@ public class Building : MonoBehaviour
         _renderer = GetComponent<Renderer>();
         _collider = GetComponent<BoxCollider>();
         _navMeshObstacle = GetComponent<NavMeshObstacle>();
+        _baseTurretStateMachine = GetComponent<BaseTurretStateMachine>();
+
         _state = _states.Ghost;
+
+        //SetState(false);
 
         _clamedPoints = new Vector2Int[_takenPoints.Length];
     }
-
-    
 }
 
 [System.Serializable]

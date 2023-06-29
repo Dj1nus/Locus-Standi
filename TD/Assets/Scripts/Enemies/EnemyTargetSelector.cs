@@ -1,8 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class TargetSelector : MonoBehaviour
+public class EnemyTargetSelector : MonoBehaviour
 {
     private Entity _mainBase;
     private NavMeshAgent  _agent;
@@ -17,6 +18,16 @@ public class TargetSelector : MonoBehaviour
         _agent.destination = _target.transform.position;
     }
 
+    public void AddTarget(Entity target)
+    {
+        _targets.Add(target);
+    }
+
+    public void RemoveTarget(Entity target)
+    {
+        _targets.Remove(target);
+    }
+
     public Entity GetTarget()
     {
         return _target;
@@ -27,17 +38,32 @@ public class TargetSelector : MonoBehaviour
         _target = target;
         _agent.destination = _target.transform.position;
     }
-    public void CheckTargetExist()
+
+    //Это тоже друзья
+    IEnumerator Kostyl()
     {
+        yield return new WaitForEndOfFrame();
+
         if (_target == null)
         {
             _targets.Remove(_target);
             SetTarget(_mainBase);
         }
     }
+    private void CheckTargetExist(Building building)
+    {
+        StartCoroutine(Kostyl());
+    }
+    //Их тоже нельзя разлучать
+    //KOSTYLS LIVES MATTERS!!!
 
     public void ChooseTarget()
     {
+        if (_targets.Count <= 0)
+        {
+            return;
+        }
+
         float distanceToBase = Vector3.Distance(transform.position, _mainBase.transform.position);
         float minDistance = distanceToBase;
 
@@ -47,12 +73,16 @@ public class TargetSelector : MonoBehaviour
         {
             if (target != null)
             {
-                float distancetotarget = Vector3.Distance(transform.position, target.transform.position);
-                if (distancetotarget < distanceToBase & distancetotarget <= minDistance)
+                float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
+                if (distanceToTarget < distanceToBase & distanceToTarget <= minDistance)
                 {
                     possibleTarget = target;
-                    minDistance = distancetotarget;
+                    minDistance = distanceToTarget;
                 }
+            }
+            else
+            {
+                _targets.Remove(target);
             }
         }
         
@@ -62,24 +92,8 @@ public class TargetSelector : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        if (other.TryGetComponent(out Entity target))
-        {
-            _targets.Add(target);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.TryGetComponent(out Entity target))
-        {
-            _targets.Remove(target);
-        }
-    }
-
-    private void Update()
-    {
-        CheckTargetExist();
+        GlobalEventManager.OnBuildingDestroy.AddListener(CheckTargetExist);
     }
 }

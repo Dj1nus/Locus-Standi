@@ -16,8 +16,8 @@ TagManager:
   - Turret
   - BuildingLogic
   - Tiles
-  - 
-  - 
+  - BuildingsTriggers
+  - EnemiesTrigger
   - 
   - 
   - 

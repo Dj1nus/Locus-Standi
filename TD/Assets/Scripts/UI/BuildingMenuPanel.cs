@@ -19,7 +19,6 @@ public class BuildingMenuPanel : MonoBehaviour
     {
         if (_state == _states.down)
         {
-            
             _transform.DOLocalMoveY(_upPositionY, time);
             _state = _states.up;
         }

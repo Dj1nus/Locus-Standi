@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Entity : MonoBehaviour
 {
+    public UnityEvent<Entity> iAmDied = new UnityEvent<Entity>();
+
     public static Action OnBaseDestroyed;
 
     [SerializeField] private float _damage;
@@ -11,9 +14,11 @@ public class Entity : MonoBehaviour
     [SerializeField] private float _distanceToDamage;
     [SerializeField] private float _attackCooldown;
     [SerializeField] private bool _isMainBase;
+    [SerializeField] private bool _isEnemy;
 
     private bool _isCanAttack = true;
-
+    
+    public float DistanceToDamage { get { return _distanceToDamage; } }
 
     public float GetHp()
     {
@@ -27,8 +32,8 @@ public class Entity : MonoBehaviour
 
     public void TakeDamage(float value)
     {
-        CheckHp();
         _hp -= value;
+        CheckHp();
     }
 
     public void Attack(Entity target)
@@ -53,8 +58,15 @@ public class Entity : MonoBehaviour
         {
             OnBaseDestroyed?.Invoke();
         }
+
+        else if (_isEnemy) 
+        {
+            iAmDied?.Invoke(GetComponent<Entity>());
+        }
         
         Destroy(gameObject);
+
+        //gameObject.SetActive(false);
     }
 
     public void CheckHp()

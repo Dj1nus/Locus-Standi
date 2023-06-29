@@ -713,7 +713,7 @@ Transform:
   m_Children:
   - {fileID: 129896932}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &445905599
 MonoBehaviour:
@@ -1268,6 +1268,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurretTierOne (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3490902126843345333, guid: 81f512fa71072f6459cfb0259ebe74aa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3609249788921337156, guid: 81f512fa71072f6459cfb0259ebe74aa, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1360,6 +1364,10 @@ PrefabInstance:
     - target: {fileID: 3490902126843345333, guid: 81f512fa71072f6459cfb0259ebe74aa, type: 3}
       propertyPath: m_Name
       value: TurretTierOne (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3490902126843345333, guid: 81f512fa71072f6459cfb0259ebe74aa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3609249788921337156, guid: 81f512fa71072f6459cfb0259ebe74aa, type: 3}
       propertyPath: m_IsActive
@@ -1700,7 +1708,7 @@ Transform:
   - {fileID: 631520849}
   - {fileID: 97683195}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1127874807
 PrefabInstance:
@@ -1760,6 +1768,10 @@ PrefabInstance:
     - target: {fileID: 3490902126843345333, guid: 81f512fa71072f6459cfb0259ebe74aa, type: 3}
       propertyPath: m_Name
       value: TurretTierOne (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3490902126843345333, guid: 81f512fa71072f6459cfb0259ebe74aa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3609249788921337156, guid: 81f512fa71072f6459cfb0259ebe74aa, type: 3}
       propertyPath: m_IsActive
@@ -2444,6 +2456,10 @@ PrefabInstance:
     - target: {fileID: 3490902126843345333, guid: 81f512fa71072f6459cfb0259ebe74aa, type: 3}
       propertyPath: m_Name
       value: TurretTierOne
+      objectReference: {fileID: 0}
+    - target: {fileID: 3490902126843345333, guid: 81f512fa71072f6459cfb0259ebe74aa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3609249788921337156, guid: 81f512fa71072f6459cfb0259ebe74aa, type: 3}
       propertyPath: m_IsActive
