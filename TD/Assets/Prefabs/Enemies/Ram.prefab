@@ -153,6 +153,9 @@ MonoBehaviour:
       m_Calls: []
   _damage: 5
   _hp: 10
+  _moneysForKilling:
+    organic: 25
+    metal: 10
   _distanceToDamage: 2
   _attackCooldown: 1
   _isMainBase: 0

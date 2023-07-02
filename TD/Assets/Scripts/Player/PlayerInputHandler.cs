@@ -36,7 +36,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     void Update()
     {
-        if (_level.GetState() == Level._states.building && Input.GetMouseButtonUp(0))
+        if (_level.GetState() == Level._states.building && Input.GetMouseButtonDown(0))
         {
             _buildingManager.PlaceBuilding();
         }

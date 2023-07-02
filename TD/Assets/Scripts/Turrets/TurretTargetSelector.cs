@@ -41,7 +41,7 @@ public class TurretTargetSelector : MonoBehaviour
 
     public void ChooseTarget()
     {
-        print(1);
+        //print(1);
         if (_targets.Count <= 0)
         {
             return;
@@ -72,7 +72,6 @@ public class TurretTargetSelector : MonoBehaviour
         {
             SetTarget(possibleTarget);
             RemoveTarget(possibleTarget);
-            print("Sended");
             return;
         }
     }

@@ -33,6 +33,17 @@ public class PlayersResources : MonoBehaviour
         GlobalEventManager.ResourceValueChanged();
     }
 
+    private void TakeMoneyForEnemyKilling(Cost cost)
+    {
+        IncreaseMetalValue(cost.metal);
+        IncreaseOrganicValue(cost.organic);
+    }
+
+    private void Start()
+    {
+        GlobalEventManager.OnEnemyDied.AddListener(TakeMoneyForEnemyKilling);
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.B))

@@ -11,7 +11,7 @@ public class GunTurret : Entity
         if (!_isSignalSended)
         {
             _isSignalSended = true;
-            GlobalEventManager.SendBuildingDestroy(GetComponent<Building>());
+            GlobalEventManager.SendBuildingDestroy(GetComponent<MapUnit>());
         }
         Destroy(gameObject);
     }

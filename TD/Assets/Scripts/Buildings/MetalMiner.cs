@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Building : MapUnit
+public class MetalMiner : MapUnit
 {
     public enum _states
     {
@@ -17,6 +17,7 @@ public class Building : MapUnit
     [SerializeField] private Material _good;
     [SerializeField] private Material _bad;
     [SerializeField] private Material _standart;
+
 
     private Renderer _renderer;
     private Collider _collider;
@@ -92,24 +93,4 @@ public class Building : MapUnit
     {
         Init();
     }
-
-    //private void Awake()
-    //{
-    //    _renderer = GetComponent<Renderer>();
-    //    _collider = GetComponent<BoxCollider>();
-    //    _navMeshObstacle = GetComponent<NavMeshObstacle>();
-    //    _baseTurretStateMachine = GetComponent<BaseTurretStateMachine>();
-
-    //    _state = _states.Ghost;
-
-
-    //}
-}
-
-[System.Serializable]
-
-public class Cost
-{
-    [SerializeField] public int organic;
-    [SerializeField] public int metal;
 }

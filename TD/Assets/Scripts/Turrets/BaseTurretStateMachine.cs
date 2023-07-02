@@ -32,7 +32,7 @@ public class BaseTurretStateMachine : MonoBehaviour
 
     private void EnemyDetected(Entity enemy)
     {
-        Debug.Log("я увидел цель");
+        //Debug.Log("я увидел цель");
 
         enemy.iAmDied.AddListener(TargetDied);
 
@@ -53,12 +53,12 @@ public class BaseTurretStateMachine : MonoBehaviour
         switch (_state)
         {
             case _states.idle:
-                Debug.Log("я отдыхаю");
+                //Debug.Log("я отдыхаю");
                 //gameObject.transform.rotation = _startRotation;
                 break;
 
             case _states.attack:
-                Debug.Log("я стрел€ю");
+                //Debug.Log("я стрел€ю");
                 _shooter.Shoot(_target);
                 break;
         }

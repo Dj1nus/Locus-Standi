@@ -5,12 +5,16 @@ using UnityEngine.iOS;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private float _damage;
+    private float _damage;
     private float _liveTime = 10;
+
+    public void Init(float damage)
+    {
+        _damage = damage;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        print(other.name);
         if (other.TryGetComponent(out BaseEnemyStateMachine enemy))
         {
             StopCoroutine(LifeTimer());
@@ -22,6 +26,7 @@ public class Bullet : MonoBehaviour
     IEnumerator LifeTimer()
     {
         yield return new WaitForSeconds(_liveTime);
+        Destroy(gameObject);
     }
 
     private void Start()

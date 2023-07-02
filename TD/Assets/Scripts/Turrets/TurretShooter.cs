@@ -1,41 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TurretShooter : MonoBehaviour
 {
-    [SerializeField] GameObject bullet;
-    [SerializeField] Transform _muzzle;
+    [SerializeField] private GameObject _bullet;
+    [SerializeField] private GameObject _sphere;
+    [SerializeField] private GameObject _muzzleBox;
+    [SerializeField] private Transform _muzzle;
+    [SerializeField] private float _damage;
+    [SerializeField] private float _shootForce;
+    [SerializeField] private float _fireRate;
 
-    [SerializeField] float _shootForce;
+    private bool _isCanShoot = true;
+    private Transform _headTransform;
+    private Vector3 vectorOfLook;
 
     public void Shoot(Entity target)
     {
-        gameObject.transform.LookAt(target.transform.position);
+        if (target == null) return;
 
-        //var newBullet = Instantiate(bullet, _muzzle.position, Quaternion.identity);
-        var newBullet = Instantiate(bullet);
+        _sphere.transform.LookAt(new Vector3(
+            target.transform.position.x,
+            _sphere.transform.position.y,
+            target.transform.position.z));
 
-        newBullet.transform.position = _muzzle.position;
+        _muzzleBox.transform.LookAt(new Vector3(
+            _muzzleBox.transform.position.x,
+            target.transform.position.y,
+            _muzzleBox.transform.position.z));
+        
+        //_head.transform.LookAt(target.transform.position);
+        //_head.transform.LookAt(target.transform.position);
 
-        Vector3 direction = target.transform.position - _muzzle.position;
+        
 
-        //newBullet.transform.LookAt(target.transform.position);
-        newBullet.GetComponent<Rigidbody>().AddForce(direction.normalized * _shootForce, ForceMode.Impulse);
+        if (_isCanShoot)
+        {
+            var newBullet = Instantiate(_bullet);
 
-        //target.TakeDamage(10000f);
+            newBullet.GetComponent<Bullet>().Init(_damage);
+            newBullet.transform.position = _muzzle.position;
+
+            Vector3 direction = target.transform.position - _muzzle.position;
+
+            newBullet.GetComponent<Rigidbody>().AddForce(direction.normalized * _shootForce, ForceMode.Impulse);
+
+            StartCoroutine(CooldownTimer());
+        }
     }
 
-
-    // Start is called before the first frame update
-    void Start()
+    IEnumerator CooldownTimer()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _isCanShoot = false;
+        yield return new WaitForSeconds(_fireRate);
+        _isCanShoot = true;
     }
 }

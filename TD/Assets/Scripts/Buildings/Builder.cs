@@ -23,6 +23,7 @@ public class Builder : MonoBehaviour
             Destroy(_ghostBuilding.gameObject);
         
         _ghostBuilding = Instantiate(building);
+        _ghostBuilding.Init();
     }
 
     public void PlaceBuilding()
@@ -51,9 +52,9 @@ public class Builder : MonoBehaviour
             
             if (mousePositionInWorld != _previousPosition)
             {
-                Vector3Int _possiblePosition = new Vector3Int(
+                Vector3 _possiblePosition = new Vector3(
                     Mathf.RoundToInt(mousePositionInWorld.x), 
-                    _ghostBuilding.GetYOffset(), 
+                    _ghostBuilding.GetYOffset(),
                     Mathf.RoundToInt(mousePositionInWorld.z));
 
                 _ghostBuilding.transform.position = _possiblePosition;

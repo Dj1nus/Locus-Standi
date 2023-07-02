@@ -11,6 +11,7 @@ public class Entity : MonoBehaviour
 
     [SerializeField] private float _damage;
     [SerializeField] private float _hp;
+    [SerializeField] private Cost _moneysForKilling;
     [SerializeField] private float _distanceToDamage;
     [SerializeField] private float _attackCooldown;
     [SerializeField] private bool _isMainBase;
@@ -62,6 +63,7 @@ public class Entity : MonoBehaviour
         else if (_isEnemy) 
         {
             iAmDied?.Invoke(GetComponent<Entity>());
+            GlobalEventManager.SendEnemeDied(_moneysForKilling);
         }
         
         Destroy(gameObject);

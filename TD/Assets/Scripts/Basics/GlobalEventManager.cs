@@ -6,12 +6,13 @@ using UnityEngine.Events;
 
 public class GlobalEventManager : MonoBehaviour
 {
-    public static UnityEvent<Building> OnBuildingDestroy = new UnityEvent<Building>();
+    public static UnityEvent<MapUnit> OnBuildingDestroy = new UnityEvent<MapUnit>();
     public static UnityEvent<Level._states> OnVisualModeChanged = new UnityEvent<Level._states>();
     public static UnityEvent OnResourceValueChanged = new UnityEvent();
     public static UnityEvent<Building> OnBuyButtonClick = new UnityEvent<Building>();
+    public static UnityEvent<Cost> OnEnemyDied = new UnityEvent<Cost>();
 
-    public static void SendBuildingDestroy(Building building)
+    public static void SendBuildingDestroy(MapUnit building)
     {
         OnBuildingDestroy?.Invoke(building);
     }
@@ -29,5 +30,10 @@ public class GlobalEventManager : MonoBehaviour
     public static void BuyButtonClicked(Building building)
     {
         OnBuyButtonClick?.Invoke(building);
+    }
+
+    public static void SendEnemeDied(Cost cost)
+    {
+        OnEnemyDied?.Invoke(cost);
     }
 }

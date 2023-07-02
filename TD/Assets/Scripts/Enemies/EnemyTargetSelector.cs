@@ -50,7 +50,7 @@ public class EnemyTargetSelector : MonoBehaviour
             SetTarget(_mainBase);
         }
     }
-    private void CheckTargetExist(Building building)
+    private void CheckTargetExist(MapUnit building)
     {
         StartCoroutine(Kostyl());
     }
@@ -80,14 +80,11 @@ public class EnemyTargetSelector : MonoBehaviour
                     minDistance = distanceToTarget;
                 }
             }
-            else
-            {
-                _targets.Remove(target);
-            }
         }
         
         if (possibleTarget != null)
         {
+            _targets.Remove(possibleTarget);
             SetTarget(possibleTarget);
         }
     }
