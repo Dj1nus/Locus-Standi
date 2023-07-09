@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3705165674771725156}
   - component: {fileID: 3705165674771725157}
   - component: {fileID: 3705165674771725158}
-  - component: {fileID: 3705165674771725159}
+  - component: {fileID: 4564700228305885398}
   - component: {fileID: -3980293995476306596}
   - component: {fileID: -7914681964603895462}
   m_Layer: 7
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d48b3640b43f0e479e6058cb40f2e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3705165674771725159
+--- !u!114 &4564700228305885398
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,21 +136,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3705165674771725152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f607fd93e68c3c849bd5aa9eb1613ab2, type: 3}
+  m_Script: {fileID: 11500000, guid: 9193fe62a162e7644bd5699a26907012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iAmDied:
-    m_PersistentCalls:
-      m_Calls: []
   _damage: 50
-  _hp: 150
+  _hp: 200
   _moneysForKilling:
     organic: 50
     metal: 150
   _distanceToDamage: 0
   _attackCooldown: 2
-  _isMainBase: 0
-  _isEnemy: 1
 --- !u!195 &-3980293995476306596
 NavMeshAgent:
   m_ObjectHideFlags: 0

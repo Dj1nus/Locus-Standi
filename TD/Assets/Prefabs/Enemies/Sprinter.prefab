@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 4639031945568702784}
   - component: {fileID: 4639031945568702785}
   - component: {fileID: 4639031945568702790}
-  - component: {fileID: 4639031945568702791}
+  - component: {fileID: 6913346152446820854}
   - component: {fileID: 4639031945568702788}
   - component: {fileID: 4639031945568702786}
   - component: {fileID: 4639031945568702789}
@@ -161,7 +161,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4639031945568702791
+--- !u!114 &6913346152446820854
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,12 +170,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4639031945568702811}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f607fd93e68c3c849bd5aa9eb1613ab2, type: 3}
+  m_Script: {fileID: 11500000, guid: 9193fe62a162e7644bd5699a26907012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iAmDied:
-    m_PersistentCalls:
-      m_Calls: []
   _damage: 20
   _hp: 50
   _moneysForKilling:
@@ -183,8 +180,6 @@ MonoBehaviour:
     metal: 50
   _distanceToDamage: 2.5
   _attackCooldown: 1.5
-  _isMainBase: 0
-  _isEnemy: 1
 --- !u!114 &4639031945568702788
 MonoBehaviour:
   m_ObjectHideFlags: 0

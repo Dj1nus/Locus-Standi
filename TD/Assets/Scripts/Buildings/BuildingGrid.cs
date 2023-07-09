@@ -95,9 +95,10 @@ public class BuildingGrid : MonoBehaviour
     private void Awake()
     {
         GlobalEventManager.OnBuildingDestroy.AddListener(DeleteBuildingFromMap);
+
         _map = new MapUnit[_mapSize.x, _mapSize.y];
 
-        _deposits = FindObjectsOfType<Deposit>();
+        _deposits = FindObjectsOfType<Deposit>();//
 
         foreach (MapUnit deposit in _deposits)
         {

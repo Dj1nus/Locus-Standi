@@ -28,7 +28,7 @@ public class Spawner : MonoBehaviour
     {
         float delayBetweenSpawns = _waves[_currentWaveIndex].DelayBetweenSpawns;
 
-        Entity[] enemiesArray = _waves[_currentWaveIndex].Wave.GetEnemy();
+        EnemyEntity[] enemiesArray = _waves[_currentWaveIndex].Wave.GetEnemy();
         int[] numbersOfEnemies = _waves[_currentWaveIndex].Wave.GetCount();
 
         for (int i = 0; i < _waves[_currentWaveIndex].Wave.GetLenght(); i++)
@@ -73,10 +73,10 @@ public class Waves
 
 public class EnemyDictionary
 {
-    [SerializeField] private Entity[] _enemy;
+    [SerializeField] private EnemyEntity[] _enemy;
     [SerializeField] private int[] _count;
 
-    public Entity[] GetEnemy()
+    public EnemyEntity[] GetEnemy()
     {
         return _enemy;
     }

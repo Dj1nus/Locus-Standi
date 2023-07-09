@@ -8,10 +8,7 @@ public class EnemiesTrigger : MonoBehaviour
     {
         if (other.TryGetComponent(out EnemyEntity target))
         {
-            if (target._isEnemy)
-            {
-                targetSelector.AddTarget(target);
-            }
+            targetSelector.AddTarget(target);
         }
     }
 
@@ -19,10 +16,7 @@ public class EnemiesTrigger : MonoBehaviour
     {
         if (other.TryGetComponent(out EnemyEntity target))
         {
-            if (target._isEnemy)
-            {
-                targetSelector.RemoveTarget(target);
-            }
+            targetSelector.RemoveTarget(target);
         }
     }
 

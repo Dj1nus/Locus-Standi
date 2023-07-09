@@ -17,10 +17,10 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out BaseEnemyStateMachine enemy))
+        if (other.TryGetComponent(out EnemyEntity enemy))
         {
             StopCoroutine(LifeTimer());
-            enemy.GetComponent<Entity>().TakeDamage(_damage);
+            enemy.TakeDamage(_damage);
             Deactivate();
         }
     }

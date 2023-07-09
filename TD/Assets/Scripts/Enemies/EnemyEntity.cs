@@ -9,5 +9,7 @@ public class EnemyEntity : Entity
     protected override void Die()
     {
         EnemyDied?.Invoke(GetComponent<EnemyEntity>());
+
+        base.Die();
     }
 }

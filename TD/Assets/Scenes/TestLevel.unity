@@ -1711,24 +1711,24 @@ MonoBehaviour:
     _isTimeFixed: 0
     _wavesDictionary:
       _enemy:
-      - {fileID: 5954195737348160734, guid: d1893681e02fc3040abafc36b499577d, type: 3}
+      - {fileID: 3865502630262126143, guid: d1893681e02fc3040abafc36b499577d, type: 3}
       _count: 0c000000
   - _waveDuration: 10
     _delayBetweenSpawns: 0.05
     _isTimeFixed: 0
     _wavesDictionary:
       _enemy:
-      - {fileID: 4639031945568702791, guid: be57b62f8f30718429490c087696d2a2, type: 3}
-      - {fileID: 5954195737348160734, guid: d1893681e02fc3040abafc36b499577d, type: 3}
+      - {fileID: 6913346152446820854, guid: be57b62f8f30718429490c087696d2a2, type: 3}
+      - {fileID: 3865502630262126143, guid: d1893681e02fc3040abafc36b499577d, type: 3}
       _count: 050000000a000000
   - _waveDuration: 20
     _delayBetweenSpawns: 0.1
     _isTimeFixed: 0
     _wavesDictionary:
       _enemy:
-      - {fileID: 5954195737348160734, guid: d1893681e02fc3040abafc36b499577d, type: 3}
-      - {fileID: 4639031945568702791, guid: be57b62f8f30718429490c087696d2a2, type: 3}
-      - {fileID: 3705165674771725159, guid: 8f280b149e6f4f9438181cb7e4054f6e, type: 3}
+      - {fileID: 3865502630262126143, guid: d1893681e02fc3040abafc36b499577d, type: 3}
+      - {fileID: 6913346152446820854, guid: be57b62f8f30718429490c087696d2a2, type: 3}
+      - {fileID: 4564700228305885398, guid: 8f280b149e6f4f9438181cb7e4054f6e, type: 3}
       _count: 0f0000000a00000005000000
 --- !u!4 &1120774275
 Transform:

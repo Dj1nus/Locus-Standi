@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7345118073097338264}
   - component: {fileID: 143239254968496831}
   - component: {fileID: 8047860782902673565}
-  - component: {fileID: 5954195737348160734}
+  - component: {fileID: 3865502630262126143}
   - component: {fileID: 5811550674104022246}
   m_Layer: 7
   m_Name: Ram
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d48b3640b43f0e479e6058cb40f2e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5954195737348160734
+--- !u!114 &3865502630262126143
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,12 +145,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7345118073097338267}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f607fd93e68c3c849bd5aa9eb1613ab2, type: 3}
+  m_Script: {fileID: 11500000, guid: 9193fe62a162e7644bd5699a26907012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iAmDied:
-    m_PersistentCalls:
-      m_Calls: []
   _damage: 5
   _hp: 10
   _moneysForKilling:
@@ -158,8 +155,6 @@ MonoBehaviour:
     metal: 10
   _distanceToDamage: 2
   _attackCooldown: 1
-  _isMainBase: 0
-  _isEnemy: 1
 --- !u!114 &5811550674104022246
 MonoBehaviour:
   m_ObjectHideFlags: 0
