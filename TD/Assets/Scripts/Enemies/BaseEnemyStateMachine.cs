@@ -21,7 +21,9 @@ public class BaseEnemyStateMachine : MonoBehaviour
 
     private void CheckState()
     {
-        if (_logic.GetTarget() != null && Vector3.Distance(transform.position, _logic.GetTarget().transform.position) <= 5f)
+        Entity target = _logic.GetTarget();
+
+        if (target != null && Vector3.Distance(transform.position, target.transform.position) <= target.DistanceToDamage)
         {
             _state = _states.Attack;
             return;
@@ -40,6 +42,7 @@ public class BaseEnemyStateMachine : MonoBehaviour
 
             case _states.Attack:
                 _entity.Attack(_logic.GetTarget());
+                _logic.StopMoving();
                 break;
         }
     }

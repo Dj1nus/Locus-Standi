@@ -1,79 +1,31 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class MetalMiner : MapUnit
+public class MetalMiner : Building
 {
-    public enum _states
+    [SerializeField] private float _miningSpeed;
+    [SerializeField] private int _quantility;
+
+    private bool _isCoroutineStarget = false;
+    private PlayersResources _resources;
+
+    IEnumerator Mining()
     {
-        Ghost,
-        Placed
-    }
+        _isCoroutineStarget = true;
 
-    private _states _state;
-
-    [SerializeField] private Cost _cost;
-
-    [SerializeField] private float _yOffset;
-    [SerializeField] private Material _good;
-    [SerializeField] private Material _bad;
-    [SerializeField] private Material _standart;
-
-
-    private Renderer _renderer;
-    private Collider _collider;
-    private NavMeshObstacle _navMeshObstacle;
-    private BaseTurretStateMachine _baseTurretStateMachine;
-
-    public float GetYOffset()
-    {
-        return _yOffset;
-    }
-
-    public _states GetState()
-    {
-        return _state;
-    }
-
-    public Cost GetCost()
-    {
-        return _cost;
-    }
-
-    public void SetState(bool isPlaced)
-    {
-        if (isPlaced)
+        while (true)
         {
-            _state = _states.Placed;
+            yield return new WaitForSeconds(_miningSpeed);
+
+            _resources.IncreaseMetalValue(_quantility);
         }
-        else
-        {
-            _state = _states.Ghost;
-        }
-        SetVisualMode(isPlaced);
     }
 
-    public void SetVisualMode(bool isAvaible)
+    private void MinerPlaced()
     {
-        if (_state == _states.Placed)
+        if (!_isCoroutineStarget)
         {
-            _renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
-            _collider.enabled = true;
-            _navMeshObstacle.enabled = true;
-            _renderer.material = _standart;
-            _baseTurretStateMachine.enabled = true;
-        }
-        else
-        {
-            _renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-            _collider.enabled = false;
-            _navMeshObstacle.enabled = false;
-            _baseTurretStateMachine.enabled = false;
-
-            if (isAvaible)
-                _renderer.material = _good;
-
-            else
-                _renderer.material = _bad;
+            StartCoroutine(Mining());
         }
     }
 
@@ -81,16 +33,7 @@ public class MetalMiner : MapUnit
     {
         base.Init();
 
-        _renderer = GetComponent<Renderer>();
-        _collider = GetComponent<BoxCollider>();
-        _navMeshObstacle = GetComponent<NavMeshObstacle>();
-        _baseTurretStateMachine = GetComponent<BaseTurretStateMachine>();
-
-        _state = _states.Ghost;
-    }
-
-    private void Start()
-    {
-        Init();
+        BuildingPlaced.AddListener(MinerPlaced);
+        _resources = FindObjectOfType<PlayersResources>();
     }
 }

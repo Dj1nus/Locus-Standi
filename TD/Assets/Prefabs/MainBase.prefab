@@ -124,11 +124,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f607fd93e68c3c849bd5aa9eb1613ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iAmDied:
+    m_PersistentCalls:
+      m_Calls: []
   _damage: 0
   _hp: 1000
-  _distanceToDamage: 4
+  _moneysForKilling:
+    organic: 0
+    metal: 0
+  _distanceToDamage: 3
   _attackCooldown: 0
   _isMainBase: 1
+  _isEnemy: 0
 --- !u!208 &1416560692
 NavMeshObstacle:
   m_ObjectHideFlags: 0

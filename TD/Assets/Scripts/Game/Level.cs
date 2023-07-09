@@ -29,19 +29,19 @@ public class Level : MonoBehaviour
 
         GlobalEventManager.ChangeVisualMode(_state);
     }
-    private void StopGame()
+    private void StopLevel()
     {
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
     }
 
     private void OnEnable()
     {
-        Entity.OnBaseDestroyed += StopGame;
+        GlobalEventManager.OnMainBaseDestroy += StopLevel;
     }
 
     private void OnDisable()
     {
-        Entity.OnBaseDestroyed -= StopGame;
+        GlobalEventManager.OnMainBaseDestroy -= StopLevel;
     }
 
     private void Start()

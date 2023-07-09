@@ -1,16 +1,15 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class GlobalEventManager : MonoBehaviour
 {
+    public static Action OnMainBaseDestroy;
     public static UnityEvent<MapUnit> OnBuildingDestroy = new UnityEvent<MapUnit>();
     public static UnityEvent<Level._states> OnVisualModeChanged = new UnityEvent<Level._states>();
-    public static UnityEvent OnResourceValueChanged = new UnityEvent();
+    public static Action OnResourceValueChanged;
     public static UnityEvent<Building> OnBuyButtonClick = new UnityEvent<Building>();
-    public static UnityEvent<Cost> OnEnemyDied = new UnityEvent<Cost>();
+    public static Action<Cost> OnEnemyDied;
 
     public static void SendBuildingDestroy(MapUnit building)
     {
@@ -32,8 +31,13 @@ public class GlobalEventManager : MonoBehaviour
         OnBuyButtonClick?.Invoke(building);
     }
 
-    public static void SendEnemeDied(Cost cost)
+    public static void SendEnemyDied(Cost cost)
     {
         OnEnemyDied?.Invoke(cost);
+    }
+
+    public static void SendBaseDestroyed()
+    {
+        OnMainBaseDestroy?.Invoke();
     }
 }

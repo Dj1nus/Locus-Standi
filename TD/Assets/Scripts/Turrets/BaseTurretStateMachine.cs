@@ -15,34 +15,28 @@ public class BaseTurretStateMachine : MonoBehaviour
 
     private TurretTargetSelector _targetSelector;
     private TurretShooter _shooter;
-    private Entity _entity;
-    private Quaternion _startRotation;
 
     public void Init()
     {
         _state = _states.idle;
-        _startRotation = gameObject.transform.rotation;
 
         _targetSelector = GetComponent<TurretTargetSelector>();
         _shooter = GetComponent<TurretShooter>();
-        _entity = GetComponent<Entity>();
 
-        _targetSelector.OnEnemyDetected.AddListener(EnemyDetected);
+        _targetSelector.OnEnemyDetected += EnemyDetected;
     }
 
-    private void EnemyDetected(Entity enemy)
+    private void EnemyDetected(EnemyEntity enemy)
     {
-        //Debug.Log("я увидел цель");
-
-        enemy.iAmDied.AddListener(TargetDied);
+        enemy.EnemyDied += TargetDied;
 
         _target = enemy;
         _state = _states.attack;
     }
 
-    private void TargetDied(Entity target)
+    private void TargetDied(EnemyEntity target)
     {
-        target.iAmDied.RemoveListener(TargetDied);
+        target.EnemyDied -= TargetDied;
         _target = null;
         _targetSelector.SetTargetToNull();
         _state = _states.idle;
@@ -53,20 +47,12 @@ public class BaseTurretStateMachine : MonoBehaviour
         switch (_state)
         {
             case _states.idle:
-                //Debug.Log("я отдыхаю");
-                //gameObject.transform.rotation = _startRotation;
                 break;
 
             case _states.attack:
-                //Debug.Log("я стрел€ю");
-                _shooter.Shoot(_target);
+                _shooter.ShooterStateMachine(_target);
                 break;
         }
-    }
-
-    private void Start()
-    {
-        Init();
     }
 
     private void Update() 

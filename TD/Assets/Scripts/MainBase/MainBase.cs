@@ -1,20 +1,11 @@
 using System;
 using UnityEngine;
 
-public class MainBase : MonoBehaviour
+public class MainBase : Entity
 {
-    private Entity entity;
-
-    private void Start()
+    protected override void Die()
     {
-        entity = GetComponent<Entity>();
-    }
-
-    private void Update()
-    {
-        if (entity.GetHp() < 500)
-        {
-            entity.TakeDamage(-600);
-        }
+        GlobalEventManager.SendBaseDestroyed();
+        print("Died");
     }
 }

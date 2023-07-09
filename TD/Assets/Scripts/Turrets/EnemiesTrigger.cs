@@ -1,31 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class EnemiesTrigger : MonoBehaviour
 {
-    [SerializeField] private GameObject parent;
     private TurretTargetSelector targetSelector;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Entity target))
+        if (other.TryGetComponent(out EnemyEntity target))
         {
-            targetSelector.AddTarget(target);
+            if (target._isEnemy)
+            {
+                targetSelector.AddTarget(target);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out Entity target))
+        if (other.TryGetComponent(out EnemyEntity target))
         {
-            targetSelector.RemoveTarget(target);
+            if (target._isEnemy)
+            {
+                targetSelector.RemoveTarget(target);
+            }
         }
     }
 
     private void Start()
     {
-        targetSelector = parent.GetComponent<TurretTargetSelector>();
+        targetSelector = GetComponentInParent<TurretTargetSelector>();
     }
 }

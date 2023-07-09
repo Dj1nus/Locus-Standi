@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class Building : MapUnit
 {
@@ -9,7 +10,7 @@ public class Building : MapUnit
         Placed
     }
 
-    private _states _state;
+    protected _states _state;
 
     [SerializeField] private Cost _cost;
 
@@ -18,10 +19,11 @@ public class Building : MapUnit
     [SerializeField] private Material _bad;
     [SerializeField] private Material _standart;
 
+    protected UnityEvent BuildingPlaced = new UnityEvent();
+
     private Renderer _renderer;
     private Collider _collider;
     private NavMeshObstacle _navMeshObstacle;
-    private BaseTurretStateMachine _baseTurretStateMachine;
 
     public float GetYOffset()
     {
@@ -51,7 +53,7 @@ public class Building : MapUnit
         SetVisualMode(isPlaced);
     }
 
-    public void SetVisualMode(bool isAvaible)
+    public virtual void SetVisualMode(bool isAvaible)
     {
         if (_state == _states.Placed)
         {
@@ -59,14 +61,16 @@ public class Building : MapUnit
             _collider.enabled = true;
             _navMeshObstacle.enabled = true;
             _renderer.material = _standart;
-            _baseTurretStateMachine.enabled = true;
+
+            BuildingPlaced?.Invoke();
+
+
         }
         else
         {
             _renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             _collider.enabled = false;
             _navMeshObstacle.enabled = false;
-            _baseTurretStateMachine.enabled = false;
 
             if (isAvaible)
                 _renderer.material = _good;
@@ -80,10 +84,9 @@ public class Building : MapUnit
     {
         base.Init();
 
-        _renderer = GetComponent<Renderer>();
-        _collider = GetComponent<BoxCollider>();
-        _navMeshObstacle = GetComponent<NavMeshObstacle>();
-        _baseTurretStateMachine = GetComponent<BaseTurretStateMachine>();
+        _renderer = GetComponentInChildren<Renderer>();
+        _collider = GetComponentInChildren<BoxCollider>();
+        _navMeshObstacle = GetComponentInChildren<NavMeshObstacle>();
 
         _state = _states.Ghost;
     }
@@ -92,24 +95,5 @@ public class Building : MapUnit
     {
         Init();
     }
-
-    //private void Awake()
-    //{
-    //    _renderer = GetComponent<Renderer>();
-    //    _collider = GetComponent<BoxCollider>();
-    //    _navMeshObstacle = GetComponent<NavMeshObstacle>();
-    //    _baseTurretStateMachine = GetComponent<BaseTurretStateMachine>();
-
-    //    _state = _states.Ghost;
-
-
-    //}
 }
 
-[System.Serializable]
-
-public class Cost
-{
-    [SerializeField] public int organic;
-    [SerializeField] public int metal;
-}

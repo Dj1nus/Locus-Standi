@@ -24,6 +24,7 @@ public class Builder : MonoBehaviour
         
         _ghostBuilding = Instantiate(building);
         _ghostBuilding.Init();
+        _ghostBuilding.GetComponent<BaseTurretStateMachine>().Init();
     }
 
     public void PlaceBuilding()

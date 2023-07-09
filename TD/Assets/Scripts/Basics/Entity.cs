@@ -1,12 +1,9 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Entity : MonoBehaviour
 {
-    public UnityEvent<Entity> iAmDied = new UnityEvent<Entity>();
-
     public static Action OnBaseDestroyed;
 
     [SerializeField] private float _damage;
@@ -15,10 +12,11 @@ public class Entity : MonoBehaviour
     [SerializeField] private float _distanceToDamage;
     [SerializeField] private float _attackCooldown;
     [SerializeField] private bool _isMainBase;
-    [SerializeField] private bool _isEnemy;
+    [SerializeField] public bool _isEnemy;
 
     private bool _isCanAttack = true;
-    
+    private bool _isSignalSended = false;
+
     public float DistanceToDamage { get { return _distanceToDamage; } }
 
     public float GetHp()
@@ -53,30 +51,21 @@ public class Entity : MonoBehaviour
         _isCanAttack = true;
     }
 
-    public virtual void Die()
+    protected virtual void Die()
     {
-        if (_isMainBase)
+        if (!_isSignalSended)
         {
-            OnBaseDestroyed?.Invoke();
-        }
-
-        else if (_isEnemy) 
-        {
-            iAmDied?.Invoke(GetComponent<Entity>());
-            GlobalEventManager.SendEnemeDied(_moneysForKilling);
+            _isSignalSended = true;
+            GlobalEventManager.SendBuildingDestroy(GetComponent<MapUnit>());
         }
         
         Destroy(gameObject);
-
-        //gameObject.SetActive(false);
     }
 
     public void CheckHp()
     {
         if (_hp <= 0)
         {
-            //print(gameObject.name);
-            //print("is dying");
             Die();
         }
     }

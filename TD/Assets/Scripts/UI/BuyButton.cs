@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 public class BuyButton : MonoBehaviour
 {
-    [SerializeField] Building _building;
-    [SerializeField] PlayersResources _playerResources;
+    [SerializeField] protected Building _building;
 
+    PlayersResources _playerResources;
     private Cost _buildingCost;
     private Button _button;
 
@@ -29,11 +29,18 @@ public class BuyButton : MonoBehaviour
         GlobalEventManager.BuyButtonClicked(_building);
     }
 
-    void Start()
+    public virtual void Init()
     {
-        GlobalEventManager.OnResourceValueChanged.AddListener(CompareCost);   
+        GlobalEventManager.OnResourceValueChanged += CompareCost;
         _button = GetComponent<Button>();
 
+        _playerResources = FindObjectOfType<PlayersResources>();
+
         CompareCost();
+    }
+
+    void Start()
+    {
+        Init();
     }
 }

@@ -1,29 +1,29 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class TurretTargetSelector : MonoBehaviour
 {
-    public UnityEvent<Entity> OnEnemyDetected = new UnityEvent<Entity>(); 
+    public Action<EnemyEntity> OnEnemyDetected;
 
     private const float MIN_DISTANCE = 10f;
 
-    private List<Entity> _targets = new List<Entity>();
-    private Entity _target = null;
+    private List<EnemyEntity> _targets = new List<EnemyEntity>();
+    private EnemyEntity _target = null;
 
-    public List<Entity> Targets { get { return _targets; } }
+    public List<EnemyEntity> Targets { get { return _targets; } }
 
-    public void AddTarget(Entity target)
+    public void AddTarget(EnemyEntity target)
     {
         _targets.Add(target);
     }
 
-    public void RemoveTarget(Entity target) 
+    public void RemoveTarget(EnemyEntity target) 
     {
         _targets.Remove(target);
     }
 
-    private void SetTarget(Entity target)
+    private void SetTarget(EnemyEntity target)
     {
         _target = target;
         OnEnemyDetected?.Invoke(target);
@@ -50,9 +50,9 @@ public class TurretTargetSelector : MonoBehaviour
         float minDistance = MIN_DISTANCE;
         float distancetoTarget;
 
-        Entity possibleTarget = null;
+        EnemyEntity possibleTarget = null;
 
-        foreach (Entity target in _targets)
+        foreach (EnemyEntity target in _targets)
         {
             if (target == null)
             {

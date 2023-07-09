@@ -39,10 +39,15 @@ public class EnemyTargetSelector : MonoBehaviour
         _agent.destination = _target.transform.position;
     }
 
+    public void StopMoving()
+    {
+        _agent.destination = transform.position;
+    }
+
     //Это тоже друзья
     IEnumerator Kostyl()
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.01f);
 
         if (_target == null)
         {

@@ -1,60 +1,92 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class TurretShooter : MonoBehaviour
 {
-    [SerializeField] private GameObject _bullet;
+    protected enum states
+    {
+        _rotating,
+        _aimed,
+        _shooting,
+        _reloading
+    }
+
+    protected states _state;
+
+    [SerializeField] protected float _damagePerBullet;
+    [SerializeField] protected float _shootForce;
+    [SerializeField] protected float _rotationSpeed;
+    [SerializeField] protected GameObject _bullet;
+    [SerializeField] protected Transform _muzzle;
+
     [SerializeField] private GameObject _sphere;
-    [SerializeField] private GameObject _muzzleBox;
-    [SerializeField] private Transform _muzzle;
-    [SerializeField] private float _damage;
-    [SerializeField] private float _shootForce;
     [SerializeField] private float _fireRate;
 
-    private bool _isCanShoot = true;
-    private Transform _headTransform;
-    private Vector3 vectorOfLook;
+    private Vector3 _lookDirection;
+    private Quaternion _lookRotation;
+    protected BulletPool _bulletPool;
 
-    public void Shoot(Entity target)
+    public void ShooterStateMachine(Entity target)
     {
         if (target == null) return;
 
-        _sphere.transform.LookAt(new Vector3(
-            target.transform.position.x,
-            _sphere.transform.position.y,
-            target.transform.position.z));
-
-        _muzzleBox.transform.LookAt(new Vector3(
-            _muzzleBox.transform.position.x,
-            target.transform.position.y,
-            _muzzleBox.transform.position.z));
-        
-        //_head.transform.LookAt(target.transform.position);
-        //_head.transform.LookAt(target.transform.position);
-
-        
-
-        if (_isCanShoot)
+        switch (_state)
         {
-            var newBullet = Instantiate(_bullet);
+            case states._rotating:
+                LookAtTarget(target);
+                CheckState();
+                break;
 
-            newBullet.GetComponent<Bullet>().Init(_damage);
-            newBullet.transform.position = _muzzle.position;
+            case states._aimed:
+                Shoot(target);
+                break;
 
-            Vector3 direction = target.transform.position - _muzzle.position;
+            case states._reloading:
+                break;
 
-            newBullet.GetComponent<Rigidbody>().AddForce(direction.normalized * _shootForce, ForceMode.Impulse);
-
-            StartCoroutine(CooldownTimer());
+            case states._shooting:
+                break;
         }
     }
 
-    IEnumerator CooldownTimer()
+    private void CheckState()
     {
-        _isCanShoot = false;
+        if (_state == states._reloading) return;
+
+        if (Mathf.Abs((_lookRotation.eulerAngles - _sphere.transform.rotation.eulerAngles).y) < 1)
+        {
+            _state = states._aimed;
+        }
+
+        else
+        {
+            _state = states._rotating;
+        }
+    }
+
+    public virtual void Shoot(Entity target)
+    {
+        print(0);
+    }
+   
+    private void LookAtTarget(Entity target)
+    {
+        _lookDirection = target.transform.position - transform.position;
+        _lookRotation = Quaternion.LookRotation(_lookDirection);
+        _sphere.transform.rotation = Quaternion.RotateTowards(_sphere.transform.rotation, _lookRotation, _rotationSpeed);
+    }
+
+    protected IEnumerator CooldownTimer()
+    {
+        _state = states._reloading;
         yield return new WaitForSeconds(_fireRate);
-        _isCanShoot = true;
+        _state = states._rotating;
+    }
+
+    private void Start()
+    {
+        _bulletPool = FindObjectOfType<BulletPool>().GetComponent<BulletPool>();
+        _state = states._rotating;
     }
 }

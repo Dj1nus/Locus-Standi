@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using UnityEngine;
 
 public class BuildingGrid : MonoBehaviour
@@ -32,11 +33,12 @@ public class BuildingGrid : MonoBehaviour
             }
         }
 
-        else if (unit.GetUnitType() == MapUnit._types.deposit)
+        else if (unit.GetUnitType() == MapUnit._types.miner)
         {
             foreach (Vector2Int point in unit.GetClamedPoints())
             {
-                if (_map[point.x, point.y] != new Deposit())
+                if (_map[point.x, point.y] == null ||
+                    _map[point.x, point.y].GetUnitType() != MapUnit._types.deposit)
                 {
                     return false;
                 }
@@ -64,6 +66,13 @@ public class BuildingGrid : MonoBehaviour
             }
         }
         
+        else if (unit.GetUnitType() == MapUnit._types.miner)
+        {
+            foreach (Vector2Int point in unit.GetClamedPoints())
+            {
+                _map[point.x, point.y] = unit as MetalMiner;
+            }
+        }
     }
 
     public void DeleteBuildingFromMap(MapUnit unit)
@@ -72,7 +81,7 @@ public class BuildingGrid : MonoBehaviour
         {
             foreach (Vector2Int point in unit.GetClamedPoints())
             {
-                _map[point.x, point.y] = new Deposit();
+                _map[point.x, point.y] = FindObjectOfType<Deposit>();
             }
             return;
         }

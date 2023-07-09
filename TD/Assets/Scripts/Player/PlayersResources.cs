@@ -41,7 +41,7 @@ public class PlayersResources : MonoBehaviour
 
     private void Start()
     {
-        GlobalEventManager.OnEnemyDied.AddListener(TakeMoneyForEnemyKilling);
+        GlobalEventManager.OnEnemyDied += TakeMoneyForEnemyKilling;
     }
 
     private void Update()
