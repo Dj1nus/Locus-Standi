@@ -5,6 +5,7 @@ public class BaseEnemyStateMachine : MonoBehaviour
     private enum _states
     {
         Move,
+        MoveToTarget,
         Attack
     }
     private _states _state;
@@ -31,6 +32,11 @@ public class BaseEnemyStateMachine : MonoBehaviour
         _state = _states.Move;
     }
 
+    public void OnEnemyDied()
+    {
+        _state = _states.Move;
+    }
+
     public void StateMachine()
     {
         CheckState();
@@ -39,7 +45,7 @@ public class BaseEnemyStateMachine : MonoBehaviour
             case _states.Move:
                 _logic.ChooseTarget();
                 break;
-
+            
             case _states.Attack:
                 _entity.Attack(_logic.GetTarget());
                 _logic.StopMoving();

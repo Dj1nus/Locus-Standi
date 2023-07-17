@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,15 +6,17 @@ using UnityEngine.AI;
 
 public class EnemyTargetSelector : MonoBehaviour
 {
+    public Action<TurretEntity> OnBuildingDetected;
+
     private Entity _mainBase;
-    private NavMeshAgent  _agent;
+    private NavMeshAgent _agent;
     private Entity _target;
     private List<Entity> _targets = new List<Entity>();
 
     public void Init()
     {
         _mainBase = GameObject.Find("MainBase").GetComponent<Entity>();
-        _agent =  GetComponent<NavMeshAgent>() ;
+        _agent = GetComponent<NavMeshAgent>() ;
         _target = _mainBase;
         _agent.destination = _target.transform.position;
     }
@@ -53,6 +56,8 @@ public class EnemyTargetSelector : MonoBehaviour
         {
             _targets.Remove(_target);
             SetTarget(_mainBase);
+            ChooseTarget();
+            GetComponentInParent<BaseEnemyStateMachine>().OnEnemyDied();
         }
     }
     private void CheckTargetExist(MapUnit building)
@@ -76,26 +81,38 @@ public class EnemyTargetSelector : MonoBehaviour
 
         foreach (Entity target in _targets)
         {
-            if (target != null)
+            if (target == null)
             {
-                float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
-                if (distanceToTarget < distanceToBase & distanceToTarget <= minDistance)
-                {
-                    possibleTarget = target;
-                    minDistance = distanceToTarget;
-                }
+                continue;
+            }
+
+            float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
+
+            if (distanceToTarget < distanceToBase & distanceToTarget <= minDistance)
+            {
+                possibleTarget = target;
+                minDistance = distanceToTarget;
             }
         }
         
         if (possibleTarget != null)
         {
-            _targets.Remove(possibleTarget);
             SetTarget(possibleTarget);
+            RemoveTarget(possibleTarget);
+            return;
         }
     }
 
     private void Start()
     {
         GlobalEventManager.OnBuildingDestroy.AddListener(CheckTargetExist);
+    }
+
+    private void Update()
+    {
+        if (_target == null && _targets.Count > 0)
+        {
+            ChooseTarget();
+        }
     }
 }

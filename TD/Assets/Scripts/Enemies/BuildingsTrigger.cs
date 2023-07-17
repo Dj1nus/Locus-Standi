@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BuildingsTrigger : MonoBehaviour 
 {
-    [SerializeField] private GameObject parent;
+    //[SerializeField] private GameObject parent;
     private EnemyTargetSelector targetSelector;
 
     private void OnTriggerEnter(Collider other)
@@ -23,6 +23,7 @@ public class BuildingsTrigger : MonoBehaviour
 
     private void Start()
     {
-        targetSelector = parent.GetComponent<EnemyTargetSelector>();
+        //targetSelector = parent.GetComponent<EnemyTargetSelector>();
+        targetSelector = GetComponentInParent<EnemyTargetSelector>();
     }
 }

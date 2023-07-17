@@ -1,6 +1,4 @@
-using System;
-
-public class TurretEntity : Entity
+public class MinerEntity : Entity
 {
     private bool _isOnDestroySignalSended = false;
 

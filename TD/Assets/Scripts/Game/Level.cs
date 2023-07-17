@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Level : MonoBehaviour
@@ -12,8 +10,8 @@ public class Level : MonoBehaviour
 
     private _states _state;
 
-    [SerializeField] private Vector2 _mapSize;
-    
+    //[SerializeField] private Vector2 _mapSize;
+
 
     public _states GetState()
     {
@@ -31,7 +29,7 @@ public class Level : MonoBehaviour
     }
     private void StopLevel()
     {
-        //Time.timeScale = 0;
+        Time.timeScale = 0;
     }
 
     private void OnEnable()

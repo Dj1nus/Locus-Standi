@@ -10,6 +10,7 @@ public class GlobalEventManager : MonoBehaviour
     public static Action OnResourceValueChanged;
     public static UnityEvent<Building> OnBuyButtonClick = new UnityEvent<Building>();
     public static Action<Cost> OnEnemyDied;
+    public static Action OnLastWave;
 
     public static void SendBuildingDestroy(MapUnit building)
     {
@@ -39,5 +40,11 @@ public class GlobalEventManager : MonoBehaviour
     public static void SendBaseDestroyed()
     {
         OnMainBaseDestroy?.Invoke();
+    }
+
+    public static void SendLastWave()
+    {
+        OnLastWave?.Invoke();
+        print(1);
     }
 }

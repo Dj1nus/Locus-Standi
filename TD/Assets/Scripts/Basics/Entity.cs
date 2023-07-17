@@ -7,14 +7,21 @@ public class Entity : MonoBehaviour
     //public static Action OnBaseDestroyed;
 
     [SerializeField] private float _damage;
-    [SerializeField] private float _hp;
+    [SerializeField] private float _maxHp;
     [SerializeField] private Cost _moneysForKilling;
     [SerializeField] private float _distanceToDamage;
     [SerializeField] private float _attackCooldown;
 
     private bool _isCanAttack = true;
+    private HealthBar _healthBar;
+    private float _hp;
 
     public float DistanceToDamage { get { return _distanceToDamage; } }
+
+    public Cost GetMoneyForKilling()
+    {
+        return _moneysForKilling;
+    }
 
     public float GetHp()
     {
@@ -29,6 +36,7 @@ public class Entity : MonoBehaviour
     public void TakeDamage(float value)
     {
         _hp -= value;
+        
         CheckHp();
     }
 
@@ -59,5 +67,15 @@ public class Entity : MonoBehaviour
         {
             Die();
         }
+
+        _healthBar.UpdateHealthBat(_maxHp, _hp);
+    }
+
+    private void Start()
+    {
+        _hp = _maxHp;
+
+        _healthBar = GetComponentInChildren<HealthBar>();
+        _healthBar.UpdateHealthBat(_maxHp, _hp);
     }
 }

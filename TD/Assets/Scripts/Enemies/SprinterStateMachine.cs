@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class SprinterStateMachine : BaseEnemyStateMachine
 {
-    IEnumerator LifeTimer()
-    {
-        yield return new WaitForSeconds(20);
-        Destroy(gameObject);
-    }
+    //IEnumerator LifeTimer()
+    //{
+    //    yield return new WaitForSeconds(20);
+    //    Destroy(gameObject);
+    //}
 
-    void Start()
-    {
-        StartCoroutine(LifeTimer());
-        Init();
-    }
+    //void Start()
+    //{
+    //    StartCoroutine(LifeTimer());
+    //    Init();
+    //}
 
     private void Update()
     {

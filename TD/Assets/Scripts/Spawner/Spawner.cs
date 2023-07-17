@@ -1,15 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    public Action OnLastWave;
+
     [SerializeField] Transform[] _spawnPoints;
     [SerializeField] private float _startDelay;
     [SerializeField] Waves[] _waves;
 
     private int _waveCount;
     private int _currentWaveIndex;
+    public int totalEnemyCount;
 
     private IEnumerator StartSpawn()
     {
@@ -36,14 +40,41 @@ public class Spawner : MonoBehaviour
             for (int j = 0; j < numbersOfEnemies[i]; j++)
             {
                 var newEnemy = Instantiate(enemiesArray[i], 
-                    _spawnPoints[Random.Range(0, _spawnPoints.Length)]);
+                    _spawnPoints[UnityEngine.Random.Range(0, _spawnPoints.Length)]);
+
+                newEnemy.transform.position += new Vector3(UnityEngine.Random.Range(-20f, 20f), 0, UnityEngine.Random.Range(-20f, 20f));
 
                 newEnemy.gameObject.GetComponent<EnemyTargetSelector>().Init();
+                newEnemy.GetComponent<BaseEnemyStateMachine>().Init();
                 yield return new WaitForSeconds(delayBetweenSpawns);
             }
         }
 
+        if (_currentWaveIndex == _waveCount - 1)
+        {
+            print("invoke");
+            OnLastWave?.Invoke();
+        }
+
         yield return new WaitForSeconds(_waves[_currentWaveIndex].WaveDuration);
+    }
+
+    private int CalculateTotalEnemyCount()
+    {
+        int value = 0;
+        int[] tmpArray;
+
+        foreach (var wave in _waves)
+        {
+            tmpArray = wave.Wave.GetCount();
+
+            for (int i = 0; i < tmpArray.Length;i++)
+            {
+                value += tmpArray[i];
+            }
+        }
+
+        return value;
     }
 
     void Start()
@@ -61,7 +92,7 @@ public class Waves
 {
     [SerializeField] private float _waveDuration;
     [SerializeField] private float _delayBetweenSpawns;
-    [SerializeField] private bool _isTimeFixed;
+    [SerializeField] public bool _isTimeFixed;
     [SerializeField] private EnemyDictionary _wavesDictionary;
 
     public EnemyDictionary Wave { get { return _wavesDictionary; } }

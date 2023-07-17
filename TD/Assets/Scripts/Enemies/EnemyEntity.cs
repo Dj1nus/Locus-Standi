@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class EnemyEntity : Entity
 {
@@ -9,6 +7,7 @@ public class EnemyEntity : Entity
     protected override void Die()
     {
         EnemyDied?.Invoke(GetComponent<EnemyEntity>());
+        GlobalEventManager.SendEnemyDied(GetMoneyForKilling());
 
         base.Die();
     }
