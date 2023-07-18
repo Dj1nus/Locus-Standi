@@ -6,8 +6,6 @@ public class MachinegunTurretShooter : TurretShooter
     { 
         Vector3 direction = target.transform.position - _muzzle.position;
 
-        //var newBullet = Instantiate(_bullet);
-
         var newBullet = _bulletPool.CreateBullet();
 
         newBullet.GetComponent<Bullet>().Init(_damagePerBullet);

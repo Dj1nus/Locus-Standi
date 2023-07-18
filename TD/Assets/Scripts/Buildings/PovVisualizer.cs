@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PovVisualizer : MonoBehaviour
@@ -22,20 +20,15 @@ public class PovVisualizer : MonoBehaviour
             float x = Mathf.Cos(currentRadian) * _radius;
             float y = Mathf.Sin(currentRadian) * _radius;
 
-            //Vector3 currentPosition = new Vector3(
-            //    x + transform.position.x, 
-            //    -0.4f, 
-            //    y + transform.position.z);
-
             Vector3 currentPosition = new Vector3(x, -0.4f, y);
 
             _lineRenderer.SetPosition(currentStep, currentPosition);
         }
     }
 
-    private void ChangeTransparent(Level._states state)
+    private void ChangeTransparent(MapVisual._states state)
     {
-        if (state == Level._states.building)
+        if (state == MapVisual._states.building)
             _lineRenderer.enabled = true;
 
         else

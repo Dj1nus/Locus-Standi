@@ -9,11 +9,7 @@ public class ShotgunTurretShooter : TurretShooter
 
     public override void Shoot(Entity target)
     {
-
-
         StartCoroutine(DelayBetweenBullets(target));
-
-        
     }
 
     IEnumerator DelayBetweenBullets(Entity target)

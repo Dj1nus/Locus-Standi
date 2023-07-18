@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.iOS;
-using UnityEngine.UIElements;
 
 public class Bullet : MonoBehaviour
 {
@@ -36,11 +33,5 @@ public class Bullet : MonoBehaviour
         gameObject.SetActive(false);
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         transform.position = new Vector3(50, 5, 50);
-        
-    }
-
-    private void Start()
-    {
-        
     }
 }

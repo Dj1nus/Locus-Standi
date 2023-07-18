@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class BaseTurretStateMachine : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class BaseTurretStateMachine : MonoBehaviour
 
     private TurretTargetSelector _targetSelector;
     private TurretShooter _shooter;
+
+    private void OnDestroy()
+    {
+        _targetSelector.OnEnemyDetected -= EnemyDetected;
+    }
 
     public void Init()
     {

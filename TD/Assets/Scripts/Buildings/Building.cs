@@ -13,7 +13,6 @@ public class Building : MapUnit
     protected _states _state;
 
     [SerializeField] private Cost _cost;
-
     [SerializeField] private float _yOffset;
     [SerializeField] private Material _good;
     [SerializeField] private Material _bad;
@@ -63,8 +62,6 @@ public class Building : MapUnit
             _renderer.material = _standart;
 
             BuildingPlaced?.Invoke();
-
-
         }
         else
         {

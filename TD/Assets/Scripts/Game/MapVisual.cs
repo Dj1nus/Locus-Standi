@@ -1,17 +1,15 @@
 using UnityEngine;
 
-public class Level : MonoBehaviour
+public class MapVisual : MonoBehaviour
 {
     public enum _states
     {
+        starting,
         building,
         defending
     }
 
     private _states _state;
-
-    //[SerializeField] private Vector2 _mapSize;
-
 
     public _states GetState()
     {
@@ -26,20 +24,6 @@ public class Level : MonoBehaviour
             _state = _states.building;
 
         GlobalEventManager.ChangeVisualMode(_state);
-    }
-    private void StopLevel()
-    {
-        Time.timeScale = 0;
-    }
-
-    private void OnEnable()
-    {
-        GlobalEventManager.OnMainBaseDestroy += StopLevel;
-    }
-
-    private void OnDisable()
-    {
-        GlobalEventManager.OnMainBaseDestroy -= StopLevel;
     }
 
     private void Start()

@@ -6,7 +6,7 @@ public class GlobalEventManager : MonoBehaviour
 {
     public static Action OnMainBaseDestroy;
     public static UnityEvent<MapUnit> OnBuildingDestroy = new UnityEvent<MapUnit>();
-    public static UnityEvent<Level._states> OnVisualModeChanged = new UnityEvent<Level._states>();
+    public static UnityEvent<MapVisual._states> OnVisualModeChanged = new UnityEvent<MapVisual._states>();
     public static Action OnResourceValueChanged;
     public static UnityEvent<Building> OnBuyButtonClick = new UnityEvent<Building>();
     public static Action<Cost> OnEnemyDied;
@@ -17,7 +17,7 @@ public class GlobalEventManager : MonoBehaviour
         OnBuildingDestroy?.Invoke(building);
     }
 
-    public static void ChangeVisualMode(Level._states state)
+    public static void ChangeVisualMode(MapVisual._states state)
     {
         OnVisualModeChanged?.Invoke(state);
     }
@@ -45,6 +45,5 @@ public class GlobalEventManager : MonoBehaviour
     public static void SendLastWave()
     {
         OnLastWave?.Invoke();
-        print(1);
     }
 }

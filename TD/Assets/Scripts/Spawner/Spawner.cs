@@ -10,10 +10,16 @@ public class Spawner : MonoBehaviour
     [SerializeField] Transform[] _spawnPoints;
     [SerializeField] private float _startDelay;
     [SerializeField] Waves[] _waves;
+    [SerializeField] private SkipPrepairing _skipPrepairing;
 
     private int _waveCount;
     private int _currentWaveIndex;
     public int totalEnemyCount;
+
+    private void StartRoutine()
+    {
+        StartCoroutine(StartSpawn());
+    }
 
     private IEnumerator StartSpawn()
     {
@@ -52,7 +58,6 @@ public class Spawner : MonoBehaviour
 
         if (_currentWaveIndex == _waveCount - 1)
         {
-            print("invoke");
             OnLastWave?.Invoke();
         }
 
@@ -82,7 +87,12 @@ public class Spawner : MonoBehaviour
         _waveCount = _waves.Length;
         _currentWaveIndex = 0;
 
-        StartCoroutine(StartSpawn());
+        _skipPrepairing.OnStartSpawning += StartRoutine;
+    }
+
+    private void OnDisable()
+    {
+        _skipPrepairing.OnStartSpawning -= StartRoutine;
     }
 }
 

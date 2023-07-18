@@ -1,5 +1,4 @@
 using System;
-using System.Drawing;
 using UnityEngine;
 
 public class BuildingGrid : MonoBehaviour
@@ -98,7 +97,7 @@ public class BuildingGrid : MonoBehaviour
 
         _map = new MapUnit[_mapSize.x, _mapSize.y];
 
-        _deposits = FindObjectsOfType<Deposit>();//
+        _deposits = FindObjectsOfType<Deposit>();
 
         foreach (MapUnit deposit in _deposits)
         {

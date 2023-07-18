@@ -1,11 +1,8 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    //public static Action OnBaseDestroyed;
-
     [SerializeField] private float _damage;
     [SerializeField] private float _maxHp;
     [SerializeField] private Cost _moneysForKilling;

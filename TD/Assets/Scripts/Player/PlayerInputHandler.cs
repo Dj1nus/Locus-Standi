@@ -6,7 +6,7 @@ public class PlayerInputHandler : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
     [SerializeField] private Builder _buildingManager;
-    [SerializeField] private Level _level;
+    [SerializeField] private MapVisual _level;
 
 
     //Они друзья,
@@ -36,12 +36,12 @@ public class PlayerInputHandler : MonoBehaviour
 
     void Update()
     {
-        if (_level.GetState() == Level._states.building && Input.GetMouseButtonDown(0))
+        if (_level.GetState() == MapVisual._states.building && Input.GetMouseButtonDown(0))
         {
             _buildingManager.PlaceBuilding();
         }
 
-        else if (_level.GetState() == Level._states.building && Input.GetMouseButtonDown(1))
+        else if (_level.GetState() == MapVisual._states.building && Input.GetMouseButtonDown(1))
         {
             _buildingManager.DestroyCurrentGhostBuilding();
         }
