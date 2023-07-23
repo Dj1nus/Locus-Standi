@@ -88,6 +88,8 @@ public class Spawner : MonoBehaviour
         _currentWaveIndex = 0;
 
         _skipPrepairing.OnStartSpawning += StartRoutine;
+
+        GlobalEventManager.SendTotalEnemiesAmountCalculated(CalculateTotalEnemyCount());
     }
 
     private void OnDisable()

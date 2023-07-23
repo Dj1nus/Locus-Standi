@@ -4,6 +4,8 @@ public class MachinegunTurretShooter : TurretShooter
 {
     public override void Shoot(Entity target)
     { 
+        base.Shoot(target);
+
         Vector3 direction = target.transform.position - _muzzle.position;
 
         var newBullet = _bulletPool.CreateBullet();

@@ -24,7 +24,7 @@ public class BuildingMenu : MonoBehaviour
 
     IEnumerator BuildingMenuTimer(_states nextState)
     {
-        _button.ChangeBuildingButtonPosition(_time);
+        //_button.ChangeBuildingButtonPosition(_time);
         _panel.ChangeBuildingMenuPosition(_time);
         _button.SetButtonClickable(false);
         _state = _states.moving;

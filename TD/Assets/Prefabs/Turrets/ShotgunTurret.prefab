@@ -73,6 +73,7 @@ MonoBehaviour:
   _moneysForKilling:
     organic: 0
     metal: 0
+    score: 0
   _distanceToDamage: 2
   _attackCooldown: 0
 --- !u!114 &5137334013844660424
@@ -101,6 +102,7 @@ MonoBehaviour:
   _cost:
     organic: 150
     metal: 200
+    score: 100
   _yOffset: 0.5
   _good: {fileID: 2100000, guid: e2c3147e5bd451344b12bc41b481bd87, type: 2}
   _bad: {fileID: 2100000, guid: 33036526e789a9d49b86331b46c2b7c7, type: 2}

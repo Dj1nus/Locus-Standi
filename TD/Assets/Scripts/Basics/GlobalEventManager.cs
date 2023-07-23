@@ -5,12 +5,15 @@ using UnityEngine.Events;
 public class GlobalEventManager : MonoBehaviour
 {
     public static Action OnMainBaseDestroy;
-    public static UnityEvent<MapUnit> OnBuildingDestroy = new UnityEvent<MapUnit>();
+    public static Action<Cost> OnBuildingPlaced;
+    public static Action<MapUnit> OnBuildingDestroy;
     public static UnityEvent<MapVisual._states> OnVisualModeChanged = new UnityEvent<MapVisual._states>();
     public static Action OnResourceValueChanged;
     public static UnityEvent<Building> OnBuyButtonClick = new UnityEvent<Building>();
     public static Action<Cost> OnEnemyDied;
     public static Action OnLastWave;
+    public static Action<bool> OnGameEnd;
+    public static Action<int> OnTotalEnemiesAmountCalculated;
 
     public static void SendBuildingDestroy(MapUnit building)
     {
@@ -45,5 +48,20 @@ public class GlobalEventManager : MonoBehaviour
     public static void SendLastWave()
     {
         OnLastWave?.Invoke();
+    }
+
+    public static void SendGameEnded(bool isWin)
+    {
+        OnGameEnd?.Invoke(isWin);
+    }
+
+    public static void SendBuildingPlaced(Cost cost)
+    {
+        OnBuildingPlaced?.Invoke(cost);
+    }
+
+    public static void SendTotalEnemiesAmountCalculated(int amount)
+    {
+        OnTotalEnemiesAmountCalculated?.Invoke(amount);
     }
 }

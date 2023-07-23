@@ -44,6 +44,7 @@ public class Building : MapUnit
         if (isPlaced)
         {
             _state = _states.Placed;
+            GlobalEventManager.SendBuildingPlaced(_cost);
         }
         else
         {
@@ -88,9 +89,9 @@ public class Building : MapUnit
         _state = _states.Ghost;
     }
 
-    private void Start()
-    {
-        Init();
-    }
+    //private void Start()
+    //{
+    //    Init();
+    //}
 }
 

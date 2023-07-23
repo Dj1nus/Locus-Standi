@@ -58,7 +58,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf95d91b56797994493c191540cfa699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 4639031945568702811}
 --- !u!1 &4639031945568702811
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,6 +127,7 @@ MonoBehaviour:
   _moneysForKilling:
     organic: 50
     metal: 50
+    score: 70
   _distanceToDamage: 2.5
   _attackCooldown: 1.5
 --- !u!114 &4639031945568702788

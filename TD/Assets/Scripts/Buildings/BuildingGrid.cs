@@ -93,7 +93,7 @@ public class BuildingGrid : MonoBehaviour
 
     private void Awake()
     {
-        GlobalEventManager.OnBuildingDestroy.AddListener(DeleteBuildingFromMap);
+        GlobalEventManager.OnBuildingDestroy += DeleteBuildingFromMap;
 
         _map = new MapUnit[_mapSize.x, _mapSize.y];
 
@@ -105,5 +105,10 @@ public class BuildingGrid : MonoBehaviour
         }
 
         Array.Clear(_deposits, 0, _deposits.Length);
+    }
+
+    private void OnDisable()
+    {
+        GlobalEventManager.OnBuildingDestroy -= DeleteBuildingFromMap;
     }
 }

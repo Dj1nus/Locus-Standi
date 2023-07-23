@@ -105,7 +105,12 @@ public class EnemyTargetSelector : MonoBehaviour
 
     private void Start()
     {
-        GlobalEventManager.OnBuildingDestroy.AddListener(CheckTargetExist);
+        GlobalEventManager.OnBuildingDestroy += CheckTargetExist;
+    }
+
+    private void OnDestroy()
+    {
+        GlobalEventManager.OnBuildingDestroy -= CheckTargetExist;
     }
 
     private void Update()

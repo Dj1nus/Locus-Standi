@@ -1,13 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameEndChecker : MonoBehaviour
 {
+    private const float DELAY_BEFORE_END = 1.5f;
+
     private Spawner _spawner;
     private bool _isLastWave;
     private bool _isEnemiesLeft;
     private bool _isBaseDestroyed;
+    private bool _isSignalSended = false;
 
     private void SetIsLastWave()
     {
@@ -22,7 +24,11 @@ public class GameEndChecker : MonoBehaviour
     ///////////////////////////////////
     private void SetIsEnemiesLeft(Cost cost)
     {
-        StartCoroutine(Kostyl());
+        if (_isLastWave)
+        {
+            StartCoroutine(Kostyl());
+        }
+
     }
     IEnumerator Kostyl()
     {
@@ -34,6 +40,13 @@ public class GameEndChecker : MonoBehaviour
         }
     }
     ///////////////////////////////
+
+    IEnumerator DelayBeforEnd(bool isWin)
+    {
+        yield return new WaitForSeconds(DELAY_BEFORE_END);
+
+        GlobalEventManager.SendGameEnded(isWin);
+    }
 
     private void OnEnable()
     {
@@ -53,15 +66,17 @@ public class GameEndChecker : MonoBehaviour
 
     void Update()
     {
-        if (_isLastWave && _isEnemiesLeft)
+        if (_isLastWave && _isEnemiesLeft && !_isSignalSended)
         {
-            print("you won");
+            _isSignalSended = true;
+            StartCoroutine(DelayBeforEnd(true));
         }
 
-        else if (_isBaseDestroyed)
+        else if (_isBaseDestroyed && !_isSignalSended)
         {
-            print("you Loose");
+            _isSignalSended = true;
+            StartCoroutine(DelayBeforEnd(false));
         }
-        
+
     }
 }
