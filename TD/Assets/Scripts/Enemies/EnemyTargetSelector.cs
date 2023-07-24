@@ -104,7 +104,7 @@ public class EnemyTargetSelector : MonoBehaviour
 
     private void Update()
     {
-        if (_target == null )//_targets.Count > 0)
+        if (_target == null)
         {
             ChooseTarget();
         }

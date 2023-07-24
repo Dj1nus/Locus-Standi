@@ -45,38 +45,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sounds:
-  - name: Init
-    clip: {fileID: 8300000, guid: 254621a9fef56594eb6bfa0abcb86e17, type: 3}
+  - sounds:
+    - clip: {fileID: 8300000, guid: 254621a9fef56594eb6bfa0abcb86e17, type: 3}
+      volume: 1
+      pitch: 1
+      space: 0.9
+    name: Init
     group: {fileID: 6335925409927828350, guid: e9693cca8bc33274daef8ad519586a92, type: 2}
-    volume: 1
-    pitch: 1
-    space: 0.7
     source: {fileID: 0}
-    _isFree: 0
-  - name: Attack
-    clip: {fileID: 8300000, guid: a130c8a888271814996ed31007a7be85, type: 3}
-    group: {fileID: 0}
-    volume: 1
-    pitch: 1
-    space: 0.7
-    source: {fileID: 0}
-    _isFree: 0
-  - name: Hit
-    clip: {fileID: 8300000, guid: 5c451397f30402f41891bde4a7bc653b, type: 3}
+    _isFree: 1
+  - sounds:
+    - clip: {fileID: 8300000, guid: a130c8a888271814996ed31007a7be85, type: 3}
+      volume: 1
+      pitch: 1
+      space: 0.9
+    name: Attack
     group: {fileID: -8931793263644115909, guid: e9693cca8bc33274daef8ad519586a92, type: 2}
-    volume: 1
-    pitch: 1
-    space: 0.7
     source: {fileID: 0}
-    _isFree: 0
-  - name: Die
-    clip: {fileID: 8300000, guid: 867b2b585a265374fab032e19e22b557, type: 3}
+    _isFree: 1
+  - sounds:
+    - clip: {fileID: 8300000, guid: 5c451397f30402f41891bde4a7bc653b, type: 3}
+      volume: 1
+      pitch: 1
+      space: 0.9
+    name: Hit
+    group: {fileID: 6690751838085304228, guid: e9693cca8bc33274daef8ad519586a92, type: 2}
+    source: {fileID: 0}
+    _isFree: 1
+  - sounds:
+    - clip: {fileID: 8300000, guid: 867b2b585a265374fab032e19e22b557, type: 3}
+      volume: 1
+      pitch: 1
+      space: 0.9
+    name: Die
     group: {fileID: -5871671265552638600, guid: e9693cca8bc33274daef8ad519586a92, type: 2}
-    volume: 1
-    pitch: 1
-    space: 0.7
     source: {fileID: 0}
-    _isFree: 0
+    _isFree: 1
 --- !u!1 &1966229489491678218
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,4 +11,14 @@ public class EnemyEntity : Entity
         
         base.Die();
     }
+
+    public override void Attack(Entity target)
+    {
+        if (_audioPlayer != null && _isCanAttack)
+        {
+            _audioPlayer.Play("Attack", UnityEngine.Random.Range(0.9f, 1.1f));
+        }
+
+        base.Attack(target);
+    }
 }

@@ -4,31 +4,31 @@ using UnityEngine;
 
 public class AudioPlayer : MonoBehaviour
 {
-    [SerializeField] private Sound[] _sounds;
+    [SerializeField] private SoundPool[] _sounds;
 
     private void Awake()
     {
-        foreach (Sound sound in _sounds)
+        foreach (SoundPool soundPool in _sounds)
         {
-            sound.source = gameObject.AddComponent<AudioSource>();
-            sound.source.clip = sound.clip;
-            sound.source.volume = sound.volume;
-            sound.source.pitch = sound.pitch;
-            sound.source.spatialBlend = sound.space;
-            sound.source.outputAudioMixerGroup = sound.group;
+            soundPool.source = gameObject.AddComponent<AudioSource>();
+            soundPool.source.clip = soundPool.sounds[0].clip;
+            soundPool.source.volume = soundPool.sounds[0].volume;
+            soundPool.source.pitch = soundPool.sounds[0].pitch;
+            soundPool.source.spatialBlend = soundPool.sounds[0].space;
+            soundPool.source.outputAudioMixerGroup = soundPool.group;
         }
     }
 
     public void Play(string name, float pitch = 1)
     {
-        Sound sound = Array.Find(_sounds, item => item.name == name);
+        SoundPool sound = Array.Find(_sounds, item => item.name == name);
         sound.source.pitch = pitch;
+        sound.source.clip = sound.sounds[UnityEngine.Random.Range(0, sound.sounds.Length)].clip;
         sound.source.Play();
     }
 
-    IEnumerator PlaySoundRoutine(string name)
+    public float GetSoundDuration(string name)
     {
-        Sound sound = Array.Find(_sounds, item => item.name == name);
-        yield return new WaitForSeconds(sound.clip.length);
+        return Array.Find(_sounds, item => item.name == name).source.clip.length;
     }
 }

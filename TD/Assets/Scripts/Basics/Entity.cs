@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Entity : MonoBehaviour
 {
@@ -9,10 +10,10 @@ public class Entity : MonoBehaviour
     [SerializeField] private float _distanceToDamage;
     [SerializeField] private float _attackCooldown;
 
-    private bool _isCanAttack = true;
+    protected bool _isCanAttack = true;
     private HealthBar _healthBar;
-    [SerializeField] private float _hp;
-    private AudioPlayer _audioPlayer;
+    private float _hp;
+    protected AudioPlayer _audioPlayer;
 
     public float DistanceToDamage { get { return _distanceToDamage; } }
 
@@ -37,13 +38,14 @@ public class Entity : MonoBehaviour
 
         if (_audioPlayer != null)
         {
-            _audioPlayer.Play("Hit", Random.Range(0.5f, 1.5f));
+            //_audioPlayer.Play("Hit", Random.Range(0.5f, 1.5f));
         }
 
         CheckHp();
     }
 
-    public void Attack(Entity target)
+
+    public virtual void Attack(Entity target)
     {
         if (_isCanAttack)
         {
@@ -61,11 +63,21 @@ public class Entity : MonoBehaviour
 
     protected virtual void Die()
     {
+
         if (_audioPlayer != null)
         {
-            _audioPlayer.Play("Die");
+            StartCoroutine(DieSoundDelay());
         }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
+    IEnumerator DieSoundDelay()
+    {
+        _audioPlayer.Play("Die");
+        yield return new WaitForSeconds(_audioPlayer.GetSoundDuration("Die"));
         Destroy(gameObject);
     }
 
