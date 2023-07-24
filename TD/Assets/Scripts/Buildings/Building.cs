@@ -23,6 +23,7 @@ public class Building : MapUnit
     private Renderer _renderer;
     private Collider _collider;
     private NavMeshObstacle _navMeshObstacle;
+    private AudioPlayer _audioPlayer;
 
     public float GetYOffset()
     {
@@ -45,6 +46,12 @@ public class Building : MapUnit
         {
             _state = _states.Placed;
             GlobalEventManager.SendBuildingPlaced(_cost);
+
+            if (_audioPlayer != null)
+            {
+                _audioPlayer.Play("Init");
+            }
+
         }
         else
         {
@@ -85,13 +92,9 @@ public class Building : MapUnit
         _renderer = GetComponentInChildren<Renderer>();
         _collider = GetComponentInChildren<BoxCollider>();
         _navMeshObstacle = GetComponentInChildren<NavMeshObstacle>();
+        _audioPlayer = GetComponentInChildren<AudioPlayer>();
 
         _state = _states.Ghost;
     }
-
-    //private void Start()
-    //{
-    //    Init();
-    //}
 }
 

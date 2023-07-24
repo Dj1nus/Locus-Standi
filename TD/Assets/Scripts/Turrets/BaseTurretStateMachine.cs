@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class BaseTurretStateMachine : MonoBehaviour
 {
@@ -15,11 +14,6 @@ public class BaseTurretStateMachine : MonoBehaviour
     private TurretTargetSelector _targetSelector;
     private TurretShooter _shooter;
 
-    private void OnDestroy()
-    {
-        _targetSelector.OnEnemyDetected -= EnemyDetected;
-    }
-
     public void Init()
     {
         _state = _states.idle;
@@ -28,6 +22,11 @@ public class BaseTurretStateMachine : MonoBehaviour
         _shooter = GetComponent<TurretShooter>();
 
         _targetSelector.OnEnemyDetected += EnemyDetected;
+    }
+  
+    private void OnDestroy()
+    {
+        _targetSelector.OnEnemyDetected -= EnemyDetected;
     }
 
     private void EnemyDetected(EnemyEntity enemy)

@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class EnemyTargetSelector : MonoBehaviour
 {
-    public Action<TurretEntity> OnBuildingDetected;
+    public Action<Entity> OnBuildingDetected;
 
     private Entity _mainBase;
     private NavMeshAgent _agent;
@@ -21,9 +21,19 @@ public class EnemyTargetSelector : MonoBehaviour
         _agent.destination = _target.transform.position;
     }
 
+    public Entity GetMainBase()
+    {
+        return _mainBase;
+    }
+
     public void AddTarget(Entity target)
     {
         _targets.Add(target);
+
+        if (_target == _mainBase)
+        {
+            ChooseTarget();
+        }
     }
 
     public void RemoveTarget(Entity target)
@@ -39,7 +49,10 @@ public class EnemyTargetSelector : MonoBehaviour
     private void SetTarget(Entity target)
     {
         _target = target;
+
         _agent.destination = _target.transform.position;
+
+        OnBuildingDetected?.Invoke(_target);
     }
 
     public void StopMoving()
@@ -47,31 +60,11 @@ public class EnemyTargetSelector : MonoBehaviour
         _agent.destination = transform.position;
     }
 
-    //Это тоже друзья
-    IEnumerator Kostyl()
-    {
-        yield return new WaitForSeconds(0.01f);
-
-        if (_target == null)
-        {
-            _targets.Remove(_target);
-            SetTarget(_mainBase);
-            ChooseTarget();
-            GetComponentInParent<BaseEnemyStateMachine>().OnEnemyDied();
-        }
-    }
-    private void CheckTargetExist(MapUnit building)
-    {
-        StartCoroutine(Kostyl());
-    }
-    //Их тоже нельзя разлучать
-    //KOSTYLS LIVES MATTERS!!!
-
     public void ChooseTarget()
     {
         if (_targets.Count <= 0)
         {
-            return;
+            SetTarget(_mainBase);
         }
 
         float distanceToBase = Vector3.Distance(transform.position, _mainBase.transform.position);
@@ -103,19 +96,15 @@ public class EnemyTargetSelector : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void SetTargetToNull(Entity target)
     {
-        GlobalEventManager.OnBuildingDestroy += CheckTargetExist;
-    }
-
-    private void OnDestroy()
-    {
-        GlobalEventManager.OnBuildingDestroy -= CheckTargetExist;
+        RemoveTarget(target);
+        _target = null;
     }
 
     private void Update()
     {
-        if (_target == null && _targets.Count > 0)
+        if (_target == null )//_targets.Count > 0)
         {
             ChooseTarget();
         }

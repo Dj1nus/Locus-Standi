@@ -11,7 +11,8 @@ public class Entity : MonoBehaviour
 
     private bool _isCanAttack = true;
     private HealthBar _healthBar;
-    private float _hp;
+    [SerializeField] private float _hp;
+    private AudioPlayer _audioPlayer;
 
     public float DistanceToDamage { get { return _distanceToDamage; } }
 
@@ -33,7 +34,12 @@ public class Entity : MonoBehaviour
     public void TakeDamage(float value)
     {
         _hp -= value;
-        
+
+        if (_audioPlayer != null)
+        {
+            _audioPlayer.Play("Hit", Random.Range(0.5f, 1.5f));
+        }
+
         CheckHp();
     }
 
@@ -54,7 +60,12 @@ public class Entity : MonoBehaviour
     }
 
     protected virtual void Die()
-    {  
+    {
+        if (_audioPlayer != null)
+        {
+            _audioPlayer.Play("Die");
+        }
+
         Destroy(gameObject);
     }
 
@@ -74,5 +85,7 @@ public class Entity : MonoBehaviour
 
         _healthBar = GetComponentInChildren<HealthBar>();
         _healthBar.UpdateHealthBat(_maxHp, _hp);
+
+        _audioPlayer = GetComponentInChildren<AudioPlayer>();
     }
 }

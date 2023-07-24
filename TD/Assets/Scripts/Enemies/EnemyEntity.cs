@@ -8,7 +8,7 @@ public class EnemyEntity : Entity
     {
         EnemyDied?.Invoke(GetComponent<EnemyEntity>());
         GlobalEventManager.SendEnemyDied(GetMoneyForKilling());
-
+        
         base.Die();
     }
 }

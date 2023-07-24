@@ -1,21 +1,34 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioPlayer : MonoBehaviour
 {
-    [SerializeField] AudioClip _shot;
+    [SerializeField] private Sound[] _sounds;
 
-    [SerializeField] private AudioSource _shootAudioSource;
-
-
-    public void PlayShootSound()
+    private void Awake()
     {
-        _shootAudioSource.pitch = Random.Range(0.9f, 1.1f);
-
-        _shootAudioSource.PlayOneShot(_shot);
+        foreach (Sound sound in _sounds)
+        {
+            sound.source = gameObject.AddComponent<AudioSource>();
+            sound.source.clip = sound.clip;
+            sound.source.volume = sound.volume;
+            sound.source.pitch = sound.pitch;
+            sound.source.spatialBlend = sound.space;
+            sound.source.outputAudioMixerGroup = sound.group;
+        }
     }
 
+    public void Play(string name, float pitch = 1)
+    {
+        Sound sound = Array.Find(_sounds, item => item.name == name);
+        sound.source.pitch = pitch;
+        sound.source.Play();
+    }
 
-
+    IEnumerator PlaySoundRoutine(string name)
+    {
+        Sound sound = Array.Find(_sounds, item => item.name == name);
+        yield return new WaitForSeconds(sound.clip.length);
+    }
 }

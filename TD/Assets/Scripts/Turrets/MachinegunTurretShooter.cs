@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class MachinegunTurretShooter : TurretShooter
 {
+    private AudioPlayer _audioPlayer;
+
     public override void Shoot(Entity target)
     { 
         base.Shoot(target);
@@ -15,6 +17,13 @@ public class MachinegunTurretShooter : TurretShooter
 
         newBullet.GetComponent<Rigidbody>().AddForce(direction.normalized * _shootForce, ForceMode.Impulse);
 
+        _audioPlayer.Play("Attack", Random.Range(0.9f, 1.1f));
+
         StartCoroutine(CooldownTimer());
+    }
+
+    private void Awake()
+    {
+        _audioPlayer = GetComponentInChildren<AudioPlayer>();
     }
 }

@@ -3167,7 +3167,7 @@ MonoBehaviour:
     _wavesDictionary:
       _enemy:
       - {fileID: 3865502630262126143, guid: d1893681e02fc3040abafc36b499577d, type: 3}
-      _count: 0c000000
+      _count: 04000000
   - _waveDuration: 10
     _delayBetweenSpawns: 0.05
     _isTimeFixed: 0

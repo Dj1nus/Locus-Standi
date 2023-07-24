@@ -107,10 +107,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7345118073097338263}
   - component: {fileID: 7345118073097338264}
-  - component: {fileID: 143239254968496831}
-  - component: {fileID: 8047860782902673565}
   - component: {fileID: 3865502630262126143}
+  - component: {fileID: 8047860782902673565}
   - component: {fileID: 5811550674104022246}
+  - component: {fileID: 143239254968496831}
   m_Layer: 7
   m_Name: Ram
   m_TagString: Untagged
@@ -149,6 +149,50 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3865502630262126143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7345118073097338267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9193fe62a162e7644bd5699a26907012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 5
+  _maxHp: 50
+  _moneysForKilling:
+    organic: 25
+    metal: 10
+    score: 20
+  _distanceToDamage: 2
+  _attackCooldown: 1
+--- !u!114 &8047860782902673565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7345118073097338267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d48b3640b43f0e479e6058cb40f2e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5811550674104022246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7345118073097338267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f6809fbf8144c4fa7f4897aee45a5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!195 &143239254968496831
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -171,50 +215,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &8047860782902673565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7345118073097338267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d48b3640b43f0e479e6058cb40f2e45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3865502630262126143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7345118073097338267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9193fe62a162e7644bd5699a26907012, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _damage: 5
-  _maxHp: 50
-  _moneysForKilling:
-    organic: 25
-    metal: 10
-    score: 20
-  _distanceToDamage: 2
-  _attackCooldown: 1
---- !u!114 &5811550674104022246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7345118073097338267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f6809fbf8144c4fa7f4897aee45a5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9124626003583960505
 GameObject:
   m_ObjectHideFlags: 0
