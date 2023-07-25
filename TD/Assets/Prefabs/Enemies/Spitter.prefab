@@ -268,14 +268,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9193fe62a162e7644bd5699a26907012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 10
+  _damage: 5
   _maxHp: 20
   _moneysForKilling:
     organic: 70
     metal: 50
     score: 100
   _distanceToDamage: 3
-  _attackCooldown: 3
+  _attackCooldown: 2
 --- !u!114 &2543511199822516768
 MonoBehaviour:
   m_ObjectHideFlags: 0

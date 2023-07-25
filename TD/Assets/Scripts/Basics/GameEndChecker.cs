@@ -13,13 +13,11 @@ public class GameEndChecker : MonoBehaviour
 
     private void SetIsLastWave()
     {
-        print("LastWave");
         _isLastWave = true;
     }
 
     private void SetIsBaseDestroyed()
     {
-        print("BaseDestroyed");
         _isBaseDestroyed = true;
     }
 

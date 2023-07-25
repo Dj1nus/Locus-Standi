@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayersResources : MonoBehaviour
 {
+    [SerializeField] private int _startMetalAmount;
+    [SerializeField] private int _startOrganicAmount;
+
     private int _metal = 1;
     public int metal { get { return _metal; } }
     private int _organic = 1;
@@ -42,6 +45,14 @@ public class PlayersResources : MonoBehaviour
     private void Start()
     {
         GlobalEventManager.OnEnemyDied += TakeMoneyForEnemyKilling;
+
+        IncreaseMetalValue(_startMetalAmount);
+        IncreaseOrganicValue(_startOrganicAmount);
+    }
+
+    private void OnDestroy()
+    {
+        GlobalEventManager.OnEnemyDied -= TakeMoneyForEnemyKilling;
     }
 
     private void Update()

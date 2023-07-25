@@ -1460,6 +1460,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuyShotgunTurretButton
       objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103353, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 870300001807103356, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
       propertyPath: _building
       value: 
@@ -1568,6 +1572,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 178c39ede3d51f04488dee51eef89a8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startMetalAmount: 600
+  _startOrganicAmount: 400
 --- !u!1 &607321671
 GameObject:
   m_ObjectHideFlags: 0
@@ -2195,11 +2201,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1737674519}
-  - {fileID: 1194649624}
   - {fileID: 932543887}
   - {fileID: 390745235}
   - {fileID: 556759878}
+  - {fileID: 1736684450}
   m_Father: {fileID: 574311864}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3166,7 +3171,7 @@ MonoBehaviour:
     _isTimeFixed: 0
     _wavesDictionary:
       _enemy:
-      - {fileID: 4535800167595154860, guid: c86d085433be5d149b01aec093b9584d, type: 3}
+      - {fileID: 3865502630262126143, guid: d1893681e02fc3040abafc36b499577d, type: 3}
       _count: 0c000000
   - _waveDuration: 10
     _delayBetweenSpawns: 0.05
@@ -3175,16 +3180,18 @@ MonoBehaviour:
       _enemy:
       - {fileID: 6913346152446820854, guid: be57b62f8f30718429490c087696d2a2, type: 3}
       - {fileID: 3865502630262126143, guid: d1893681e02fc3040abafc36b499577d, type: 3}
-      _count: 050000000a000000
+      - {fileID: 4535800167595154860, guid: c86d085433be5d149b01aec093b9584d, type: 3}
+      _count: 050000000a0000000a000000
   - _waveDuration: 20
     _delayBetweenSpawns: 0.1
     _isTimeFixed: 0
     _wavesDictionary:
       _enemy:
-      - {fileID: 3865502630262126143, guid: d1893681e02fc3040abafc36b499577d, type: 3}
-      - {fileID: 6913346152446820854, guid: be57b62f8f30718429490c087696d2a2, type: 3}
       - {fileID: 4564700228305885398, guid: 8f280b149e6f4f9438181cb7e4054f6e, type: 3}
-      _count: 0f0000000a00000005000000
+      - {fileID: 4535800167595154860, guid: c86d085433be5d149b01aec093b9584d, type: 3}
+      - {fileID: 6913346152446820854, guid: be57b62f8f30718429490c087696d2a2, type: 3}
+      - {fileID: 3865502630262126143, guid: d1893681e02fc3040abafc36b499577d, type: 3}
+      _count: 060000000a0000000600000008000000
   _skipPrepairing: {fileID: 439332198}
   totalEnemyCount: 0
 --- !u!4 &1120774275
@@ -3470,154 +3477,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1193910752}
-  m_CullTransparentMesh: 1
---- !u!1 &1194649623
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1194649624}
-  - component: {fileID: 1194649628}
-  - component: {fileID: 1194649627}
-  - component: {fileID: 1194649626}
-  - component: {fileID: 1194649625}
-  m_Layer: 5
-  m_Name: ShotgunTurretButton
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1194649624
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194649623}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 839389070}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -520, y: 0}
-  m_SizeDelta: {x: 150, y: 150}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1194649625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194649623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b03dfdafbb7386f4d9a0cc232ef82cc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _building: {fileID: 5137334013844660424, guid: ed04b3f6c3d238e498f0fbe8976b347e, type: 3}
-  _panel: {fileID: 0}
---- !u!114 &1194649626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194649623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.08
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1194649627}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1194649625}
-        m_TargetAssemblyTypeName: BuyButton, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1194649627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194649623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1194649628
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194649623}
   m_CullTransparentMesh: 1
 --- !u!1 &1216723715
 GameObject:
@@ -4562,154 +4421,112 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1737674518
-GameObject:
+--- !u!1001 &1736684449
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1737674519}
-  - component: {fileID: 1737674523}
-  - component: {fileID: 1737674522}
-  - component: {fileID: 1737674521}
-  - component: {fileID: 1737674520}
-  m_Layer: 5
-  m_Name: BuyMinerButton
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1737674519
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 839389070}
+    m_Modifications:
+    - target: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103353, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: m_Name
+      value: BuyGrenadeTurretButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 870300001807103356, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+      propertyPath: _building
+      value: 
+      objectReference: {fileID: 8587599456135217172, guid: 86c77723f3a962247bb91d09959b2ca0, type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+--- !u!224 &1736684450 stripped
 RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 870300001807103352, guid: 4bab045f5b488f84ca47d054f7740d56, type: 3}
+  m_PrefabInstance: {fileID: 1736684449}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1737674518}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 839389070}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -860, y: 0}
-  m_SizeDelta: {x: 150, y: 150}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1737674520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1737674518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b03dfdafbb7386f4d9a0cc232ef82cc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _building: {fileID: 4419180396990208865, guid: 9a81574d78e2a31418ba36b503d2c27b, type: 3}
-  _panel: {fileID: 0}
---- !u!114 &1737674521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1737674518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1737674522}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1737674520}
-        m_TargetAssemblyTypeName: BuyButton, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1737674522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1737674518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1737674523
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1737674518}
-  m_CullTransparentMesh: 1
 --- !u!1 &1785880772
 GameObject:
   m_ObjectHideFlags: 0

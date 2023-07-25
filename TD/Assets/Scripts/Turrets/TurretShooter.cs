@@ -22,6 +22,7 @@ public class TurretShooter : MonoBehaviour
     [SerializeField] private GameObject _sphere;
     [SerializeField] private float _fireRate;
 
+    private AudioPlayer _audioPlayer;
     private Vector3 _lookDirection;
     private Quaternion _lookRotation;
     protected BulletPool _bulletPool;
@@ -66,7 +67,8 @@ public class TurretShooter : MonoBehaviour
 
     public virtual void Shoot(Entity target)
     {
-        //print(0);
+        print(0);
+        _audioPlayer.Play("Attack", Random.Range(0.9f, 1.1f));
     }
    
     private void LookAtTarget(Entity target)
@@ -86,6 +88,8 @@ public class TurretShooter : MonoBehaviour
     private void Start()
     {
         _bulletPool = FindObjectOfType<BulletPool>().GetComponent<BulletPool>();
+
+        _audioPlayer = GetComponentInChildren<AudioPlayer>();
 
         _state = states._rotating;
     }

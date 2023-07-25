@@ -1,10 +1,9 @@
 using UnityEngine;
 
-public class MachinegunTurretShooter : TurretShooter
+public class GrenadeTurretShooter : TurretShooter
 {
-
     public override void Shoot(Entity target)
-    { 
+    {
         base.Shoot(target);
 
         Vector3 direction = target.transform.position - _muzzle.position;
@@ -18,5 +17,4 @@ public class MachinegunTurretShooter : TurretShooter
 
         StartCoroutine(CooldownTimer());
     }
-
 }
