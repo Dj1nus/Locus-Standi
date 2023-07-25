@@ -13,11 +13,13 @@ public class GameEndChecker : MonoBehaviour
 
     private void SetIsLastWave()
     {
+        print("LastWave");
         _isLastWave = true;
     }
 
     private void SetIsBaseDestroyed()
     {
+        print("BaseDestroyed");
         _isBaseDestroyed = true;
     }
 
@@ -26,16 +28,18 @@ public class GameEndChecker : MonoBehaviour
     {
         if (_isLastWave)
         {
+            StopAllCoroutines();
             StartCoroutine(Kostyl());
         }
 
     }
     IEnumerator Kostyl()
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(3f);
 
         if (FindObjectOfType<EnemyEntity>() == null)
         {
+            print("NoEnemies");
             _isEnemiesLeft = true;
         }
     }

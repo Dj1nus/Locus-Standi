@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Entity : MonoBehaviour
 {
@@ -15,7 +14,14 @@ public class Entity : MonoBehaviour
     private float _hp;
     protected AudioPlayer _audioPlayer;
 
+    protected bool _isSignalSended = false;
+
     public float DistanceToDamage { get { return _distanceToDamage; } }
+
+    public float GetCoolDown()
+    {
+        return _attackCooldown;
+    }
 
     public Cost GetMoneyForKilling()
     {

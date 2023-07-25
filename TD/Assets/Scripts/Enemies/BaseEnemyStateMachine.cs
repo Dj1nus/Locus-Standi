@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class BaseEnemyStateMachine : MonoBehaviour
 {
-    private enum _states
+    protected enum _states
     {
         Move,
         MoveToTurret,
         Attack
     }
-    private _states _state;
+    protected _states _state;
 
-    private EnemyTargetSelector _targetSelector;
-    private Entity _entity;
+    protected EnemyTargetSelector _targetSelector;
+    protected Entity _entity;
 
-    private Entity _target;
+    protected Entity _target;
 
     public void Init()
     {
@@ -57,7 +57,7 @@ public class BaseEnemyStateMachine : MonoBehaviour
         _state = _states.Move;
     }
 
-    private void IsCanAttack()
+    protected virtual void IsCanAttack()
     {
         if (_target != null && Vector3.Distance(transform.position, _target.transform.position) <= _target.DistanceToDamage)
         {
@@ -70,7 +70,7 @@ public class BaseEnemyStateMachine : MonoBehaviour
         _state = _states.Move;
     }
 
-    public void StateMachine()
+    public virtual void StateMachine()
     {
         IsCanAttack();
 

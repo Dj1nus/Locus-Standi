@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6800466288670928040}
   - component: {fileID: 8756070284822160204}
   - component: {fileID: 7548275289678171293}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: BuildingsTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
