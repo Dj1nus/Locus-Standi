@@ -37,7 +37,6 @@ public class GameEndChecker : MonoBehaviour
 
         if (FindObjectOfType<EnemyEntity>() == null)
         {
-            print("NoEnemies");
             _isEnemiesLeft = true;
         }
     }

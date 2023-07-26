@@ -26,6 +26,8 @@ public class ShotgunTurretShooter : TurretShooter
 
             newBullet.GetComponent<Rigidbody>().AddForce(direction.normalized * _shootForce, ForceMode.Impulse);
 
+            base.Shoot(target);
+            
             yield return new WaitForSeconds(_delayBetweenShots);
         }
 

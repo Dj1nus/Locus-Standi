@@ -276,6 +276,7 @@ MonoBehaviour:
     score: 100
   _distanceToDamage: 3
   _attackCooldown: 2
+  _deathEffect: {fileID: 0}
 --- !u!114 &2543511199822516768
 MonoBehaviour:
   m_ObjectHideFlags: 0

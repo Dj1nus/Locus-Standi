@@ -43,6 +43,7 @@ public class TurretShooter : MonoBehaviour
                 break;
 
             case states._reloading:
+                LookAtTarget(target);
                 break;
 
             case states._shooting:
@@ -67,7 +68,6 @@ public class TurretShooter : MonoBehaviour
 
     public virtual void Shoot(Entity target)
     {
-        print(0);
         _audioPlayer.Play("Attack", Random.Range(0.9f, 1.1f));
     }
    

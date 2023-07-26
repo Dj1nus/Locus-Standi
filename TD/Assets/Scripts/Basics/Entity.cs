@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Entity : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class Entity : MonoBehaviour
     [SerializeField] private Cost _moneysForKilling;
     [SerializeField] private float _distanceToDamage;
     [SerializeField] private float _attackCooldown;
+
+    [SerializeField] private VisualEffect _deathEffect;
 
     protected bool _isCanAttack = true;
     private HealthBar _healthBar;
@@ -69,7 +72,11 @@ public class Entity : MonoBehaviour
 
     protected virtual void Die()
     {
-
+        if (_deathEffect != null)
+        {
+            _deathEffect.Play();
+        }
+        
         if (_audioPlayer != null)
         {
             StartCoroutine(DieSoundDelay());

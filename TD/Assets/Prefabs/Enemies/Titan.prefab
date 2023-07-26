@@ -195,6 +195,7 @@ MonoBehaviour:
     score: 120
   _distanceToDamage: 0
   _attackCooldown: 2
+  _deathEffect: {fileID: 0}
 --- !u!195 &-3980293995476306596
 NavMeshAgent:
   m_ObjectHideFlags: 0

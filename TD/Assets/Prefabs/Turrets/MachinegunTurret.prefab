@@ -349,6 +349,7 @@ MonoBehaviour:
     score: 0
   _distanceToDamage: 2
   _attackCooldown: 0
+  _deathEffect: {fileID: 4384674987635783717, guid: e558e54a8b19dfe4bbc3e8c2f343cb7e, type: 3}
 --- !u!114 &4793232142687965232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,7 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damagePerBullet: 5
-  _shootForce: 20
+  _shootForce: 30
   _rotationSpeed: 3
   _bullet: {fileID: 1655871884883203978, guid: 74ea7a4280294604082490dc668347a2, type: 3}
   _muzzle: {fileID: 6243020289981039196}
@@ -649,7 +650,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: edf515dd2fcef6c46b8cb241fb702e56, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -747,7 +748,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: edf515dd2fcef6c46b8cb241fb702e56, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
