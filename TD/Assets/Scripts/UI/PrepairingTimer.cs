@@ -13,7 +13,7 @@ public class PrepairingTimer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _currentTime = _totalTime;
+        _currentTime = _totalTime + 0.5f;
 
         _text = GetComponent<TMP_Text>();
         _text.text = _currentTime.ToString();

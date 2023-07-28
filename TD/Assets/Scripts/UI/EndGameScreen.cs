@@ -8,8 +8,8 @@ public class EndGameScreen : MonoBehaviour
 {
     [SerializeField] private StatisticsCollector _statistics;
 
-    [SerializeField] private string _winText = "Победа!";
-    [SerializeField] private string _looseText = "Поражение!";
+    [SerializeField] private string _winText = "Победа";
+    [SerializeField] private string _looseText = "Поражение";
 
     [SerializeField] private Button _toMenuButton;
     [SerializeField] private TMP_Text _winOrLooseText;
@@ -25,9 +25,9 @@ public class EndGameScreen : MonoBehaviour
 
     public void Init(bool isWin)
     {
-        _resourcesSpendText = "Потрачено ресурсов:\nМеталл - " +
+        _resourcesSpendText = "\n    " +
             _statistics.MetalSpend.ToString() +
-            "\nОрганика - " + _statistics.OrganicSpend.ToString();
+            "\n    " + _statistics.OrganicSpend.ToString();
 
         if (isWin)
         {
@@ -41,7 +41,7 @@ public class EndGameScreen : MonoBehaviour
 
         _score.text += _statistics.Score.ToString();
         _enemyKilled.text += _statistics.EnemiesKilled.ToString();
-        _resourcesSpend.text = _resourcesSpendText;
+        _resourcesSpend.text += _resourcesSpendText;
         _buildingsConstructed.text += _statistics.BuildingsConstructed.ToString();
         _buildingsDestroyed.text += _statistics.BuildingsDestroyed.ToString();
     }

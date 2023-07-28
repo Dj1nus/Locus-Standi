@@ -47,7 +47,7 @@ public class Entity : MonoBehaviour
 
         if (_audioPlayer != null)
         {
-            //_audioPlayer.Play("Hit", Random.Range(0.5f, 1.5f));
+            _audioPlayer.Play("Hit", Random.Range(0.5f, 1.5f));
         }
 
         CheckHp();
@@ -74,6 +74,7 @@ public class Entity : MonoBehaviour
     {
         if (_deathEffect != null)
         {
+            Instantiate(_deathEffect, transform);
             _deathEffect.Play();
         }
         

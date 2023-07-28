@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -31,6 +31,7 @@ public class Spawner : MonoBehaviour
         for (; _currentWaveIndex < _waveCount; _currentWaveIndex++) 
         {
             yield return StartCoroutine(SpawnWave());
+            print(1);
         }
     }
 
@@ -95,6 +96,11 @@ public class Spawner : MonoBehaviour
     private void OnDisable()
     {
         _skipPrepairing.OnStartSpawning -= StartRoutine;
+    }
+
+    private void Update()
+    {
+        //print(_currentWaveIndex);
     }
 }
 

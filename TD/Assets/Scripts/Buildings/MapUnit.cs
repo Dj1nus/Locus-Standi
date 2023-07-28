@@ -9,11 +9,12 @@ public class MapUnit : MonoBehaviour
         turret,
         deposit,
         townhall,
-        miner
+        miner,
+        wall
     }
 
     [SerializeField] private _types _type;
-    [SerializeField] private Vector2Int[] _takenPoints;
+    [SerializeField] protected Vector2Int[] _takenPoints;
 
     private Vector2Int[] _clamedPoints;
 

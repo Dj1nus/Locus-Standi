@@ -7,7 +7,6 @@ public class BuyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private Vector2 bigSize = new Vector2(150, 150);
     private Vector2 smallSize = new Vector2(140, 140);
 
-
     [SerializeField] protected Building _building;
     [SerializeField] private BuildingCostPanel _panel;
 

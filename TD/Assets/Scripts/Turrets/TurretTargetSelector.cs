@@ -6,12 +6,10 @@ public class TurretTargetSelector : MonoBehaviour
 {
     public Action<EnemyEntity> OnEnemyDetected;
 
-    private const float MIN_DISTANCE = 10f;
+    private const float MIN_DISTANCE = 1000f;
 
-    private List<EnemyEntity> _targets = new List<EnemyEntity>();
-    private EnemyEntity _target = null;
-
-    public List<EnemyEntity> Targets { get { return _targets; } }
+    protected List<EnemyEntity> _targets = new List<EnemyEntity>();
+    protected EnemyEntity _target = null;
 
     public void AddTarget(EnemyEntity target)
     {
@@ -23,7 +21,7 @@ public class TurretTargetSelector : MonoBehaviour
         _targets.Remove(target);
     }
 
-    private void SetTarget(EnemyEntity target)
+    protected void SetTarget(EnemyEntity target)
     {
         _target = target;
         OnEnemyDetected?.Invoke(target);
@@ -39,9 +37,8 @@ public class TurretTargetSelector : MonoBehaviour
         return _target;
     }
 
-    public void ChooseTarget()
+    public virtual void ChooseTarget()
     {
-        //print(1);
         if (_targets.Count <= 0)
         {
             return;

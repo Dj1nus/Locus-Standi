@@ -1,10 +1,10 @@
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class ResourcesTitels : MonoBehaviour
 {
-    [SerializeField] private Text _metalText;
-    [SerializeField] private Text _organicText;
+    [SerializeField] private TMP_Text _metalText;
+    [SerializeField] private TMP_Text _organicText;
     [SerializeField] private PlayersResources _playersResources;
 
     private void ChangeResourcesValue()

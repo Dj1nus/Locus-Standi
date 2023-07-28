@@ -72,6 +72,22 @@ public class BuildingGrid : MonoBehaviour
                 _map[point.x, point.y] = unit as MetalMiner;
             }
         }
+
+        else if (unit.GetUnitType() == MapUnit._types.townhall)
+        {
+            foreach (Vector2Int point in unit.GetClamedPoints())
+            {
+                _map[point.x, point.y] = unit as MainBaseBuilding;
+            }
+        }
+
+        else if (unit.GetUnitType() == MapUnit._types.wall)
+        {
+            foreach (Vector2Int point in unit.GetClamedPoints())
+            {
+                _map[point.x, point.y] = unit as Wall;
+            }
+        }
     }
 
     public void DeleteBuildingFromMap(MapUnit unit)
@@ -105,6 +121,15 @@ public class BuildingGrid : MonoBehaviour
         }
 
         Array.Clear(_deposits, 0, _deposits.Length);
+
+        UpdateMap(FindObjectOfType<MainBaseBuilding>());
+
+        _deposits = FindObjectsOfType<Wall>();
+
+        foreach (MapUnit wall in _deposits)
+        {
+            UpdateMap(wall);
+        }
     }
 
     private void OnDisable()

@@ -11,8 +11,8 @@ public class BuildingCostPanel : MonoBehaviour
     
     public void SetCostText(Cost cost)
     {
-        _metalText.text += cost.metal.ToString();
-        _organicText.text += cost.organic.ToString();
+        _metalText.text = cost.metal.ToString();
+        _organicText.text = cost.organic.ToString();
     }
 
     public void ShowPanel()

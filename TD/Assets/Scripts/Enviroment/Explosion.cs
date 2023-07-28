@@ -4,18 +4,13 @@ using UnityEngine.VFX;
 
 public class Explosion : MonoBehaviour
 {
-    //[SerializeField] private ParticleSystem _explosion;
     [SerializeField] private VisualEffect _explosion;
-
-    public VisualEffect effect;
 
     public void Explode(float radius, float damage)
     {
         Instantiate(_explosion, transform);
 
-        
-        GetComponentInChildren<AudioPlayer>().Play("Explode", Random.Range(0.9f, 1.1f));
-        GetComponent<MeshRenderer>().enabled = false;
+        GetComponentInChildren<MeshRenderer>().enabled = false;
 
         _explosion.Play();
 

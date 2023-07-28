@@ -21,9 +21,14 @@ public class AudioPlayer : MonoBehaviour
     public void Play(string name, float pitch = 1)
     {
         SoundPool sound = Array.Find(_sounds, item => item.name == name);
-        sound.source.pitch = pitch;
-        sound.source.clip = sound.sounds[UnityEngine.Random.Range(0, sound.sounds.Length)].clip;
-        sound.source.Play();
+
+        if (sound != null)
+        {
+            sound.source.pitch = pitch;
+            sound.source.clip = sound.sounds[UnityEngine.Random.Range(0, sound.sounds.Length)].clip;
+            sound.source.Play();
+        }
+
     }
 
     public float GetSoundDuration(string name)
