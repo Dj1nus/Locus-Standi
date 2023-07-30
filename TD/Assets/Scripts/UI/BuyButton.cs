@@ -9,6 +9,7 @@ public class BuyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     [SerializeField] protected Building _building;
     [SerializeField] private BuildingCostPanel _panel;
+    [SerializeField] private RectTransform _image;
 
     PlayersResources _playerResources;
     private Cost _buildingCost;
@@ -94,6 +95,7 @@ public class BuyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void OnPointerEnter(PointerEventData data)
     {
         _rectTransform.sizeDelta = bigSize;
+        _image.sizeDelta = bigSize;
 
         if (_audioPlayer != null)
         {
@@ -111,5 +113,6 @@ public class BuyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void OnPointerExit(PointerEventData eventData)
     {
         _rectTransform.sizeDelta = smallSize;
+        _image.sizeDelta = smallSize;
     }
 }

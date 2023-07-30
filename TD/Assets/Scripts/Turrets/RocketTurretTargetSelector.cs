@@ -12,7 +12,7 @@ public class RocketTurretTargetSelector : TurretTargetSelector
 
         foreach (EnemyEntity target in _targets)
         {
-            if (target == null) continue;
+            if (target == null || target.GetHp() <= 0) continue;
 
             overlapedBodies = Physics.OverlapSphere(target.transform.position, 2.5f).Length;
 

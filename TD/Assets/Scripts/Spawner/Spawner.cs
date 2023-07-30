@@ -31,7 +31,6 @@ public class Spawner : MonoBehaviour
         for (; _currentWaveIndex < _waveCount; _currentWaveIndex++) 
         {
             yield return StartCoroutine(SpawnWave());
-            print(1);
         }
     }
 

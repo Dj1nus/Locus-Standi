@@ -8,7 +8,14 @@ public class Explosion : MonoBehaviour
 
     public void Explode(float radius, float damage)
     {
+        if (transform.position.y < 0)
+        {
+            transform.position += new Vector3(0, 1f, 0);
+        }
+
+
         Instantiate(_explosion, transform);
+
 
         GetComponentInChildren<MeshRenderer>().enabled = false;
 

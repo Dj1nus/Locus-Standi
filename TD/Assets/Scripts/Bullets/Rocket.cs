@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class Rocket : Explosion
 {
+    [SerializeField] private ParticleSystem _smoke;
+    [SerializeField] private float _smokeSpawnRate;
     [SerializeField] private float _speed;
     [SerializeField] private float _rotateSpeed = 95f;
     [SerializeField] private float _directHitDamage;
     [SerializeField] private float _explosionRadius;
     [SerializeField] private float _timeUntilLaunch;
-
+    
     private Quaternion _tmpRotation;
     private int _damage;
     private Entity _target;
@@ -24,11 +26,23 @@ public class Rocket : Explosion
         _target = target;
 
         StartCoroutine(UntilLaunchTimer());
+        StartCoroutine(SmokeSpawner());
+
+        transform.forward = Vector3.up;
+    }
+
+    IEnumerator SmokeSpawner()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(_smokeSpawnRate);
+            Instantiate(_smoke, transform.position, Quaternion.identity);
+        }
     }
 
     IEnumerator LifeTimer()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
         Destroy(gameObject);
     }
 
@@ -36,11 +50,14 @@ public class Rocket : Explosion
     {
         yield return new WaitForSeconds(_timeUntilLaunch);
         _isLaunched = true;
+
+        StartCoroutine(LifeTimer());
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        StopAllCoroutines();
+        _isLaunched = false;
+        StopCoroutine(SmokeSpawner());
 
         if (other.TryGetComponent(out EnemyEntity enemy))
         {
@@ -49,13 +66,10 @@ public class Rocket : Explosion
 
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
-        _rb.rotation = Quaternion.identity;
-        transform.position = other.transform.position;
-        transform.rotation = Quaternion.identity;
 
         Explode(_explosionRadius, _damage);
         GetComponent<CapsuleCollider>().enabled = false;
-        StartCoroutine(LifeTimer());
+
     }
 
     private void FixedUpdate()
