@@ -48,7 +48,7 @@ public class Spawner : MonoBehaviour
                 var newEnemy = Instantiate(enemiesArray[i], 
                     _spawnPoints[UnityEngine.Random.Range(0, _spawnPoints.Length)]);
 
-                newEnemy.transform.position += new Vector3(UnityEngine.Random.Range(-20f, 20f), 0, UnityEngine.Random.Range(-20f, 20f));
+                newEnemy.transform.position += new Vector3(UnityEngine.Random.Range(-15f, 15f), 0, UnityEngine.Random.Range(-15f, 15f));
 
                 newEnemy.gameObject.GetComponent<EnemyTargetSelector>().Init();
                 newEnemy.GetComponent<BaseEnemyStateMachine>().Init();

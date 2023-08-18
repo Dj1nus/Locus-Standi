@@ -1,6 +1,6 @@
 public class SprinterStateMachine : BaseEnemyStateMachine
 {
-    private void Update()
+    private void FixedUpdate()
     {
         StateMachine();
     }

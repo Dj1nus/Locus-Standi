@@ -44,7 +44,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 2.6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7548275289678171293
 MonoBehaviour:
@@ -123,12 +123,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9193fe62a162e7644bd5699a26907012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 20
-  _maxHp: 50
+  _damage: 40
+  _maxHp: 80
   _moneysForKilling:
     organic: 50
     metal: 50
-    score: 70
+    score: 50
   _distanceToDamage: 2.5
   _attackCooldown: 1.5
   _deathEffect: {fileID: 0}

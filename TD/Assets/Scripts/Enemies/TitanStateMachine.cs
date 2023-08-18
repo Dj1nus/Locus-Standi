@@ -1,6 +1,6 @@
 public class TitanStateMachine : BaseEnemyStateMachine
 {
-    private void Update()
+    private void FixedUpdate()
     {
         StateMachine();
     }

@@ -13,7 +13,29 @@ public class BuildingMenuPanel : MonoBehaviour
 
     [SerializeField] private int _upPositionY;
     [SerializeField] private int _downPositionY;
+
+    [SerializeField] private BuyButton[] _buttons;
+
     private RectTransform _transform;
+
+    private void InitButtons()
+    {
+        int numOfTurrets = Progress.Instance.ChoosedBuildings.Length;
+
+        if (numOfTurrets < _buttons.Length)
+        {
+            for (int i = numOfTurrets; i < _buttons.Length; i++)
+            {
+                Destroy(_buttons[i].gameObject);
+            }
+        }
+
+        for (int i = 0; i < numOfTurrets; i++)
+        {
+            _buttons[i]._building = Progress.Instance.ChoosedBuildings[i];
+            _buttons[i].Init();
+        }
+    }
 
     public void ChangeBuildingMenuPosition(float time)
     {
@@ -32,6 +54,10 @@ public class BuildingMenuPanel : MonoBehaviour
 
     void Start()
     {
+        InitButtons();
+
+        FindObjectOfType<PlayersResources>().Init();
+
         _transform = GetComponent<RectTransform>();
         _state = _states.down;
     }

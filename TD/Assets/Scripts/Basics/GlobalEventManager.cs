@@ -15,6 +15,13 @@ public class GlobalEventManager : MonoBehaviour
     public static Action<bool> OnGameEnd;
     public static Action<int> OnTotalEnemiesAmountCalculated;
 
+    public static Action OnPointerUp;
+
+    public static void SendOnPointerUp()
+    {
+        OnPointerUp?.Invoke();
+    }
+
     public static void SendBuildingDestroy(MapUnit building)
     {
         OnBuildingDestroy?.Invoke(building);

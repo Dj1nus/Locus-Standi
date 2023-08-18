@@ -15,7 +15,8 @@ public class EnemyTargetSelector : MonoBehaviour
 
     public void Init()
     {
-        _mainBase = GameObject.Find("MainBase").GetComponent<Entity>();
+        //_mainBase = GameObject.Find("MainBase").GetComponent<Entity>();
+        _mainBase = FindObjectOfType<MainBase>();
         _agent = GetComponent<NavMeshAgent>() ;
         _target = _mainBase;
         _agent.destination = _target.transform.position;

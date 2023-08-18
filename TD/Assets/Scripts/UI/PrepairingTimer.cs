@@ -7,7 +7,7 @@ public class PrepairingTimer : MonoBehaviour
     public Action OnTimesLeft;
 
     private TMP_Text _text;
-    private int _totalTime = 20;
+    [SerializeField] private int _totalTime = 20;
     private float _currentTime;
 
     // Start is called before the first frame update

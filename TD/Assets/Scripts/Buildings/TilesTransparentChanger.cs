@@ -15,5 +15,7 @@ public class TilesTransparentChanger : MonoBehaviour
     void Start()
     {
         GlobalEventManager.OnVisualModeChanged.AddListener(ChangeTilesTransparent);
+
+        gameObject.SetActive(true ? FindObjectOfType<MapVisual>()._state == MapVisual._states.building : false);
     }
 }

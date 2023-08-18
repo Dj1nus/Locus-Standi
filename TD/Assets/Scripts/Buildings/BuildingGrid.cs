@@ -20,7 +20,7 @@ public class BuildingGrid : MonoBehaviour
         {
             foreach (Vector2Int point in unit.GetClamedPoints())
             {
-                if (point.x < _mapBorders.z || point.x > _mapBorders.x || point.y < _mapBorders.w || point.y > _mapBorders.y)
+                if (point.x > _mapBorders.x || point.x < _mapBorders.w || point.y > _mapBorders.y || point.y < _mapBorders.z)
                 {
                     return false;
                 }
@@ -107,7 +107,7 @@ public class BuildingGrid : MonoBehaviour
         }
     }
 
-    private void Awake()
+    private void Start()
     {
         GlobalEventManager.OnBuildingDestroy += DeleteBuildingFromMap;
 
@@ -130,6 +130,9 @@ public class BuildingGrid : MonoBehaviour
         {
             UpdateMap(wall);
         }
+
+        GetComponentInChildren<GridVisualizer>().Init(new Vector2Int((int)_mapBorders.w,
+            (int)_mapBorders.z), new Vector2Int((int)_mapBorders.x, (int)_mapBorders.y));
     }
 
     private void OnDisable()

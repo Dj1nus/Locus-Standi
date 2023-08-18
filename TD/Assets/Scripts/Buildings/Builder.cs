@@ -43,6 +43,11 @@ public class Builder : MonoBehaviour
             _ghostBuilding.SetState(true);
             _ghostBuilding = null;
         }
+
+        else if (!_isCanPlace) 
+        {
+            DestroyCurrentGhostBuilding();
+        }
     }
 
     private void MoveGhostBuilding()

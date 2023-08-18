@@ -13,6 +13,12 @@ public class TurretShooter : MonoBehaviour
 
     protected states _state;
 
+    public Progress.Types _type;
+
+    [SerializeField] private float _baseDamage;
+    [SerializeField] private float _multiplier;
+    [SerializeField] private float _addDamage;
+
     [SerializeField] protected float _damagePerBullet;
     [SerializeField] protected float _shootForce;
     [SerializeField] protected float _rotationSpeed;
@@ -87,6 +93,9 @@ public class TurretShooter : MonoBehaviour
 
     private void Start()
     {
+        _damagePerBullet = _baseDamage + _multiplier * 
+            Progress.Instance.GetLevel(_type) * _addDamage;
+
         _bulletPool = FindObjectOfType<BulletPool>().GetComponent<BulletPool>();
 
         _audioPlayer = GetComponentInChildren<AudioPlayer>();

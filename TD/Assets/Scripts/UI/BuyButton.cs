@@ -2,14 +2,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class BuyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class BuyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
     private Vector2 bigSize = new Vector2(150, 150);
     private Vector2 smallSize = new Vector2(140, 140);
 
-    [SerializeField] protected Building _building;
+    [SerializeField] public Building _building;
     [SerializeField] private BuildingCostPanel _panel;
-    [SerializeField] private RectTransform _image;
+    //[SerializeField] private RectTransform _image;
 
     PlayersResources _playerResources;
     private Cost _buildingCost;
@@ -58,12 +58,12 @@ public class BuyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnClick()
     {
-        if (_audioPlayer != null)
-        {
-            _audioPlayer.Play("Buy", Random.Range(0.9f, 1.1f));
-        }
+        //if (_audioPlayer != null)
+        //{
+        //    _audioPlayer.Play("Buy", Random.Range(0.9f, 1.1f));
+        //}
 
-        GlobalEventManager.BuyButtonClicked(_building);
+        //GlobalEventManager.BuyButtonClicked(_building);
         
     }
 
@@ -82,10 +82,10 @@ public class BuyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         _rectTransform = GetComponent<RectTransform>();
     }
 
-    void Start()
-    {
-        Init();
-    }
+    //void Start()
+    //{
+    //    Init();
+    //}
 
     private void OnDisable()
     {
@@ -95,7 +95,7 @@ public class BuyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void OnPointerEnter(PointerEventData data)
     {
         _rectTransform.sizeDelta = bigSize;
-        _image.sizeDelta = bigSize;
+        //_image.sizeDelta = bigSize;
 
         if (_audioPlayer != null)
         {
@@ -113,6 +113,24 @@ public class BuyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void OnPointerExit(PointerEventData eventData)
     {
         _rectTransform.sizeDelta = smallSize;
-        _image.sizeDelta = smallSize;
+        //_image.sizeDelta = smallSize;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (_button.interactable)
+        {
+            if (_audioPlayer != null)
+            {
+                _audioPlayer.Play("Buy", Random.Range(0.9f, 1.1f));
+            }
+
+            GlobalEventManager.BuyButtonClicked(_building);
+        }
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        GlobalEventManager.SendOnPointerUp();
     }
 }

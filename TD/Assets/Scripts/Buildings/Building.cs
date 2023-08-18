@@ -66,7 +66,7 @@ public class Building : MapUnit
         {
             _renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
             _collider.enabled = true;
-            _navMeshObstacle.enabled = true;
+            //_navMeshObstacle.enabled = true;
             _renderer.material = _standart;
 
             BuildingPlaced?.Invoke();
@@ -75,7 +75,7 @@ public class Building : MapUnit
         {
             _renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             _collider.enabled = false;
-            _navMeshObstacle.enabled = false;
+            //_navMeshObstacle.enabled = false;
 
             if (isAvaible)
                 _renderer.material = _good;
@@ -91,7 +91,7 @@ public class Building : MapUnit
 
         _renderer = GetComponentInChildren<Renderer>();
         _collider = GetComponentInChildren<BoxCollider>();
-        _navMeshObstacle = GetComponentInChildren<NavMeshObstacle>();
+        //_navMeshObstacle = GetComponentInChildren<NavMeshObstacle>();
         _audioPlayer = GetComponentInChildren<AudioPlayer>();
 
         _state = _states.Ghost;

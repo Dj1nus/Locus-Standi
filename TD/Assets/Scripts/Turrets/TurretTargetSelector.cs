@@ -51,7 +51,7 @@ public class TurretTargetSelector : MonoBehaviour
 
         foreach (EnemyEntity target in _targets)
         {
-            if (target == null)
+            if (target == null || target.GetHp() <= 0)
             {
                 continue;
             }

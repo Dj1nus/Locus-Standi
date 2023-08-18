@@ -14,6 +14,8 @@ public class BaseTurretStateMachine : MonoBehaviour
     private TurretTargetSelector _targetSelector;
     private TurretShooter _shooter;
 
+    private float _fovRadius;
+
     public void Init()
     {
         _state = _states.idle;
@@ -22,6 +24,8 @@ public class BaseTurretStateMachine : MonoBehaviour
         _shooter = GetComponent<TurretShooter>();
 
         _targetSelector.OnEnemyDetected += EnemyDetected;
+
+        _fovRadius = GetComponentInChildren<SphereCollider>().radius;
     }
   
     private void OnDestroy()
@@ -45,20 +49,31 @@ public class BaseTurretStateMachine : MonoBehaviour
         _state = _states.idle;
     }
 
+    private void CheckDistance()
+    {
+        if (Vector3.Distance(transform.position, _target.transform.position) > _fovRadius + 2f)
+        {
+            TargetDied(_target as EnemyEntity);
+        }
+    }
+
     private void StateMachine()
     {
+
+
         switch (_state)
         {
             case _states.idle:
                 break;
 
             case _states.attack:
+                CheckDistance();
                 _shooter.ShooterStateMachine(_target);
                 break;
         }
     }
 
-    private void Update() 
+    private void FixedUpdate() 
     {
         StateMachine();
     }

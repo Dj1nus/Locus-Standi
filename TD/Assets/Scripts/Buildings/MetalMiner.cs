@@ -3,8 +3,12 @@ using UnityEngine;
 
 public class MetalMiner : Building
 {
-    [SerializeField] private float _miningSpeed;
+    [SerializeField] private float _baseQuantility;
+    [SerializeField] private int _addQuantility;
+    [SerializeField] private float _multiplier;
+
     [SerializeField] private int _quantility;
+    [SerializeField] private float _miningSpeed;
 
     private bool _isCoroutineStarget = false;
     private PlayersResources _resources;
@@ -32,6 +36,9 @@ public class MetalMiner : Building
     public override void Init()
     {
         base.Init();
+
+        _quantility = Mathf.RoundToInt(_baseQuantility + _multiplier * 
+            Progress.Instance.GetLevel(Progress.Types.miner) * _addQuantility);
 
         BuildingPlaced.AddListener(MinerPlaced);
         _resources = FindObjectOfType<PlayersResources>();

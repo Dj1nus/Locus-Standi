@@ -244,7 +244,7 @@ MonoBehaviour:
     score: 0
   _distanceToDamage: 3
   _attackCooldown: 0
-  _deathEffect: {fileID: 4384674987635783717, guid: e558e54a8b19dfe4bbc3e8c2f343cb7e, type: 3}
+  _deathEffect: {fileID: 7609930368811856580, guid: e192ab45427b83a42b2dd9e7887af152, type: 3}
 --- !u!114 &8587599456135217172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,8 +278,8 @@ MonoBehaviour:
   _cost:
     organic: 300
     metal: 300
-    score: 350
-  _yOffset: -0.4
+    score: 400
+  _yOffset: -0.9
   _good: {fileID: 2100000, guid: e2c3147e5bd451344b12bc41b481bd87, type: 2}
   _bad: {fileID: 2100000, guid: 33036526e789a9d49b86331b46c2b7c7, type: 2}
   _standart: {fileID: 2100000, guid: 23b6ced6c076fdb4caeceb95b5239c9c, type: 2}
@@ -319,9 +319,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1de7d0ff2f0d044a6975fb10d2e00c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damagePerBullet: 100
+  _type: 3
+  _baseDamage: 50
+  _multiplier: 1.1
+  _addDamage: 35
+  _damagePerBullet: 50
   _shootForce: 12
-  _rotationSpeed: 0.3
+  _rotationSpeed: 1.2
   _bullet: {fileID: 7929068604904335149, guid: 2709c86211d412048a02a964882b5f76, type: 3}
   _muzzle: {fileID: 2196756304176568682}
   _sphere: {fileID: 3574792814675883527}
@@ -362,7 +366,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2400352467530479734}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.5, y: 0.5, z: 0.5}

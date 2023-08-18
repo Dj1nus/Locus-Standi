@@ -43,12 +43,26 @@ public class StatisticsCollector : MonoBehaviour
         _score -= building.GetComponent<Building>().GetCost().score;
     }
 
+    private void IncreaseMoney(bool isWin)
+    {
+        if (isWin)
+        {
+            Progress.Instance.Money += _score;
+        }
+
+        else 
+        {
+            Progress.Instance.Money += _score / 2;
+        }
+    }
+
     private void OnEnable()
     {
         GlobalEventManager.OnEnemyDied += OnEnemyKilled;
         GlobalEventManager.OnBuildingPlaced += OnBuildingPlaced;
         GlobalEventManager.OnBuildingDestroy += OnBuildingDestroyed;
         GlobalEventManager.OnTotalEnemiesAmountCalculated += SetTotalEnemiesCount;
+        GlobalEventManager.OnGameEnd += IncreaseMoney;
     }
 
     private void OnDestroy()

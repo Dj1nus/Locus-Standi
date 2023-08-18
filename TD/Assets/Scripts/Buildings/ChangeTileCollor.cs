@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ChangeTileCollor : MonoBehaviour
 {
+    [SerializeField] public bool _isWall = false;
     [SerializeField] private Material _goodMaterial;
     [SerializeField] private Material _badMaterial;
 
@@ -16,8 +17,10 @@ public class ChangeTileCollor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
         _meshRenderer.material = _badMaterial;
         _coll = other;
+        
     }
 
     private void OnTriggerExit(Collider other)

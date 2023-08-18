@@ -56,7 +56,7 @@ public class SpitterStateMachine : BaseEnemyStateMachine
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         StateMachine();
     }

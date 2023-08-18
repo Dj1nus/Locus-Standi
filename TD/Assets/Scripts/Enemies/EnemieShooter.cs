@@ -25,4 +25,9 @@ public class EnemieShooter : MonoBehaviour
         _isCanAttack = true;
     }
 
+    private void Start()
+    {
+        _audioPlayer = GetComponent<AudioPlayer>();
+    }
+
 }

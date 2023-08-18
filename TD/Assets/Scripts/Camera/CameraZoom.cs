@@ -9,6 +9,8 @@ public class CameraZoom : MonoBehaviour
     [SerializeField] private Vector2 _range = new Vector2(30f, 70f);
     [SerializeField] private Transform _cameraHolder;
 
+    [SerializeField] private PlayerInputHandler _playerInputHandler;
+
     private Vector3 _cameraDirection => transform.InverseTransformDirection(_cameraHolder.forward);
 
     private Vector3 _targetPosition;
@@ -29,10 +31,13 @@ public class CameraZoom : MonoBehaviour
         Vector3 nextTargetPosition = _targetPosition + _cameraDirection * (_input * _speed);
         if (IsInBounds(nextTargetPosition))
         {
+            //print(1);
             _targetPosition = nextTargetPosition;
         }
 
         _cameraHolder.localPosition = Vector3.Lerp(_cameraHolder.localPosition, _targetPosition, Time.deltaTime * _smoothing);
+
+        _input = 0;
     }
 
     private bool IsInBounds(Vector3 position)

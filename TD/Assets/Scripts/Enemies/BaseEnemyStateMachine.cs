@@ -6,6 +6,7 @@ public class BaseEnemyStateMachine : MonoBehaviour
     {
         Move,
         MoveToTurret,
+        Spawn,
         Attack
     }
     protected _states _state;
@@ -15,7 +16,7 @@ public class BaseEnemyStateMachine : MonoBehaviour
 
     protected Entity _target;
 
-    public void Init()
+    public virtual void Init()
     {
         _state = _states.Move;
         _targetSelector = GetComponent<EnemyTargetSelector>();

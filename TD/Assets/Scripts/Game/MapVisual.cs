@@ -9,7 +9,7 @@ public class MapVisual : MonoBehaviour
         defending
     }
 
-    private _states _state;
+    public _states _state;
 
     public _states GetState()
     {

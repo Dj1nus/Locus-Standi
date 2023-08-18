@@ -3,13 +3,13 @@ using UnityEngine;
 public class GridVisualizer : MonoBehaviour
 {
     private const float GRID_OFFSET = 0.5f;
-    private const float HEIGHT = -0.4f;
+    private const float HEIGHT = -0.9f;
 
     [SerializeField] private int _sizeX;
     [SerializeField] private int _sizeY;
     
     private LineRenderer _lineRenderer;
-    private int i = 0; //Простите за такую херню
+    private int i = 0; //Простите за такую фигню
 
     private void DrawBox(float x, float y)
     {
@@ -34,16 +34,21 @@ public class GridVisualizer : MonoBehaviour
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
-        _lineRenderer.positionCount = _sizeX * _sizeY * 12;
+        //_lineRenderer.positionCount = _sizeX * _sizeY * 12;
 
         GlobalEventManager.OnVisualModeChanged.AddListener(ChangeTransparent);
     }
 
-    void Start()
+    public void Init(Vector2Int start, Vector2Int end)
     {
-        for (int x = 0; x < _sizeX * 2; x++)
+        _sizeX = end.x - start.x;
+        _sizeY = end.y - start.y;
+
+        _lineRenderer.positionCount = _sizeX * _sizeY * 3;
+
+        for (int x = start.x; x < end.x; x++)
         {
-            for (int y = 0; y < _sizeY * 2; y++)
+            for (int y = start.y; y < end.y; y++)
             {
                 DrawBox(x - GRID_OFFSET, y - GRID_OFFSET);
             }
@@ -51,4 +56,17 @@ public class GridVisualizer : MonoBehaviour
 
         gameObject.SetActive(false);
     }
+
+    //void Start()
+    //{
+    //    for (int x = 0; x < _sizeX * 2; x++)
+    //    {
+    //        for (int y = 0; y < _sizeY * 2; y++)
+    //        {
+    //            DrawBox(x - GRID_OFFSET, y - GRID_OFFSET);
+    //        }
+    //    }
+
+    //    gameObject.SetActive(false);
+    //}
 }

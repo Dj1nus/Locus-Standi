@@ -10,7 +10,8 @@ public class Entity : MonoBehaviour
     [SerializeField] private float _distanceToDamage;
     [SerializeField] private float _attackCooldown;
 
-    [SerializeField] private VisualEffect _deathEffect;
+    //[SerializeField] private VisualEffect _deathEffect;
+    [SerializeField] private ParticleSystem _deathEffect;
 
     protected bool _isCanAttack = true;
     private HealthBar _healthBar;

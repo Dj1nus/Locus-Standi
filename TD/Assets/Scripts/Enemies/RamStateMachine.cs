@@ -1,6 +1,6 @@
 public class RamStateMachine : BaseEnemyStateMachine
 {
-    private void Update()
+    private void FixedUpdate()
     {
         StateMachine();
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameEndChecker : MonoBehaviour
 {
@@ -18,7 +19,13 @@ public class GameEndChecker : MonoBehaviour
 
     private void SetIsBaseDestroyed()
     {
-        _isBaseDestroyed = true;
+        
+
+        if (!_isBaseDestroyed)
+        {
+            print("Destroyed");
+            _isBaseDestroyed = true;
+        }
     }
 
     ///////////////////////////////////
@@ -44,9 +51,32 @@ public class GameEndChecker : MonoBehaviour
 
     IEnumerator DelayBeforEnd(bool isWin)
     {
+
+
+        if (isWin)
+        {
+            int index = SceneManager.GetActiveScene().buildIndex;
+            Progress.Instance.OnLevelComplition(index);
+        }
+       
         yield return new WaitForSeconds(DELAY_BEFORE_END);
 
         GlobalEventManager.SendGameEnded(isWin);
+
+        print("GEM sended");
+    }
+
+    private void LevelEnded(bool isWin)
+    {
+        if (isWin)
+        {
+            int index = SceneManager.GetActiveScene().buildIndex;
+            Progress.Instance.OnLevelComplition(index);
+        }
+
+        GlobalEventManager.SendGameEnded(isWin);
+
+        print("GEM sended");
     }
 
     private void OnEnable()
@@ -58,7 +88,7 @@ public class GameEndChecker : MonoBehaviour
         GlobalEventManager.OnMainBaseDestroy += SetIsBaseDestroyed;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         _spawner.OnLastWave -= SetIsLastWave;
         GlobalEventManager.OnEnemyDied -= SetIsEnemiesLeft;
@@ -70,14 +100,24 @@ public class GameEndChecker : MonoBehaviour
         if (_isLastWave && _isEnemiesLeft && !_isSignalSended)
         {
             _isSignalSended = true;
-            StartCoroutine(DelayBeforEnd(true));
+            //StartCoroutine(DelayBeforEnd(true));
+            LevelEnded(true);
         }
 
         else if (_isBaseDestroyed && !_isSignalSended)
         {
+            print("Send");
+
             _isSignalSended = true;
-            StartCoroutine(DelayBeforEnd(false));
+            //StartCoroutine(DelayBeforEnd(false));
+            LevelEnded(false);
         }
 
+
+        if (Input.GetKey(KeyCode.L))
+        {
+            print(_isSignalSended);
+            print(_isBaseDestroyed);
+        }
     }
 }

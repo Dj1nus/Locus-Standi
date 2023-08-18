@@ -7,10 +7,10 @@ public class PlayersResources : MonoBehaviour
     [SerializeField] private int _startMetalAmount;
     [SerializeField] private int _startOrganicAmount;
 
-    private int _metal = 1;
+    private int _metal = 0;
     public int metal { get { return _metal; } }
-    private int _organic = 1;
-    public int organic { get { return _organic;} }
+    private int _organic = 0;
+    public int organic { get { return _organic; } }
 
     public void IncreaseMetalValue(int metal)
     {
@@ -24,8 +24,8 @@ public class PlayersResources : MonoBehaviour
         GlobalEventManager.ResourceValueChanged();
     }
 
-    public void IncreaseOrganicValue(int organic) 
-    { 
+    public void IncreaseOrganicValue(int organic)
+    {
         _organic += organic;
         GlobalEventManager.ResourceValueChanged();
     }
@@ -42,13 +42,21 @@ public class PlayersResources : MonoBehaviour
         IncreaseOrganicValue(cost.organic);
     }
 
-    private void Start()
+    public void Init()
     {
         GlobalEventManager.OnEnemyDied += TakeMoneyForEnemyKilling;
 
         IncreaseMetalValue(_startMetalAmount);
         IncreaseOrganicValue(_startOrganicAmount);
     }
+
+    //private void Start()
+    //{
+    //    GlobalEventManager.OnEnemyDied += TakeMoneyForEnemyKilling;
+
+    //    IncreaseMetalValue(_startMetalAmount);
+    //    IncreaseOrganicValue(_startOrganicAmount);
+    //}
 
     private void OnDestroy()
     {

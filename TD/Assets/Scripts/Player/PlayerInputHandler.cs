@@ -1,9 +1,8 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class PlayerInputHandler : MonoBehaviour
-{
+public class PlayerInputHandler : MonoBehaviour 
+{ 
     [SerializeField] private Camera _camera;
     [SerializeField] private Builder _buildingManager;
     [SerializeField] private MapVisual _level;
@@ -15,15 +14,19 @@ public class PlayerInputHandler : MonoBehaviour
     private float _z;
     private float _inputRotation;
 
+    public bool _isDragging = false;
+
     //Они друзья,
     public void OnBuyBuildingButtonClick(Building building)
     {
+        _isDragging = true;
         StartCoroutine(KostylTimer(building));
     }
     IEnumerator KostylTimer(Building building)
     {
         yield return new WaitForSeconds(0.01f);
         _buildingManager.CreateGhostBuilding(building);
+        
     }
     //Их не разлучать!!!
 
@@ -35,24 +38,30 @@ public class PlayerInputHandler : MonoBehaviour
         return ray;
     }
 
+    private void OnBuildingDrop()
+    {
+        _isDragging = false;
+
+        _buildingManager.PlaceBuilding();
+    }
+
     void Start()
     {
         GlobalEventManager.OnBuyButtonClick.AddListener(OnBuyBuildingButtonClick);
+
+        GlobalEventManager.OnPointerUp += OnBuildingDrop;
+    }
+
+    private void OnDisable()
+    {
+        GlobalEventManager.OnPointerUp -= OnBuildingDrop;
     }
 
     void Update()
     {
-        if (_level.GetState() == MapVisual._states.building && Input.GetMouseButtonDown(0))
-        {
-            _buildingManager.PlaceBuilding();
-        }
 
-        else if (_level.GetState() == MapVisual._states.building && Input.GetMouseButtonDown(1))
-        {
-            _buildingManager.DestroyCurrentGhostBuilding();
-        }
 
-        else if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
             _x = Input.GetAxisRaw("Mouse X") * -1;
             _z = Input.GetAxisRaw("Mouse Y") * -1;
@@ -63,14 +72,22 @@ public class PlayerInputHandler : MonoBehaviour
             _inputRotation = Input.GetAxisRaw("Mouse X");
         }
 
-        _cameraMovement.CalculateInput(_x, _z);
-        _cameraRotation.CalculateRotation(_inputRotation);
-        _cameraZoom.SetInput(Input.GetAxisRaw("Mouse ScrollWheel"));
+        if (!_isDragging)
+        {
+            _cameraMovement.CalculateInput(_x, _z);
+            _cameraRotation.CalculateRotation(_inputRotation);
+
+            float tmp = Input.GetAxisRaw("Mouse ScrollWheel");
+
+            if (tmp != 0)
+            {
+                _cameraZoom.SetInput(tmp);
+            }
+            
+        }
 
         _x = _z = 0;
         _inputRotation = 0;
-
-
         
     }
 }

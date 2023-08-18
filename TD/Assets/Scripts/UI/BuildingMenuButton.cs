@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class BuildingMenuButton : MonoBehaviour, IPointerEnterHandler
 {
@@ -53,11 +54,17 @@ public class BuildingMenuButton : MonoBehaviour, IPointerEnterHandler
         if (_state == _states.down)
         {
             _audioPlayer.Play("Buy", Random.Range(1f, 1.2f));
+
+            _transform.DOLocalMoveY(_upPositionY, 0.5f);
+
             _state = _states.up;
         }
         else
         {
             _audioPlayer.Play("Buy", Random.Range(0.85f, 0.95f));
+
+            _transform.DOLocalMoveY(_downPositionY, 0.5f);
+
             _state = _states.down;
         }
     }

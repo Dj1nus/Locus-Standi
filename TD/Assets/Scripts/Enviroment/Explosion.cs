@@ -4,7 +4,7 @@ using UnityEngine.VFX;
 
 public class Explosion : MonoBehaviour
 {
-    [SerializeField] private VisualEffect _explosion;
+    [SerializeField] private ParticleSystem _explosion;
 
     public void Explode(float radius, float damage)
     {
@@ -20,6 +20,7 @@ public class Explosion : MonoBehaviour
         GetComponentInChildren<MeshRenderer>().enabled = false;
 
         _explosion.Play();
+        GetComponentInChildren<AudioPlayer>().Play("Explode", Random.Range(0.9f, 1.1f));
 
         Collider[] overlapedColliders = Physics.OverlapSphere(transform.position, radius);
 

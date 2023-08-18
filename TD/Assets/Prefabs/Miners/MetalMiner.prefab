@@ -68,8 +68,11 @@ MonoBehaviour:
   _good: {fileID: 2100000, guid: e2c3147e5bd451344b12bc41b481bd87, type: 2}
   _bad: {fileID: 2100000, guid: 33036526e789a9d49b86331b46c2b7c7, type: 2}
   _standart: {fileID: 2100000, guid: 73330683d54865f48872bb0e22d9713b, type: 2}
+  _baseQuantility: 25
+  _addQuantility: 40
+  _multiplier: 1.5
+  _quantility: 50
   _miningSpeed: 10
-  _quantility: 100
 --- !u!114 &1921424609542526007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,8 +105,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5278383, y: 2.7283888, z: 2.0458724}
-  m_Center: {x: 0.01660937, y: 0.86419415, z: -0.06775677}
+  m_Size: {x: 2, y: 3, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &4300908864520493212
 Rigidbody:
   m_ObjectHideFlags: 0
