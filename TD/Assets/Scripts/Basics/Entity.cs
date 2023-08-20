@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.VFX;
 
 public class Entity : MonoBehaviour
 {
@@ -9,93 +8,47 @@ public class Entity : MonoBehaviour
     [SerializeField] private Cost _moneysForKilling;
     [SerializeField] private float _distanceToDamage;
     [SerializeField] private float _attackCooldown;
-
-    //[SerializeField] private VisualEffect _deathEffect;
     [SerializeField] private ParticleSystem _deathEffect;
 
-    protected bool _isCanAttack = true;
     private HealthBar _healthBar;
     private float _hp;
-    protected AudioPlayer _audioPlayer;
 
-    protected bool _isSignalSended = false;
+    protected bool IsCanAttack = true;
+    protected AudioPlayer AudioPlayer;
+    protected bool IsSignalSended = false;
 
-    public float DistanceToDamage { get { return _distanceToDamage; } }
+    public float GetDistanceToDamage() => _distanceToDamage;// { get { return _distanceToDamage; } }
 
-    public float GetCoolDown()
+    public float GetCoolDown() => _attackCooldown;
+
+    public Cost GetMoneyForKilling() => _moneysForKilling;
+
+    public float GetHp() => _hp;
+
+    public float GetDamage() => _damage;
+
+
+    private void Start()
     {
-        return _attackCooldown;
-    }
+        _hp = _maxHp;
 
-    public Cost GetMoneyForKilling()
-    {
-        return _moneysForKilling;
-    }
+        _healthBar = GetComponentInChildren<HealthBar>();
+        _healthBar.UpdateHealthBat(_maxHp, _hp);
 
-    public float GetHp()
-    {
-        return _hp;
-    }
-
-    public float GetDamage ()
-    {
-        return _damage;
+        AudioPlayer = GetComponentInChildren<AudioPlayer>();
     }
 
     public void TakeDamage(float value)
     {
         _hp -= value;
 
-        if (_audioPlayer != null)
+        if (AudioPlayer != null)
         {
-            _audioPlayer.Play("Hit", Random.Range(0.5f, 1.5f));
+            AudioPlayer.Play("Hit", Random.Range(0.5f, 1.5f));
         }
 
         CheckHp();
     }
-
-
-    public virtual void Attack(Entity target)
-    {
-        if (_isCanAttack)
-        {
-            StartCoroutine(AttackCooldown());
-            target.TakeDamage(_damage);
-        }
-    }
-
-    IEnumerator AttackCooldown()
-    {
-        _isCanAttack = false;
-        yield return new WaitForSeconds(_attackCooldown);
-        _isCanAttack = true;
-    }
-
-    protected virtual void Die()
-    {
-        if (_deathEffect != null)
-        {
-            Instantiate(_deathEffect, transform);
-            _deathEffect.Play();
-        }
-        
-        if (_audioPlayer != null)
-        {
-            StartCoroutine(DieSoundDelay());
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    IEnumerator DieSoundDelay()
-    {
-        _audioPlayer.Play("Die");
-        yield return new WaitForSeconds(_audioPlayer.GetSoundDuration("Die"));
-        Destroy(gameObject);
-    }
-
     public void CheckHp()
     {
         if (_hp <= 0)
@@ -106,13 +59,44 @@ public class Entity : MonoBehaviour
         _healthBar.UpdateHealthBat(_maxHp, _hp);
     }
 
-    private void Start()
+    public virtual void Attack(Entity target)
     {
-        _hp = _maxHp;
+        if (IsCanAttack)
+        {
+            StartCoroutine(AttackCooldown());
+            target.TakeDamage(_damage);
+        }
+    }
 
-        _healthBar = GetComponentInChildren<HealthBar>();
-        _healthBar.UpdateHealthBat(_maxHp, _hp);
+    protected virtual void Die()
+    {
+        if (_deathEffect != null)
+        {
+            Instantiate(_deathEffect, transform);
+            _deathEffect.Play();
+        }
 
-        _audioPlayer = GetComponentInChildren<AudioPlayer>();
+        if (AudioPlayer != null)
+        {
+            //AudioPlayer.Play("Die");
+            StartCoroutine(DieSoundDelay());
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    IEnumerator AttackCooldown()
+    {
+        IsCanAttack = false;
+        yield return new WaitForSeconds(_attackCooldown);
+        IsCanAttack = true;
+    }
+
+    IEnumerator DieSoundDelay()
+    {
+        AudioPlayer.Play("Die");
+        yield return new WaitForSeconds(AudioPlayer.GetSoundDuration("Die"));
+        Destroy(gameObject);
     }
 }

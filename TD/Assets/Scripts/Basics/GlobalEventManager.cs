@@ -1,21 +1,18 @@
 using System;
-using UnityEngine;
-using UnityEngine.Events;
 
-public class GlobalEventManager : MonoBehaviour
+public class GlobalEventManager
 {
     public static Action OnMainBaseDestroy;
     public static Action<Cost> OnBuildingPlaced;
     public static Action<MapUnit> OnBuildingDestroy;
-    public static UnityEvent<MapVisual._states> OnVisualModeChanged = new UnityEvent<MapVisual._states>();
     public static Action OnResourceValueChanged;
-    public static UnityEvent<Building> OnBuyButtonClick = new UnityEvent<Building>();
     public static Action<Cost> OnEnemyDied;
     public static Action OnLastWave;
     public static Action<bool> OnGameEnd;
     public static Action<int> OnTotalEnemiesAmountCalculated;
-
     public static Action OnPointerUp;
+    public static Action<MapVisual.states> OnVisualModeChanged;
+    public static Action<Building> OnBuyButtonClick;
 
     public static void SendOnPointerUp()
     {
@@ -27,7 +24,7 @@ public class GlobalEventManager : MonoBehaviour
         OnBuildingDestroy?.Invoke(building);
     }
 
-    public static void ChangeVisualMode(MapVisual._states state)
+    public static void ChangeVisualMode(MapVisual.states state)
     {
         OnVisualModeChanged?.Invoke(state);
     }

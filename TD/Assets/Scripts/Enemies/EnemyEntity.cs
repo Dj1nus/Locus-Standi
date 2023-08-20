@@ -8,16 +8,18 @@ public class EnemyEntity : Entity
 
     protected override void Die()
     {
-        if (!_isSignalSended)
+        if (!IsSignalSended)
         {
-            _isSignalSended = true;
-            EnemyDied?.Invoke(GetComponent<EnemyEntity>());
-            GlobalEventManager.SendEnemyDied(GetMoneyForKilling());
+            IsSignalSended = true;
 
             GetComponent<BaseEnemyStateMachine>().enabled = false;
             GetComponent<EnemyTargetSelector>().enabled = false;
             GetComponent<BoxCollider>().enabled = false;
             GetComponent<NavMeshAgent>().enabled = false;
+
+            EnemyDied?.Invoke(GetComponent<EnemyEntity>());
+
+            GlobalEventManager.SendEnemyDied(GetMoneyForKilling());
 
             base.Die();
         }
@@ -25,9 +27,9 @@ public class EnemyEntity : Entity
 
     public override void Attack(Entity target)
     {
-        if (_audioPlayer != null && _isCanAttack)
+        if (AudioPlayer != null && IsCanAttack)
         {
-            _audioPlayer.Play("Attack", UnityEngine.Random.Range(0.9f, 1.1f));
+            AudioPlayer.Play("Attack", UnityEngine.Random.Range(0.9f, 1.1f));
         }
 
         base.Attack(target);

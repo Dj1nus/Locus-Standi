@@ -1,123 +1,62 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameEndChecker : MonoBehaviour
 {
-    private const float DELAY_BEFORE_END = 1.5f;
+    [SerializeField] private Spawner _spawner;
+    [SerializeField] private StatisticsCollector _statistics;
 
-    private Spawner _spawner;
-    private bool _isLastWave;
-    private bool _isEnemiesLeft;
-    private bool _isBaseDestroyed;
-    private bool _isSignalSended = false;
-
-    private void SetIsLastWave()
-    {
-        _isLastWave = true;
-    }
-
-    private void SetIsBaseDestroyed()
-    {
-        
-
-        if (!_isBaseDestroyed)
-        {
-            print("Destroyed");
-            _isBaseDestroyed = true;
-        }
-    }
-
-    ///////////////////////////////////
-    private void SetIsEnemiesLeft(Cost cost)
-    {
-        if (_isLastWave)
-        {
-            StopAllCoroutines();
-            StartCoroutine(Kostyl());
-        }
-
-    }
-    IEnumerator Kostyl()
-    {
-        yield return new WaitForSeconds(3f);
-
-        if (FindObjectOfType<EnemyEntity>() == null)
-        {
-            _isEnemiesLeft = true;
-        }
-    }
-    ///////////////////////////////
-
-    IEnumerator DelayBeforEnd(bool isWin)
-    {
-
-
-        if (isWin)
-        {
-            int index = SceneManager.GetActiveScene().buildIndex;
-            Progress.Instance.OnLevelComplition(index);
-        }
-       
-        yield return new WaitForSeconds(DELAY_BEFORE_END);
-
-        GlobalEventManager.SendGameEnded(isWin);
-
-        print("GEM sended");
-    }
-
-    private void LevelEnded(bool isWin)
-    {
-        if (isWin)
-        {
-            int index = SceneManager.GetActiveScene().buildIndex;
-            Progress.Instance.OnLevelComplition(index);
-        }
-
-        GlobalEventManager.SendGameEnded(isWin);
-
-        print("GEM sended");
-    }
+    private int _totalEnemiesCount;
 
     private void OnEnable()
     {
         _spawner = FindObjectOfType<Spawner>();
-
-        _spawner.OnLastWave += SetIsLastWave;
-        GlobalEventManager.OnEnemyDied += SetIsEnemiesLeft;
+        _statistics = FindObjectOfType<StatisticsCollector>();
+        _spawner.OnLastWave += LastWave;
         GlobalEventManager.OnMainBaseDestroy += SetIsBaseDestroyed;
+        GlobalEventManager.OnTotalEnemiesAmountCalculated += SetTotalEnemiesCount;
     }
 
     private void OnDestroy()
     {
-        _spawner.OnLastWave -= SetIsLastWave;
-        GlobalEventManager.OnEnemyDied -= SetIsEnemiesLeft;
+        _spawner.OnLastWave -= LastWave;
+        GlobalEventManager.OnEnemyDied -= CheckWinCondition;
         GlobalEventManager.OnMainBaseDestroy -= SetIsBaseDestroyed;
+        GlobalEventManager.OnTotalEnemiesAmountCalculated -= SetTotalEnemiesCount;
     }
 
-    void Update()
+    private void SetTotalEnemiesCount(int count)
     {
-        if (_isLastWave && _isEnemiesLeft && !_isSignalSended)
+        _totalEnemiesCount = count;
+    }
+
+    private void LastWave()
+    {
+        GlobalEventManager.OnEnemyDied += CheckWinCondition;
+    }
+    private void CheckWinCondition(Cost cost)
+    {
+        if (_statistics.EnemiesKilled >= _totalEnemiesCount)
         {
-            _isSignalSended = true;
-            //StartCoroutine(DelayBeforEnd(true));
-            LevelEnded(true);
+            EndLevel(isWin: true);
+        }
+    }
+
+    private void SetIsBaseDestroyed()
+    {
+        EndLevel(isWin: false);
+    }
+
+    private void EndLevel(bool isWin)
+    {
+        if (isWin)
+        {
+            int index = SceneManager.GetActiveScene().buildIndex;
+            Progress.Instance.OnLevelComplition(index);
         }
 
-        else if (_isBaseDestroyed && !_isSignalSended)
-        {
-            print("Send");
+        GlobalEventManager.SendGameEnded(isWin);
 
-            _isSignalSended = true;
-            //StartCoroutine(DelayBeforEnd(false));
-            LevelEnded(false);
-        }
-
-
-        if (Input.GetKey(KeyCode.L))
-        {
-            print(_isSignalSended);
-            print(_isBaseDestroyed);
-        }
+        print("GEM sended");
     }
 }

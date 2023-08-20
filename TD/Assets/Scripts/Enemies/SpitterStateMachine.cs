@@ -13,11 +13,11 @@ public class SpitterStateMachine : BaseEnemyStateMachine
 
     protected override void IsCanAttack()
     {
-        if (_target != null && 
-            Vector3.Distance(transform.position, _target.transform.position) 
-            <= _target.DistanceToDamage + _attackDistance)
+        if (Target != null && 
+            Vector3.Distance(transform.position, Target.transform.position) 
+            <= Target.GetDistanceToDamage() + _attackDistance)
         {
-            _state = _states.Attack;
+            State = States.Attack;
         }
     }
 
@@ -32,25 +32,25 @@ public class SpitterStateMachine : BaseEnemyStateMachine
     {
         IsCanAttack();
 
-        switch (_state)
+        switch (State)
         {
-            case _states.Move:
-                _targetSelector.ChooseTarget();
+            case States.Move:
+                TargetSelector.ChooseTarget();
                 break;
 
-            case _states.Attack:
-                if (isTooClose(_target))
+            case States.Attack:
+                if (isTooClose(Target))
                 {
 
                 }
 
                 else
                 {
-                    if (_target != null)
+                    if (Target != null)
                     {
-                        _shooter.Shoot(_target, _entity.GetDamage(), _entity.GetCoolDown());
+                        _shooter.Shoot(Target, EntityComponent.GetDamage(), EntityComponent.GetCoolDown());
                     }
-                    _targetSelector.StopMoving();
+                    TargetSelector.StopMoving();
                 }
                 break;
         }

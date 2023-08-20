@@ -2,32 +2,31 @@ using UnityEngine;
 
 public class BaseEnemyStateMachine : MonoBehaviour
 {
-    protected enum _states
+    protected enum States
     {
         Move,
         MoveToTurret,
         Spawn,
         Attack
     }
-    protected _states _state;
 
-    protected EnemyTargetSelector _targetSelector;
-    protected Entity _entity;
-
-    protected Entity _target;
+    protected States State;
+    protected EnemyTargetSelector TargetSelector;
+    protected Entity EntityComponent;
+    protected Entity Target;
 
     public virtual void Init()
     {
-        _state = _states.Move;
-        _targetSelector = GetComponent<EnemyTargetSelector>();
-        _entity = GetComponent<Entity>();
+        State = States.Move;
+        TargetSelector = GetComponent<EnemyTargetSelector>();
+        EntityComponent = GetComponent<Entity>();
 
-        _targetSelector.OnBuildingDetected += OnTurretDetected;
+        TargetSelector.OnBuildingDetected += OnTurretDetected;
     }
 
     private void OnDestroy()
     {
-        _targetSelector.OnBuildingDetected -= OnTurretDetected;
+        TargetSelector.OnBuildingDetected -= OnTurretDetected;
     }
 
     public void OnTurretDetected(Entity target)
@@ -38,55 +37,55 @@ public class BaseEnemyStateMachine : MonoBehaviour
             t.OnDestroy += OnTurretDestroy;
         }
 
-        _target = target;
+        Target = target;
 
-        _state = _states.MoveToTurret;
+        State = States.MoveToTurret;
     }
 
     private void OnTurretDestroy(Entity target)
     {
         if (target is TurretEntity)
         {
-            TurretEntity t = _target as TurretEntity;
+            TurretEntity t = Target as TurretEntity;
             t.OnDestroy -= OnTurretDestroy;
         }
 
-        _target = _targetSelector.GetMainBase();
+        Target = TargetSelector.GetMainBase();
 
-        _targetSelector.SetTargetToNull(target);
+        TargetSelector.SetTargetToNull(target);
 
-        _state = _states.Move;
+        State = States.Move;
     }
 
     protected virtual void IsCanAttack()
     {
-        if (_target != null && Vector3.Distance(transform.position, _target.transform.position) <= _target.DistanceToDamage)
+        if (Target != null && Vector3.Distance(transform.position, Target.transform.position) <= Target.GetDistanceToDamage())
         {
-            _state = _states.Attack;
+            State = States.Attack;
         }
     }
 
     public void OnEnemyDied()
     {
-        _state = _states.Move;
+        State = States.Move;
     }
 
     public virtual void StateMachine()
     {
         IsCanAttack();
 
-        switch (_state)
+        switch (State)
         {
-            case _states.Move:
-                _targetSelector.ChooseTarget();
+            case States.Move:
+                TargetSelector.ChooseTarget();
                 break;
 
-            case _states.Attack:
-                if (_target != null)
+            case States.Attack:
+                if (Target != null)
                 {
-                    _entity.Attack(_target);
+                    EntityComponent.Attack(Target);
                 }
-                _targetSelector.StopMoving();
+                TargetSelector.StopMoving();
                 break;
         }
     }

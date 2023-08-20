@@ -14,7 +14,7 @@ public class Spawner : MonoBehaviour
 
     private int _waveCount;
     private int _currentWaveIndex;
-    public int totalEnemyCount;
+    [NonSerialized] public int TotalEnemyCount;
 
     private void StartRoutine()
     {
@@ -88,6 +88,8 @@ public class Spawner : MonoBehaviour
         _currentWaveIndex = 0;
 
         _skipPrepairing.OnStartSpawning += StartRoutine;
+
+        print(CalculateTotalEnemyCount());
 
         GlobalEventManager.SendTotalEnemiesAmountCalculated(CalculateTotalEnemyCount());
     }

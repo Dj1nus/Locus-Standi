@@ -2,32 +2,32 @@ using UnityEngine;
 
 public class MapVisual : MonoBehaviour
 {
-    public enum _states
+    public enum states
     {
         starting,
         building,
         defending
     }
 
-    public _states _state;
+    public states State;
 
-    public _states GetState()
+    public states GetState()
     {
-        return _state;
+        return State;
     }
 
     public void ChangeState()
     {
-        if (_state == _states.building) 
-            _state = _states.defending;
+        if (State == states.building) 
+            State = states.defending;
         else
-            _state = _states.building;
+            State = states.building;
 
-        GlobalEventManager.ChangeVisualMode(_state);
+        GlobalEventManager.ChangeVisualMode(State);
     }
 
     private void Start()
     {
-        _state = _states.defending;
+        State = states.defending;
     }
 }

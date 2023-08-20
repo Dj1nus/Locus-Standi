@@ -22,9 +22,9 @@ public class GridVisualizer : MonoBehaviour
         _lineRenderer.SetPosition(i, new Vector3(x, HEIGHT, y + 1));
     }
 
-    private void ChangeTransparent(MapVisual._states state)
+    private void ChangeTransparent(MapVisual.states state)
     {
-        if (state == MapVisual._states.building)
+        if (state == MapVisual.states.building)
             gameObject.SetActive(true);
 
         else
@@ -36,7 +36,12 @@ public class GridVisualizer : MonoBehaviour
         _lineRenderer = GetComponent<LineRenderer>();
         //_lineRenderer.positionCount = _sizeX * _sizeY * 12;
 
-        GlobalEventManager.OnVisualModeChanged.AddListener(ChangeTransparent);
+        GlobalEventManager.OnVisualModeChanged += ChangeTransparent;
+    }
+
+    private void OnDestroy()
+    {
+        GlobalEventManager.OnVisualModeChanged -= ChangeTransparent;
     }
 
     public void Init(Vector2Int start, Vector2Int end)

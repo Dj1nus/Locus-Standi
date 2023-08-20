@@ -47,14 +47,14 @@ public class PlayerInputHandler : MonoBehaviour
 
     void Start()
     {
-        GlobalEventManager.OnBuyButtonClick.AddListener(OnBuyBuildingButtonClick);
-
+        GlobalEventManager.OnBuyButtonClick += OnBuyBuildingButtonClick;
         GlobalEventManager.OnPointerUp += OnBuildingDrop;
     }
 
     private void OnDisable()
     {
         GlobalEventManager.OnPointerUp -= OnBuildingDrop;
+        GlobalEventManager.OnBuyButtonClick -= OnBuyBuildingButtonClick;
     }
 
     void Update()

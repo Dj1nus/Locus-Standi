@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -20,6 +19,13 @@ public class EnemyTargetSelector : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>() ;
         _target = _mainBase;
         _agent.destination = _target.transform.position;
+
+        GlobalEventManager.OnMainBaseDestroy += StopMoving;
+    }
+
+    private void OnDestroy()
+    {
+        GlobalEventManager.OnMainBaseDestroy -= StopMoving;
     }
 
     public Entity GetMainBase()
@@ -105,7 +111,7 @@ public class EnemyTargetSelector : MonoBehaviour
 
     private void Update()
     {
-        if (_target == null)
+        if (_target == null && _mainBase != null)
         {
             ChooseTarget();
         }

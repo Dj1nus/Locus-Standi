@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class TilesTransparentChanger : MonoBehaviour
 {
-    private void ChangeTilesTransparent(MapVisual._states state)
+    private void ChangeTilesTransparent(MapVisual.states state)
     {
-        if (state == MapVisual._states.building)
+        if (state == MapVisual.states.building)
             gameObject.SetActive(true);
 
         else
@@ -14,8 +14,13 @@ public class TilesTransparentChanger : MonoBehaviour
 
     void Start()
     {
-        GlobalEventManager.OnVisualModeChanged.AddListener(ChangeTilesTransparent);
+        GlobalEventManager.OnVisualModeChanged += ChangeTilesTransparent;
 
-        gameObject.SetActive(true ? FindObjectOfType<MapVisual>()._state == MapVisual._states.building : false);
+        gameObject.SetActive(true ? FindObjectOfType<MapVisual>().State == MapVisual.states.building : false);
+    }
+
+    private void OnDestroy()
+    {
+        GlobalEventManager.OnVisualModeChanged -= ChangeTilesTransparent;
     }
 }

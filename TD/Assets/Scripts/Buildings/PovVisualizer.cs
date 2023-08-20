@@ -26,19 +26,21 @@ public class PovVisualizer : MonoBehaviour
         }
     }
 
-    private void ChangeTransparent(MapVisual._states state)
+    private void ChangeTransparent(MapVisual.states state)
     {
-        if (state == MapVisual._states.building)
-            _lineRenderer.enabled = true;
+        if (_lineRenderer != null)
+        {
+            if (state == MapVisual.states.building)
+                _lineRenderer.enabled = true;
 
-        else
-            _lineRenderer.enabled = false;
+            else
+                _lineRenderer.enabled = false;
+        }
     }
 
     public void Init()
     {
-        
-        GlobalEventManager.OnVisualModeChanged.AddListener(ChangeTransparent);
+        GlobalEventManager.OnVisualModeChanged += ChangeTransparent;
 
         _lineRenderer = GetComponent<LineRenderer>();
         _radius = GetComponent<SphereCollider>().radius;
@@ -46,5 +48,10 @@ public class PovVisualizer : MonoBehaviour
         DrawCircle();
 
         //_lineRenderer.enabled = false;
+    }
+
+    private void OnDestroy()
+    {
+        GlobalEventManager.OnVisualModeChanged -= ChangeTransparent;
     }
 }

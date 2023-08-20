@@ -49,36 +49,36 @@ public class SummonerStateMachine : BaseEnemyStateMachine
 
         StartCoroutine(DelayBetweenSpawns());
 
-        _state = _states.Move;
+        State = States.Move;
     }
 
     IEnumerator DelayBetweenSpawns()
     {
         yield return new WaitForSeconds(Random.Range(_delayBetweenSpawn - 3f, _delayBetweenSpawn + 5f));
-        _state = _states.Spawn;
+        State = States.Spawn;
     }
 
     public override void StateMachine()
     {
         IsCanAttack();
 
-        switch (_state)
+        switch (State)
         {
-            case _states.Move:
-                _targetSelector.ChooseTarget();
+            case States.Move:
+                TargetSelector.ChooseTarget();
                 break;
 
-            case _states.Spawn:
-                _targetSelector.StopMoving();
+            case States.Spawn:
+                TargetSelector.StopMoving();
                 SpawnEnemies();
                 break;
 
-            case _states.Attack:
-                if (_target != null)
+            case States.Attack:
+                if (Target != null)
                 {
-                    _entity.Attack(_target);
+                    EntityComponent.Attack(Target);
                 }
-                _targetSelector.StopMoving();
+                TargetSelector.StopMoving();
                 break;
         }
     }
