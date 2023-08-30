@@ -5,94 +5,90 @@ using TMPro;
 
 public class IncreaseLevelButton : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] private Progress.Types _type;
+    [SerializeField] private BuildingTypes _type;
     [SerializeField] private TMP_Text _level;
     [SerializeField] private TMP_Text _cost;
 
     [SerializeField] private int _maxLevel;
     [SerializeField] private int[] costs;
 
+    private Image _buttonBackground;
+    private Button _button;
     private int _currentCost;
     private bool _isMaxLevel;
+    private bool _isClickable = true;
+
+    private void MaxLevelReached(BuildingTypes type)
+    {
+        if (type == _type)
+        {
+            _isMaxLevel = true;
+            _cost.text = "Макс. уровень";
+            _level.text = "Уровень " + Progress.Instance.GetMaxLevel(_type);
+
+            _buttonBackground.color = Color.black;
+            _button.interactable = false;
+            _isClickable = false;
+        }
+    }
+
+    private void CheckMoney(int value)
+    {
+        bool isInteracteble = value >= Progress.Instance.GetUpgradeCost(_type);
+        Color costColor = isInteracteble ? Color.white : Color.red;
+
+        _button.interactable = isInteracteble;
+        _isClickable = isInteracteble;
+        _cost.color = costColor;
+    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-
-        if (!_isMaxLevel && Progress.Instance.Money >= _currentCost)
+        if (_isClickable && !_isMaxLevel)
         {
-            Progress.Instance.IncreaseLevel(_type);
-            
             Progress.Instance.DecreaseMoneyValue(_currentCost);
+            Progress.Instance.IncreaseLevel(_type);
 
-            int level = Progress.Instance.GetLevel(_type);
-
-            CheckMaxLevel(level);
-            ChangeValues(level);
-            IsInteracteble();
+            ChangeValues();
         }
     }
 
-    private bool IsInteracteble()
+    private void ChangeValues()
     {
-        if (_isMaxLevel)
+        if (!_isMaxLevel)
         {
-            GetComponentInParent<Image>().color = Color.black;
-            GetComponent<Button>().interactable = false;
+            _level.text = "Уровень " + (Progress.Instance.GetLevel(_type) + 1).ToString();
 
-            return false;
-        }
-
-        if (Progress.Instance.Money < _currentCost)
-        {
-            GetComponent<Button>().interactable = false;
-            _cost.color = Color.red;
-            return false;
-        }
-
-        GetComponent<Button>().interactable = true;
-        _cost.color = Color.white;
-        return true;
-    }
-
-    private void CheckMaxLevel(int level)
-    {
-        if (level + 1 >= _maxLevel)
-        {
-            _isMaxLevel = true;
-        }
-    }
-
-    private void ChangeValues(int currentLevel)
-    {
-        _level.text = "Уровень " + (currentLevel+1).ToString();
-
-        if (_isMaxLevel)
-        {
-            _cost.text = "Макс. уровень";
-        }
-        else
-        {
-            _currentCost = costs[currentLevel];
+            _currentCost = Progress.Instance.GetUpgradeCost(_type);
             _cost.text = "Цена " + _currentCost.ToString();
         }
     }
 
     private void Start()
     {
-        int level = Progress.Instance.GetLevel(_type);
-
-        if (level >= 0)
+        if (Progress.Instance.GetLevel(_type) != -1)
         {
-            CheckMaxLevel(level);
-            ChangeValues(level);
-            IsInteracteble();
+            Progress.OnMaxLevelReached += MaxLevelReached;
+            Progress.OnMoneyValueChanged += CheckMoney;
+
+            _button = GetComponent<Button>();
+            _buttonBackground = GetComponentInParent<Image>();
+
+            _currentCost = Progress.Instance.GetUpgradeCost(_type);
+
+            ChangeValues();
         }
 
         else
         {
-            GetComponent<Button>().interactable = false;
-            transform.parent.gameObject.SetActive(false);
+            Destroy(transform.parent.gameObject);
         }
+        
+    }
 
+    private void OnDestroy()
+    {
+        Progress.OnMaxLevelReached -= MaxLevelReached;
+        Progress.OnMoneyValueChanged -= CheckMoney;
     }
 }

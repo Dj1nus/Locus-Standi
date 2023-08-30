@@ -178,12 +178,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
-  _takenPoints:
-  - {x: 0, y: 2}
-  - {x: 0, y: 1}
-  - {x: 0, y: 0}
-  - {x: 0, y: -1}
+  TakenPoints:
   - {x: 0, y: -2}
+  - {x: 0, y: -1}
+  - {x: 0, y: 0}
+  - {x: 0, y: 1}
+  - {x: 0, y: 2}
   orientation: 1
 --- !u!1 &7932723823986870965
 GameObject:

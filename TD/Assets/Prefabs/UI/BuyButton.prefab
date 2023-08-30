@@ -854,15 +854,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4525120925449609497, guid: 9f99bfd9209f32c44861cfd639cd92d6, type: 3}
       propertyPath: _sounds.Array.data[0].name
-      value: Active
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4525120925449609497, guid: 9f99bfd9209f32c44861cfd639cd92d6, type: 3}
       propertyPath: _sounds.Array.data[1].name
-      value: UnActive
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4525120925449609497, guid: 9f99bfd9209f32c44861cfd639cd92d6, type: 3}
       propertyPath: _sounds.Array.data[2].name
-      value: Buy
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4525120925449609497, guid: 9f99bfd9209f32c44861cfd639cd92d6, type: 3}
       propertyPath: _sounds.Array.data[0].group

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.Events;
 
 public class Building : MapUnit
@@ -22,23 +21,13 @@ public class Building : MapUnit
 
     private Renderer _renderer;
     private Collider _collider;
-    private NavMeshObstacle _navMeshObstacle;
     private AudioPlayer _audioPlayer;
 
-    public float GetYOffset()
-    {
-        return _yOffset;
-    }
+    public float GetYOffset() => _yOffset;
 
-    public _states GetState()
-    {
-        return _state;
-    }
+    public _states GetState() => _state;
 
-    public Cost GetCost()
-    {
-        return _cost;
-    }
+    public Cost GetCost() => _cost;
 
     public void SetState(bool isPlaced)
     {
@@ -49,9 +38,8 @@ public class Building : MapUnit
 
             if (_audioPlayer != null)
             {
-                _audioPlayer.Play("Init");
+                _audioPlayer.Play(SoundTypes.Init);
             }
-
         }
         else
         {
@@ -62,21 +50,20 @@ public class Building : MapUnit
 
     public virtual void SetVisualMode(bool isAvaible)
     {
+        var isShadowCast = isAvaible ? UnityEngine.Rendering.ShadowCastingMode.On : UnityEngine.Rendering.ShadowCastingMode.Off;
+        bool isEnabled = _state == _states.Placed;
+
+        _renderer.shadowCastingMode = isShadowCast;
+        _collider.enabled = isEnabled;
+
         if (_state == _states.Placed)
         {
-            _renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
-            _collider.enabled = true;
-            //_navMeshObstacle.enabled = true;
             _renderer.material = _standart;
 
             BuildingPlaced?.Invoke();
         }
         else
         {
-            _renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-            _collider.enabled = false;
-            //_navMeshObstacle.enabled = false;
-
             if (isAvaible)
                 _renderer.material = _good;
 
@@ -91,7 +78,6 @@ public class Building : MapUnit
 
         _renderer = GetComponentInChildren<Renderer>();
         _collider = GetComponentInChildren<BoxCollider>();
-        //_navMeshObstacle = GetComponentInChildren<NavMeshObstacle>();
         _audioPlayer = GetComponentInChildren<AudioPlayer>();
 
         _state = _states.Ghost;

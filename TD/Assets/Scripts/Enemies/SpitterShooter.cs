@@ -10,7 +10,7 @@ public class SpitterShooter : EnemieShooter
 
             Vector3 direction = target.transform.position - _muzzle.transform.position;
 
-            EnemieBullet bullet = Instantiate(_bullet, _muzzle.position, Quaternion.identity);
+            EnemyBullet bullet = Instantiate(_bullet, _muzzle.position, Quaternion.identity);
             bullet.Init(damage);
 
             bullet.GetComponent<Rigidbody>().AddForce(direction.normalized * _shootForce, ForceMode.Impulse);

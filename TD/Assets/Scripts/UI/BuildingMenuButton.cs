@@ -39,12 +39,12 @@ public class BuildingMenuButton : MonoBehaviour, IPointerEnterHandler
     {
         if (_button.interactable)
         {
-            _audioPlayer.Play("Active", Random.Range(0.9f, 1.1f));
+            _audioPlayer.Play(SoundTypes.Active, Random.Range(0.9f, 1.1f));
         }
 
         else
         {
-            _audioPlayer.Play("UnActive", Random.Range(0.9f, 1.1f));
+            _audioPlayer.Play(SoundTypes.UnActive, Random.Range(0.9f, 1.1f));
         }
 
     }
@@ -53,7 +53,7 @@ public class BuildingMenuButton : MonoBehaviour, IPointerEnterHandler
     {
         if (_state == _states.down)
         {
-            _audioPlayer.Play("Buy", Random.Range(1f, 1.2f));
+            _audioPlayer.Play(SoundTypes.Buy, Random.Range(1f, 1.2f));
 
             _transform.DOLocalMoveY(_upPositionY, 0.5f);
 
@@ -61,7 +61,7 @@ public class BuildingMenuButton : MonoBehaviour, IPointerEnterHandler
         }
         else
         {
-            _audioPlayer.Play("Buy", Random.Range(0.85f, 0.95f));
+            _audioPlayer.Play(SoundTypes.Buy, Random.Range(0.85f, 0.95f));
 
             _transform.DOLocalMoveY(_downPositionY, 0.5f);
 

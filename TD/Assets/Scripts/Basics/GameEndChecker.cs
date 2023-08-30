@@ -57,6 +57,6 @@ public class GameEndChecker : MonoBehaviour
 
         GlobalEventManager.SendGameEnded(isWin);
 
-        print("GEM sended");
+        //print("GEM sended");
     }
 }

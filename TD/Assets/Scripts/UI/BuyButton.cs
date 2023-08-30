@@ -101,11 +101,11 @@ public class BuyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         {
             if (_button.interactable)
             {
-                _audioPlayer.Play("Active", Random.Range(0.9f, 1.1f));
+                _audioPlayer.Play(SoundTypes.Active, Random.Range(0.9f, 1.1f));
             }
             else
             {
-                _audioPlayer.Play("UnActive", Random.Range(0.9f, 1.1f));
+                _audioPlayer.Play(SoundTypes.UnActive, Random.Range(0.9f, 1.1f));
             }
         }
     }
@@ -122,7 +122,7 @@ public class BuyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         {
             if (_audioPlayer != null)
             {
-                _audioPlayer.Play("Buy", Random.Range(0.9f, 1.1f));
+                _audioPlayer.Play(SoundTypes.Buy, Random.Range(0.9f, 1.1f));
             }
 
             GlobalEventManager.BuyButtonClicked(_building);

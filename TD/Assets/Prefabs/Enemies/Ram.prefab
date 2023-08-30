@@ -171,6 +171,9 @@ MonoBehaviour:
   _distanceToDamage: 2
   _attackCooldown: 1
   _deathEffect: {fileID: 0}
+  _dieVolume: 0.6
+  _deathClip: {fileID: 8300000, guid: 7eee14d915a356246b5bb06a3769cde3, type: 3}
+  _audioPlayer: {fileID: 4236944761336757578, guid: 4ccff557d7c61b44b8f1f5e3893dc7f4, type: 3}
 --- !u!114 &8047860782902673565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,11 +437,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4525120925449609497, guid: 9f99bfd9209f32c44861cfd639cd92d6, type: 3}
       propertyPath: _sounds.Array.data[0].name
-      value: Attack
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4525120925449609497, guid: 9f99bfd9209f32c44861cfd639cd92d6, type: 3}
       propertyPath: _sounds.Array.data[1].name
-      value: Die
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4525120925449609497, guid: 9f99bfd9209f32c44861cfd639cd92d6, type: 3}
       propertyPath: _sounds.Array.data[0].group

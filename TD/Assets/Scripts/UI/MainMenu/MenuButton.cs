@@ -14,12 +14,12 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        _player.Play("Click", Random.Range(0.95f, 1.05f));
+        _player.Play(SoundTypes.Click, Random.Range(0.95f, 1.05f));
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        _player.Play("Enter", Random.Range(0.9f, 1.1f));
+        _player.Play(SoundTypes.Enter, Random.Range(0.9f, 1.1f));
 
         _transform.DOLocalRotate(_rotation, 0.2f);
         _transform.DOScale(_size, 0.17f);
@@ -27,7 +27,7 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        _player.Play("Exit", Random.Range(0.9f, 1.1f));
+        _player.Play(SoundTypes.Exit, Random.Range(0.9f, 1.1f));
 
         _transform.DOLocalRotate(Vector3.zero, 0.17f);
         _transform.DOScale(Vector3.one, 0.15f);

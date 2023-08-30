@@ -10,20 +10,11 @@ public class TurretBuilding : Building
     {
         base.SetVisualMode(isAvaible);
 
-        if (_state == _states.Placed) 
-        { 
-            _baseTurretStateMachine.enabled = true;
-            _trigger.enabled = true;
-            _sphereCollider.enabled = true;
-        }
+        bool isEnabled = _state == _states.Placed;
 
-        else
-        {
-            _sphereCollider.enabled = false;
-            _trigger.enabled = false;
-            _baseTurretStateMachine.enabled = false;
-        }
-
+        _baseTurretStateMachine.enabled = isEnabled;
+        _trigger.enabled = isEnabled;
+        _sphereCollider.enabled = isEnabled;
     }
 
     public override void Init()

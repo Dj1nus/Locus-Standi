@@ -16,7 +16,7 @@ public class BuildingGrid : MonoBehaviour
 
     public bool IsPointAvaible(MapUnit unit)
     {
-        if (unit.GetUnitType() == MapUnit._types.turret)
+        if (unit is TurretBuilding)
         {
             foreach (Vector2Int point in unit.GetClamedPoints())
             {
@@ -32,12 +32,11 @@ public class BuildingGrid : MonoBehaviour
             }
         }
 
-        else if (unit.GetUnitType() == MapUnit._types.miner)
+        else if (unit is MetalMiner)
         {
             foreach (Vector2Int point in unit.GetClamedPoints())
             {
-                if (_map[point.x, point.y] == null ||
-                    _map[point.x, point.y].GetUnitType() != MapUnit._types.deposit)
+                if (!(_map[point.x, point.y] is Deposit))
                 {
                     return false;
                 }
@@ -47,63 +46,23 @@ public class BuildingGrid : MonoBehaviour
         return true;
     }
 
-    public void UpdateMap(MapUnit unit)
+    public void UpdateMap<TMapUnit>(TMapUnit mapUnit)
+        where TMapUnit : MapUnit
     {
-        if (unit.GetUnitType() == MapUnit._types.turret)
+        foreach (Vector2Int point in mapUnit.GetClamedPoints())
         {
-            foreach (Vector2Int point in unit.GetClamedPoints())
-            {
-                _map[point.x, point.y] = unit as Building;
-            }
-        }
-
-        else if (unit.GetUnitType() == MapUnit._types.deposit)
-        {
-            foreach (Vector2Int point in unit.GetClamedPoints())
-            {
-                _map[point.x, point.y] = unit as Deposit;
-            }
-        }
-        
-        else if (unit.GetUnitType() == MapUnit._types.miner)
-        {
-            foreach (Vector2Int point in unit.GetClamedPoints())
-            {
-                _map[point.x, point.y] = unit as MetalMiner;
-            }
-        }
-
-        else if (unit.GetUnitType() == MapUnit._types.townhall)
-        {
-            foreach (Vector2Int point in unit.GetClamedPoints())
-            {
-                _map[point.x, point.y] = unit as MainBaseBuilding;
-            }
-        }
-
-        else if (unit.GetUnitType() == MapUnit._types.wall)
-        {
-            foreach (Vector2Int point in unit.GetClamedPoints())
-            {
-                _map[point.x, point.y] = unit as Wall;
-            }
+            _map[point.x, point.y] = mapUnit;
         }
     }
 
-    public void DeleteBuildingFromMap(MapUnit unit)
+    public void DeleteBuildingFromMap<TMapUnit>(TMapUnit unit)
+        where TMapUnit : MapUnit
     {
-        if (unit.GetUnitType() == MapUnit._types.miner)
-        {
-            foreach (Vector2Int point in unit.GetClamedPoints())
-            {
-                _map[point.x, point.y] = FindObjectOfType<Deposit>();
-            }
-            return;
-        }
+        MapUnit placeholder = unit is MetalMiner ? FindObjectOfType<Deposit>() : null;
 
         foreach (Vector2Int point in unit.GetClamedPoints())
         {
-            _map[point.x, point.y] = null;
+            _map[point.x, point.y] = placeholder;
         }
     }
 
@@ -111,6 +70,14 @@ public class BuildingGrid : MonoBehaviour
     {
         GlobalEventManager.OnBuildingDestroy += DeleteBuildingFromMap;
 
+        InitMap();
+
+        GetComponentInChildren<GridVisualizer>().Init(new Vector2Int((int)_mapBorders.w,
+            (int)_mapBorders.z), new Vector2Int((int)_mapBorders.x, (int)_mapBorders.y));
+    }
+
+    private void InitMap()
+    {
         _map = new MapUnit[_mapSize.x, _mapSize.y];
 
         _deposits = FindObjectsOfType<Deposit>();
@@ -130,9 +97,6 @@ public class BuildingGrid : MonoBehaviour
         {
             UpdateMap(wall);
         }
-
-        GetComponentInChildren<GridVisualizer>().Init(new Vector2Int((int)_mapBorders.w,
-            (int)_mapBorders.z), new Vector2Int((int)_mapBorders.x, (int)_mapBorders.y));
     }
 
     private void OnDisable()

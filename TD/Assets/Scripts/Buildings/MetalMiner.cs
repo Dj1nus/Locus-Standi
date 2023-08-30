@@ -12,6 +12,7 @@ public class MetalMiner : Building
 
     private bool _isCoroutineStarget = false;
     private PlayersResources _resources;
+    private BoxCollider _boxCollider;
 
     IEnumerator Mining()
     {
@@ -23,6 +24,13 @@ public class MetalMiner : Building
 
             _resources.IncreaseMetalValue(_quantility);
         }
+    }
+
+    public override void SetVisualMode(bool isAvaible)
+    {
+        base.SetVisualMode(isAvaible);
+
+        _boxCollider.enabled = _state == _states.Placed;
     }
 
     private void MinerPlaced()
@@ -38,9 +46,13 @@ public class MetalMiner : Building
         base.Init();
 
         _quantility = Mathf.RoundToInt(_baseQuantility + _multiplier * 
-            Progress.Instance.GetLevel(Progress.Types.miner) * _addQuantility);
+            Progress.Instance.GetLevel(BuildingTypes.miner) * _addQuantility);
 
         BuildingPlaced.AddListener(MinerPlaced);
         _resources = FindObjectOfType<PlayersResources>();
+
+        _boxCollider = GetComponent<BoxCollider>();
+
+        
     }
 }

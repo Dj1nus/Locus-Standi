@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class PlayButton : MonoBehaviour, IPointerClickHandler
 {
@@ -25,13 +26,13 @@ public class PlayButton : MonoBehaviour, IPointerClickHandler
 
     private void CopyArray()
     {
-        Building[] tmp = _turretsMenu.GetSortedArray();
+        List<Building> choosedBuildings = _turretsMenu.GetSortedArray();
 
         for (int i = 0; i < _turretsMenu.GetSize(); i++)
         {
-            if (tmp[i] != null)
+            if (choosedBuildings[i] != null)
             {
-                Progress.Instance.ChoosedBuildings[i] = tmp[i];
+                Progress.Instance.ChoosedBuildings[i] = choosedBuildings[i];
             }
         }
     }

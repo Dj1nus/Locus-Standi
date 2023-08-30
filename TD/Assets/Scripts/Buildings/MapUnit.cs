@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MapUnit : MonoBehaviour
 {
-    public enum _types
+    public enum TurretTypes
     {
         turret,
         deposit,
@@ -11,19 +11,20 @@ public class MapUnit : MonoBehaviour
         wall
     }
 
-    [SerializeField] private _types _type;
-    [SerializeField] protected Vector2Int[] _takenPoints;
+    [SerializeField] private TurretTypes _type;
+
+    [SerializeField] protected Vector2Int[] TakenPoints;
 
     private Vector2Int[] _clamedPoints;
 
-    public _types GetUnitType()
+    public TurretTypes GetUnitType()
     {
         return _type;
     }
 
     public void SetArrayToDefault()
     {
-        _takenPoints.CopyTo(_clamedPoints, 0);
+        TakenPoints.CopyTo(_clamedPoints, 0);
     }
 
     public Vector2Int[] GetClamedPoints()
@@ -40,6 +41,6 @@ public class MapUnit : MonoBehaviour
 
     public virtual void Init() 
     {
-        _clamedPoints = new Vector2Int[_takenPoints.Length];
+        _clamedPoints = new Vector2Int[TakenPoints.Length];
     }
 }

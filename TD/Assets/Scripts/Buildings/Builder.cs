@@ -8,7 +8,7 @@ public class Builder : MonoBehaviour
 
     private Building _ghostBuilding;
     private bool _isCanPlace = false;
-    private Vector3 _previousPosition = new Vector3();
+    private Vector3 _previousPosition = new();
 
     public void DestroyCurrentGhostBuilding()
     {
@@ -16,15 +16,14 @@ public class Builder : MonoBehaviour
             Destroy(_ghostBuilding.gameObject);
     }
 
-    public void CreateGhostBuilding(Building building) //Сделать кучу для "призрачных" зданий
+    public void CreateGhostBuilding(Building building)
     {
-        if (_ghostBuilding != null)
-            Destroy(_ghostBuilding.gameObject);
-        
+        DestroyCurrentGhostBuilding();
+
         _ghostBuilding = Instantiate(building);
         _ghostBuilding.Init();
 
-        if (_ghostBuilding.GetUnitType() == MapUnit._types.turret)
+        if (_ghostBuilding.GetUnitType() == MapUnit.TurretTypes.turret)
         {
             _ghostBuilding.GetComponent<BaseTurretStateMachine>().Init();
         }
@@ -44,7 +43,7 @@ public class Builder : MonoBehaviour
             _ghostBuilding = null;
         }
 
-        else if (!_isCanPlace) 
+        else
         {
             DestroyCurrentGhostBuilding();
         }
@@ -52,7 +51,7 @@ public class Builder : MonoBehaviour
 
     private void MoveGhostBuilding()
     {
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        Plane groundPlane = new(Vector3.up, Vector3.zero);
         Ray cameraToGroundRay = _inputHandler.GetCursorRay();
 
         if (groundPlane.Raycast(cameraToGroundRay, out float position))

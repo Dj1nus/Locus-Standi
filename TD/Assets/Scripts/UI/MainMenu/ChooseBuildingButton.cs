@@ -4,11 +4,13 @@ using UnityEngine.UI;
 public class ChooseBuildingButton : MonoBehaviour
 {
     [SerializeField] private bool _isActive;
-    [SerializeField] private Progress.Types _type;
+    [SerializeField] private BuildingTypes _type;
     [SerializeField] private Image _background;
     [SerializeField] private Button _button;
     [SerializeField] private ChooseTurretsMenu _menu;
     [SerializeField] private Building _building;
+
+    private Image _buttonImage;
 
     private bool _isSelected = false;
     private bool _isArrayFull = false;
@@ -21,16 +23,9 @@ public class ChooseBuildingButton : MonoBehaviour
 
         if (!_isSelected)
         {
-            if (flag)
-            {
-                _button.GetComponent<Image>().color = Color.gray;
-                _button.interactable = false;
-            }
-            else
-            {
-                _button.GetComponent<Image>().color = Color.white;
-                _button.interactable = true;
-            }
+            Color color = flag ? Color.gray : Color.white;
+            _buttonImage.color = color;
+            _button.interactable = !flag;
         }
     }
 
@@ -59,6 +54,8 @@ public class ChooseBuildingButton : MonoBehaviour
     {
         if (_menu != null)
         {
+            _buttonImage = _button.GetComponent<Image>();
+
             _menu.OnArrayFullOrEmpty += ChangeVisibility;
 
             if (Progress.Instance.GetLevel(_type) < 0)
@@ -70,7 +67,6 @@ public class ChooseBuildingButton : MonoBehaviour
             }
         }
 
-        
     }
 
     private void OnDestroy()

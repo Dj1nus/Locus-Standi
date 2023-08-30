@@ -14,6 +14,8 @@ public class WindowsController : MonoBehaviour, IPointerEnterHandler, IPointerEx
         closeAll
     }
 
+    [SerializeField] private MenuWindows[] _windows;
+
     [SerializeField] private GameObject _levelWindow;
     [SerializeField] private GameObject _upgradeWindow;
     [SerializeField] private GameObject _chooseWindow;
@@ -24,54 +26,70 @@ public class WindowsController : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     private RectTransform _transform;
 
-    public void ChangeVisibility(Types type)
+    public void ChangeActiveWindow(MenuWindows activeWindow)
     {
-        switch (type)
+        foreach (MenuWindows window in _windows)
         {
-            case Types.level:
-                _levelWindow.SetActive(!_levelWindow.activeInHierarchy);
-
-                _upgradeWindow.SetActive(false);
-                _chooseWindow.SetActive(false);
-                //_shopWindow.SetActive(false);
-                break;
-
-            case Types.upgrade:
-                _upgradeWindow.SetActive(!_upgradeWindow.activeInHierarchy);
-
-                _chooseWindow.SetActive(false);
-                //_shopWindow.SetActive(false);
-                _levelWindow.SetActive(false);
-                break;
-
-            case Types.choose:
-                _chooseWindow.SetActive(!_chooseWindow.activeInHierarchy);
-
-                //_shopWindow.SetActive(false);
-                _levelWindow.SetActive(false);
-                _upgradeWindow.SetActive(false);
-
-                break;
-
-            case Types.shop:
-                _shopWindow.SetActive(!_shopWindow.activeInHierarchy);
-
-                _levelWindow.SetActive(false);
-                _upgradeWindow.SetActive(false);
-                _chooseWindow.SetActive(false);
-                break;
+            if (window == activeWindow)
+            {
+                window.ChangeVisibility(!window.gameObject.activeInHierarchy);
+            }
+            else
+            {
+                window.ChangeVisibility(false);
+            }
             
-            default:
-                break;
         }
     }
+
+    //public void ChangeVisibility(Types type)
+    //{
+    //    switch (type)
+    //    {
+    //        case Types.level:
+    //            _levelWindow.SetActive(!_levelWindow.activeInHierarchy);
+
+    //            _upgradeWindow.SetActive(false);
+    //            _chooseWindow.SetActive(false);
+    //            //_shopWindow.SetActive(false);
+    //            break;
+
+    //        case Types.upgrade:
+    //            _upgradeWindow.SetActive(!_upgradeWindow.activeInHierarchy);
+
+    //            _chooseWindow.SetActive(false);
+    //            //_shopWindow.SetActive(false);
+    //            _levelWindow.SetActive(false);
+    //            break;
+
+    //        case Types.choose:
+    //            _chooseWindow.SetActive(!_chooseWindow.activeInHierarchy);
+
+    //            //_shopWindow.SetActive(false);
+    //            _levelWindow.SetActive(false);
+    //            _upgradeWindow.SetActive(false);
+
+    //            break;
+
+    //        case Types.shop:
+    //            _shopWindow.SetActive(!_shopWindow.activeInHierarchy);
+
+    //            _levelWindow.SetActive(false);
+    //            _upgradeWindow.SetActive(false);
+    //            _chooseWindow.SetActive(false);
+    //            break;
+
+    //        default:
+    //            break;
+    //    }
+    //}
 
 
     private void Start()
     {
-        _levelWindow.SetActive(false);
-        _upgradeWindow.SetActive(false);
-        _chooseWindow.SetActive(false);
+        //_levelWindow.SetActive(false);
+        //_upgradeWindow.SetActive(false);
+        //_chooseWindow.SetActive(false);
 
         _play = GetComponentInChildren<PlayButton>();
 

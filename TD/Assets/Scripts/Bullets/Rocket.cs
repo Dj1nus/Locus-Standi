@@ -1,8 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class Rocket : Explosion
+public class Rocket : MonoBehaviour
 {
+    [SerializeField] private Explosion _explosion;
     [SerializeField] private ParticleSystem _smoke;
     [SerializeField] private float _smokeSpawnRate;
     [SerializeField] private float _speed;
@@ -59,17 +60,27 @@ public class Rocket : Explosion
         _isLaunched = false;
         StopCoroutine(SmokeSpawner());
 
-        if (other.TryGetComponent(out EnemyEntity enemy))
+        if (other.TryGetComponent(out EnemyEntity target))
         {
-            enemy.TakeDamage(_directHitDamage);
+            target.TakeDamage(_directHitDamage);
         }
 
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
 
-        Explode(_explosionRadius, _damage);
-        GetComponent<CapsuleCollider>().enabled = false;
+        Collider[] overlapedColliders = Physics.OverlapSphere(transform.position, _explosionRadius);
 
+        foreach (Collider col in overlapedColliders)
+        {
+            if (col.TryGetComponent(out EnemyEntity enemy))
+            {
+                enemy.TakeDamage(_damage);
+            }
+        }
+
+        Instantiate(_explosion, transform.position, Quaternion.identity).Explode();
+
+        Destroy(gameObject);
     }
 
     private void FixedUpdate()

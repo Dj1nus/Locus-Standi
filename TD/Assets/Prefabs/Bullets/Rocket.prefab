@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b4c492d72ea0047bc6d01a90756eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosion: {fileID: 7609930368811856580, guid: e192ab45427b83a42b2dd9e7887af152, type: 3}
+  _explosion: {fileID: 3772231573728975968, guid: e192ab45427b83a42b2dd9e7887af152, type: 3}
   _smoke: {fileID: 265766274217486953, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
   _smokeSpawnRate: 0.1
   _speed: 20
@@ -313,7 +313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4525120925449609497, guid: 9f99bfd9209f32c44861cfd639cd92d6, type: 3}
       propertyPath: _sounds.Array.data[0].name
-      value: Explode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4525120925449609497, guid: 9f99bfd9209f32c44861cfd639cd92d6, type: 3}
       propertyPath: _sounds.Array.data[0].group

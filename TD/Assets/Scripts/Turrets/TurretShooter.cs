@@ -13,7 +13,7 @@ public class TurretShooter : MonoBehaviour
 
     protected states _state;
 
-    public Progress.Types _type;
+    public BuildingTypes _type;
 
     [SerializeField] private float _baseDamage;
     [SerializeField] private float _multiplier;
@@ -74,7 +74,7 @@ public class TurretShooter : MonoBehaviour
 
     public virtual void Shoot(Entity target)
     {
-        _audioPlayer.Play("Attack", Random.Range(0.9f, 1.1f));
+        _audioPlayer.Play(SoundTypes.Attack, Random.Range(0.9f, 1.1f));
     }
    
     private void LookAtTarget(Entity target)

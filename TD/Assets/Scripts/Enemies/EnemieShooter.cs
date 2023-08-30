@@ -5,7 +5,7 @@ public class EnemieShooter : MonoBehaviour
 {
     [SerializeField] protected Transform _muzzle;
     [SerializeField] protected float _shootForce;
-    [SerializeField] protected EnemieBullet _bullet;
+    [SerializeField] protected EnemyBullet _bullet;
 
     protected bool _isCanAttack = true;
     private AudioPlayer _audioPlayer;
@@ -14,7 +14,7 @@ public class EnemieShooter : MonoBehaviour
     {
         if (_audioPlayer != null)
         {
-            _audioPlayer.Play("Attack", Random.Range(0.9f, 1.1f));
+            _audioPlayer.Play(SoundTypes.Attack, Random.Range(0.9f, 1.1f));
         }
     }
 

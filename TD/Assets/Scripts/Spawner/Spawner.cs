@@ -89,8 +89,6 @@ public class Spawner : MonoBehaviour
 
         _skipPrepairing.OnStartSpawning += StartRoutine;
 
-        print(CalculateTotalEnemyCount());
-
         GlobalEventManager.SendTotalEnemiesAmountCalculated(CalculateTotalEnemyCount());
     }
 

@@ -1,24 +1,35 @@
 using System;
 using UnityEngine;
 
+public enum SoundTypes
+{
+    Hit,
+    Die,
+    Init,
+    Attack,
+    Explode,
+    Active,
+    UnActive,
+    Click,
+    Buy,
+    Enter,
+    Exit
+}
+
 public class AudioPlayer : MonoBehaviour
 {
     [SerializeField] private SoundPool[] _sounds;
 
     private void Awake()
     {
-        foreach (SoundPool soundPool in _sounds)
+        foreach(var soundPool in _sounds)
         {
             soundPool.source = gameObject.AddComponent<AudioSource>();
-            soundPool.source.clip = soundPool.sounds[0].clip;
-            soundPool.source.volume = soundPool.sounds[0].volume;
-            soundPool.source.pitch = soundPool.sounds[0].pitch;
-            soundPool.source.spatialBlend = soundPool.sounds[0].space;
-            soundPool.source.outputAudioMixerGroup = soundPool.group;
+            soundPool.Init();
         }
     }
 
-    public void Play(string name, float pitch = 1)
+    public void Play(SoundTypes name, float pitch = 1)
     {
         SoundPool sound = Array.Find(_sounds, item => item.name == name);
 
@@ -28,10 +39,9 @@ public class AudioPlayer : MonoBehaviour
             sound.source.clip = sound.sounds[UnityEngine.Random.Range(0, sound.sounds.Length)].clip;
             sound.source.Play();
         }
-
     }
 
-    public float GetSoundDuration(string name)
+    public float GetSoundDuration(SoundTypes name)
     {
         return Array.Find(_sounds, item => item.name == name).source.clip.length;
     }

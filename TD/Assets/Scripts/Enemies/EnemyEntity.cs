@@ -29,7 +29,7 @@ public class EnemyEntity : Entity
     {
         if (AudioPlayer != null && IsCanAttack)
         {
-            AudioPlayer.Play("Attack", UnityEngine.Random.Range(0.9f, 1.1f));
+            AudioPlayer.Play(SoundTypes.Attack, UnityEngine.Random.Range(0.9f, 1.1f));
         }
 
         base.Attack(target);

@@ -148,7 +148,7 @@ MonoBehaviour:
       volume: 1
       pitch: 1
       space: 0.9
-    name: Init
+    name: 2
     group: {fileID: 6335925409927828350, guid: e9693cca8bc33274daef8ad519586a92, type: 2}
     source: {fileID: 0}
     _isFree: 1
@@ -157,7 +157,7 @@ MonoBehaviour:
       volume: 0.2
       pitch: 1
       space: 0.9
-    name: Attack
+    name: 3
     group: {fileID: -8931793263644115909, guid: e9693cca8bc33274daef8ad519586a92, type: 2}
     source: {fileID: 0}
     _isFree: 1
@@ -166,7 +166,7 @@ MonoBehaviour:
       volume: 1
       pitch: 1
       space: 0.9
-    name: Hit
+    name: 0
     group: {fileID: 6690751838085304228, guid: e9693cca8bc33274daef8ad519586a92, type: 2}
     source: {fileID: 0}
     _isFree: 1
@@ -175,7 +175,7 @@ MonoBehaviour:
       volume: 1
       pitch: 1
       space: 0.9
-    name: Die
+    name: 1
     group: {fileID: -5871671265552638600, guid: e9693cca8bc33274daef8ad519586a92, type: 2}
     source: {fileID: 0}
     _isFree: 1
@@ -244,7 +244,10 @@ MonoBehaviour:
     score: 0
   _distanceToDamage: 3
   _attackCooldown: 0
-  _deathEffect: {fileID: 7609930368811856580, guid: e192ab45427b83a42b2dd9e7887af152, type: 3}
+  _deathEffect: {fileID: 3772231573728975968, guid: e192ab45427b83a42b2dd9e7887af152, type: 3}
+  _dieVolume: 0.9
+  _deathClip: {fileID: 8300000, guid: 867b2b585a265374fab032e19e22b557, type: 3}
+  _audioPlayer: {fileID: 4236944761336757578, guid: 4ccff557d7c61b44b8f1f5e3893dc7f4, type: 3}
 --- !u!114 &8587599456135217172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,23 +261,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
-  _takenPoints:
-  - {x: -1, y: -1}
-  - {x: -1, y: 0}
-  - {x: -1, y: 1}
+  TakenPoints:
   - {x: -1, y: 2}
-  - {x: 0, y: -1}
-  - {x: 0, y: 0}
-  - {x: 0, y: 1}
   - {x: 0, y: 2}
-  - {x: 1, y: -1}
-  - {x: 1, y: 0}
-  - {x: 1, y: 1}
   - {x: 1, y: 2}
-  - {x: 2, y: -1}
-  - {x: 2, y: 0}
-  - {x: 2, y: 1}
   - {x: 2, y: 2}
+  - {x: -1, y: 1}
+  - {x: 0, y: 1}
+  - {x: 1, y: 1}
+  - {x: 2, y: 1}
+  - {x: -1, y: 0}
+  - {x: 0, y: 0}
+  - {x: 1, y: 0}
+  - {x: 2, y: 0}
+  - {x: -1, y: -1}
+  - {x: 0, y: -1}
+  - {x: 1, y: -1}
+  - {x: 2, y: -1}
   _cost:
     organic: 300
     metal: 300

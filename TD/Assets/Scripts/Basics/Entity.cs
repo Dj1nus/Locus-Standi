@@ -8,7 +8,11 @@ public class Entity : MonoBehaviour
     [SerializeField] private Cost _moneysForKilling;
     [SerializeField] private float _distanceToDamage;
     [SerializeField] private float _attackCooldown;
-    [SerializeField] private ParticleSystem _deathEffect;
+    [SerializeField] private Explosion _deathEffect;
+
+    [SerializeField] private float _dieVolume;
+    [SerializeField] private AudioClip _deathClip;
+    [SerializeField] private DeathAudioPlayer _audioPlayer;
 
     private HealthBar _healthBar;
     private float _hp;
@@ -17,7 +21,7 @@ public class Entity : MonoBehaviour
     protected AudioPlayer AudioPlayer;
     protected bool IsSignalSended = false;
 
-    public float GetDistanceToDamage() => _distanceToDamage;// { get { return _distanceToDamage; } }
+    public float GetDistanceToDamage() => _distanceToDamage;
 
     public float GetCoolDown() => _attackCooldown;
 
@@ -26,7 +30,6 @@ public class Entity : MonoBehaviour
     public float GetHp() => _hp;
 
     public float GetDamage() => _damage;
-
 
     private void Start()
     {
@@ -44,7 +47,7 @@ public class Entity : MonoBehaviour
 
         if (AudioPlayer != null)
         {
-            AudioPlayer.Play("Hit", Random.Range(0.5f, 1.5f));
+            AudioPlayer.Play(SoundTypes.Hit, Random.Range(0.5f, 1.5f));
         }
 
         CheckHp();
@@ -72,31 +75,22 @@ public class Entity : MonoBehaviour
     {
         if (_deathEffect != null)
         {
-            Instantiate(_deathEffect, transform);
-            _deathEffect.Play();
+            Instantiate(_deathEffect, transform.position, Quaternion.identity);
         }
 
-        if (AudioPlayer != null)
+        if (_deathClip)
         {
-            //AudioPlayer.Play("Die");
-            StartCoroutine(DieSoundDelay());
+            DeathSound sound = new(_deathClip, _dieVolume, Random.Range(0.9f, 1.1f), 0.9f, 4f);
+
+            Instantiate(_audioPlayer, transform.position, Quaternion.identity).Init(sound);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+
+        Destroy(gameObject);
     }
     IEnumerator AttackCooldown()
     {
         IsCanAttack = false;
         yield return new WaitForSeconds(_attackCooldown);
         IsCanAttack = true;
-    }
-
-    IEnumerator DieSoundDelay()
-    {
-        AudioPlayer.Play("Die");
-        yield return new WaitForSeconds(AudioPlayer.GetSoundDuration("Die"));
-        Destroy(gameObject);
     }
 }

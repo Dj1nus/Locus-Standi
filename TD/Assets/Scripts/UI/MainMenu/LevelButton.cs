@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class LevelButton : MonoBehaviour, IPointerClickHandler
 {
+    [SerializeField] private MenuWindows _window;
     [SerializeField] private WindowsController _controller;
     [SerializeField] private int _levelindex;
     [SerializeField] private GameObject _image;
@@ -14,7 +15,8 @@ public class LevelButton : MonoBehaviour, IPointerClickHandler
         {
             _controller.ChoosedLevelIndex = _levelindex;
 
-            _controller.ChangeVisibility(WindowsController.Types.choose);
+            _controller.ChangeActiveWindow(_window);
+            //_controller.ChangeVisibility(WindowsController.Types.choose);
         }
         
     }

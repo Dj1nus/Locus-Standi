@@ -1,71 +1,41 @@
 using UnityEngine;
+using System.Collections.Generic;
 using System;
 
-public class ChooseTurretsMenu : MonoBehaviour
+public class ChooseTurretsMenu : MenuWindows
 {
     [SerializeField] private int _countOfBuildings;
 
-    [NonSerialized] public Building[] _pickedBuildings;
+    [NonSerialized] public List<Building> _pickedBuildings = new();
 
     public Action<bool> OnArrayFullOrEmpty;
 
-    void Start()
-    {
-        _pickedBuildings = new Building[_countOfBuildings];
-    }
-
     public void AddBuilding(Building building)
     {
-        for (int i = 0; i < _countOfBuildings; i++)
-        {
-            if (_pickedBuildings[i] == null)
-            {
-                _pickedBuildings[i] = building;
-                break;
-            }
-        }
+        _pickedBuildings.Add(building);
 
-        if (GetSize() == _countOfBuildings)
-        {
-            OnArrayFullOrEmpty?.Invoke(true);
-        }
+        CheckIsFull();
     }
 
     public void DeleteBuilding(Building building)
     {
-        for (int i = 0; i < _countOfBuildings; i++)
-        {
-            if (_pickedBuildings[i] == building)
-            {
-                _pickedBuildings[i] = null;
-                break;
-            }
-        }
+        _pickedBuildings.Remove(building);
 
-        if (GetSize() < _countOfBuildings)
-        {
-            OnArrayFullOrEmpty?.Invoke(false);
-        }
+        CheckIsFull();
+    }
+
+    private void CheckIsFull()
+    {
+        OnArrayFullOrEmpty?.Invoke(_pickedBuildings.Count >= _countOfBuildings);
     }
 
     public int GetSize()
-    {
-        int a = 0;
-
-        foreach (var i in _pickedBuildings)
-        {
-            if (i != null) a++;
-        }
-
-        //print(a);
-
-        return a;
+    { 
+        return _pickedBuildings.Count;
     }
 
-    public Building[] GetSortedArray()
+    public List<Building> GetSortedArray()
     {
-        Building tmp;
-
         for (int i = 0; i < GetSize(); i++)
         {
             for (int j = 0; j < GetSize() - 1; j++)
@@ -73,9 +43,8 @@ public class ChooseTurretsMenu : MonoBehaviour
                 if (_pickedBuildings[j].GetCost().GetTotalCost() > 
                     _pickedBuildings[j + 1].GetCost().GetTotalCost())
                 {
-                    tmp = _pickedBuildings[j + 1];
-                    _pickedBuildings[j + 1] = _pickedBuildings[j];
-                    _pickedBuildings[j] = tmp;
+                    (_pickedBuildings[j + 1], _pickedBuildings[j]) =
+                        (_pickedBuildings[j], _pickedBuildings[j + 1]);
                 }
             }
         }

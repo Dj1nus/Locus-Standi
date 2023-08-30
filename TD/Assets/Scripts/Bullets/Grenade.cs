@@ -4,7 +4,6 @@ using UnityEngine;
 public class Grenade : Explosion
 {
     [SerializeField] private float _lifeTime;
-
     [SerializeField] private float _explosionRadius;
 
     private float _damage;
@@ -19,6 +18,16 @@ public class Grenade : Explosion
     {
         yield return new WaitForSeconds(_lifeTime);
 
-        Explode(_explosionRadius, _damage);
+        Collider[] overlapedColliders = Physics.OverlapSphere(transform.position, _explosionRadius);
+
+        foreach (Collider col in overlapedColliders)
+        {
+            if (col.TryGetComponent(out EnemyEntity enemy))
+            {
+                enemy.TakeDamage(_damage);
+            }
+        }
+
+        Explode();
     }
 }
