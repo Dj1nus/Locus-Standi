@@ -80,7 +80,7 @@ public class Entity : MonoBehaviour
 
         if (_deathClip)
         {
-            DeathSound sound = new(_deathClip, _dieVolume, Random.Range(0.9f, 1.1f), 0.9f, 4f);
+            DeathSound sound = new(_deathClip, _dieVolume, Random.Range(0.9f, 1.1f), 1f, 4f);
 
             Instantiate(_audioPlayer, transform.position, Quaternion.identity).Init(sound);
         }

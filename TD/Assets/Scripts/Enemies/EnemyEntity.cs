@@ -12,11 +12,6 @@ public class EnemyEntity : Entity
         {
             IsSignalSended = true;
 
-            GetComponent<BaseEnemyStateMachine>().enabled = false;
-            GetComponent<EnemyTargetSelector>().enabled = false;
-            GetComponent<BoxCollider>().enabled = false;
-            GetComponent<NavMeshAgent>().enabled = false;
-
             EnemyDied?.Invoke(GetComponent<EnemyEntity>());
 
             GlobalEventManager.SendEnemyDied(GetMoneyForKilling());

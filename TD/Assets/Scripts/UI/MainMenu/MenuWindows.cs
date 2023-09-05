@@ -6,10 +6,11 @@ public class MenuWindows : MonoBehaviour
 
     public bool IsActive => _isActive;
 
-    private void Start()
-    {
-        ChangeVisibility(false);
-    }
+    //private void Start()
+    //{
+    //    print("Start");
+    //    ChangeVisibility(false);
+    //}
 
     public void ChangeVisibility(bool isActive)
     {

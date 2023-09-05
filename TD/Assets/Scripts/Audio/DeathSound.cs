@@ -13,6 +13,7 @@ public class DeathSound
         Clip = clip;
         Volume = volume;
         Pitch = pitch;
+        Space = space;
         LifeTime = lifeTime;
     }
 }
